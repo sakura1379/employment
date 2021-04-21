@@ -1,0 +1,98 @@
+# 开发环境配置文件
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /MyActuator
+  server:
+    port: 12583
+    address: 127.0.0.1
+
+spring:
+  datasource:
+    username: root
+    password: 201379
+    url: jdbc:mysql://localhost:3306/employment?useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: localhost
+    port: 6379
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 10
+    lettuce:
+      pool:
+        # 连接池最大连接数
+        max-active: 200
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 10
+        # 连接池中的最小空闲连接
+        min-idle: 0
+  # sa-token配置
+  sa-token:
+    # token名称 (同时也是cookie名称)
+    token-name: satoken
+    # token有效期，单位s 默认30天, -1代表永不过期
+    timeout: 2592000
+    # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+    activity-timeout: 1000
+    # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+    allow-concurrent-login: false
+    # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+    is-share: false
+    # token风格
+    token-style: uuid
+
+  # servlet配置
+  servlet:
+    # 单文件大小限制1024M，避免文件上传时因为文件过大而被限制
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+
+  # 文件上传相关配置
+  upload-config:
+    # 文件保存的根目录，所有文件都保存在这个目录下
+    root-folder: /Users/sskura/Downloads
+    # http路由前缀，用于向前台暴露文件url
+    http-prefix: /upload
+
+  # 项目自定义配置
+  myconfig:
+    # md5的盐
+    md5-salt: whatclickme
+    # 是否明文存储密码
+    is-pw: true
+    # 是否彩色SQl日志
+    color-sql: true
+    # 本项目部署到的服务器域名（文件上传等等模块  要用到）
+    domain: http://127.0.0.1:8290
+
+server:
+  port: 8290
+
+#mybatis:
+#  # 指定映射文件的位置
+#  mapper-locations: classpath:mapper/*.xml
+#    type-aliases-package: com.employ.employment.entity
+
+# mybatis-plus配置
+mybatis-plus:
+  # 配置别名包，在mapper.xml中可以直接返回SoMap
+  type-aliases-package: com.employ.employment.entity
+  # 一些配置
+  configuration:
+    # 控制打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 是否开启下划线转驼峰
+    map-underscore-to-camel-case: false
+    # 即使属性为null, 也要映射
+    call-setters-on-nulls: true

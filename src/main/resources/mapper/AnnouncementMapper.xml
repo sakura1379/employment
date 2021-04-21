@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.employ.employment.mapper.AnnouncementMapper">
+
+	<!-- 增 [G] -->
+	<insert id="add">
+		insert into 
+		announcement (announceId, announceTitle, announceContent, announceType, announceTime, adminId) 
+		values (#{announceId}, #{announceTitle}, #{announceContent}, #{announceType}, now(), #{adminId}) 
+	</insert>
+
+	<!-- 删 -->
+	<delete id="delete">
+		delete from announcement 
+		where announceId = #{announceId}
+	</delete>
+
+	<!-- 改 [G] -->
+	<update id="update">
+		update announcement set
+		announceId = #{announceId}, 
+		announceTitle = #{announceTitle}, 
+		announceContent = #{announceContent}, 
+		announceType = #{announceType}, 
+		adminId = #{adminId}
+		where announceId = #{announceId}
+	</update>
+
+
+	<!-- ================================== 查询相关 ================================== -->
+	<!-- select announceId, announceTitle, announceContent, announceType, announceTime, adminId from announcement  -->
+	
+	<!-- 通用映射：手动模式 -->
+	<resultMap id="model" type="com.employ.employment.entity.Announcement">
+		<result property="announceId" column="announceId" />
+		<result property="announceTitle" column="announceTitle" />
+		<result property="announceContent" column="announceContent" />
+		<result property="announceType" column="announceType" />
+		<result property="announceTime" column="announceTime" />
+		<result property="adminId" column="adminId" />
+	</resultMap>
+	
+	<!-- 公共查询sql片段 -->
+	<sql id="select_sql">
+		select * 
+		from announcement 
+	</sql>
+	
+	<!-- 查 - 根据id -->
+	<select id="getById" resultMap="model">
+		<include refid="select_sql"></include>
+		where announceId = #{announceId}
+	</select>
+	
+	<!-- 查集合 - 根据条件（参数为空时代表忽略指定条件） [G] -->
+	<select id="getList" resultMap="model">
+		<include refid="select_sql"></include>
+		<where>
+			<if test=' this.has("announceId") '> and announceId = #{announceId} </if>
+			<if test=' this.has("announceTitle") '> and announceTitle = #{announceTitle} </if>
+			<if test=' this.has("announceContent") '> and announceContent = #{announceContent} </if>
+			<if test=' this.has("announceType") '> and announceType = #{announceType} </if>
+			<if test=' this.has("adminId") '> and adminId = #{adminId} </if>
+		</where>
+		order by
+		<choose>
+			<when test='sortType == 1'> announceId desc </when>
+			<when test='sortType == 2'> announceTitle desc </when>
+			<when test='sortType == 3'> announceType desc </when>
+			<when test='sortType == 4'> announceTime desc </when>
+			<when test='sortType == 5'> adminId desc </when>
+			<otherwise> announceId desc </otherwise>
+		</choose>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>
