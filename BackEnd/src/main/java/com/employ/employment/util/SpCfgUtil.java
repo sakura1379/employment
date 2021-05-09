@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * DB活动配置操作工具类
  *
- * @author kong
+ * @author Zenglr
  *
  */
 @Component

@@ -26,10 +26,6 @@ public class SpRolePermissionService {
 	}
 
 
-	@Autowired
-
-
-
 	/**
 	 * 获取指定角色的所有权限码 【增加缓存】
 	 */
