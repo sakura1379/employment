@@ -64,11 +64,11 @@
 
 - @ApiImplicitParams：用在请求的方法上，包含一组参数说明
 
-  - 例如：![image-20210509112724064](/Users/sskura/Library/Application Support/typora-user-images/image-20210509112724064.png)
+  - 例如：![image-20210509112724064](https://tva1.sinaimg.cn/large/008i3skNgy1gqc8rjauunj314m0cmtbe.jpg)
 
-  - 展示效果：![image-20210509115338447](/Users/sskura/Library/Application Support/typora-user-images/image-20210509115338447.png)
+  - 展示效果：![image-20210509115338447](https://tva1.sinaimg.cn/large/008i3skNgy1gqc8re8mbfj30u00ycdjy.jpg)
 
-  - 点击上图中的”Try it out“即可进行接口测试。![image-20210509115414815](/Users/sskura/Library/Application Support/typora-user-images/image-20210509115414815.png)
+  - 点击上图中的”Try it out“即可进行接口测试。![image-20210509115414815](https://tva1.sinaimg.cn/large/008i3skNgy1gqc8rbkey1j313o0u0whw.jpg)
 
     
 
@@ -91,6 +91,7 @@
 
 ## 其他规范
 
-1. 在类上加上注解@Slf4j即可开启日志输出，最好每一个输入和输出或者方法启动时加上日志输出，方便日后日志查看debug。例如：![image-20210509115004705](/Users/sskura/Library/Application Support/typora-user-images/image-20210509115004705.png)
+1. 在类上加上注解@Slf4j即可开启日志输出，最好每一个输入和输出或者方法启动时加上日志输出，方便日后日志查看debug。例如：![image-20210509115004705](https://tva1.sinaimg.cn/large/008i3skNgy1gqc8r5eu33j314m0g4ae1.jpg)
 2. 每一个接口及类请添加注释说明。
 3. 接口返回格式统一使用AjaxJson类中的格式。
+4. 每次修改项目前先git pull再进行修改，commit时请尽量写出修改的内容，push可以直接push到main。
