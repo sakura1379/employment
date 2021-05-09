@@ -2,9 +2,11 @@ package com.employ.employment.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.employ.employment.config.token.AuthConst;
+import com.employ.employment.mapper.SpRoleMapper;
 import com.employ.employment.service.SpRolePermissionService;
 import com.employ.employment.entity.AjaxJson;
 import com.employ.employment.util.SpRoleUtil;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,19 +16,20 @@ import java.util.List;
 
 /**
  * Controller: 角色与权限的中间表
- * @author kong
+ * @author Zenglr
  *
  */
 @RestController
 @RequestMapping("/SpRolePermission/")
+@Api
 public class SpRolePermissionController {
 
+	private final SpRolePermissionService spRolePermissionService;
 
-	/** 底层Service */
 	@Autowired
-	SpRolePermissionService spRolePermissionService;
-
-
+	public SpRolePermissionController(SpRolePermissionService spRolePermissionService) {
+		this.spRolePermissionService = spRolePermissionService;
+	}
 
 	/**
 	 * 拉取权限id列表  根据指定roleId

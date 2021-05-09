@@ -19,7 +19,7 @@ public class SystemObject {
 	 *   格式为： md5(salt + userid + password)
 	 */
 	public static String getPasswordMd5(long userId, String password) {
-		return SecureUtil.md5(config.getMd5Salt() + userId + password).toUpperCase();
+		return SecureUtil.md5("whatclickme" + userId + password).toUpperCase();
 	}
 
 	/** 返回md5加密后的密码，根据当前配置的salt

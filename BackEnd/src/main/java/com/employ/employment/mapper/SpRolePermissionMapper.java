@@ -2,14 +2,16 @@ package com.employ.employment.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Mapper: 角色权限中间表
- * @author kong
+ * @author Zenglr
  */
 @Mapper
+@Component
 public interface SpRolePermissionMapper {
 
 

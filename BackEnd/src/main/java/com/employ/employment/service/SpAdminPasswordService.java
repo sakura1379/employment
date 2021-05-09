@@ -21,11 +21,11 @@ public class SpAdminPasswordService {
 	public int updatePassword(long adminId, String password) {
 		// 更改密码
 		SP.publicMapper.updateColumnById("sp_admin", "password", SystemObject.getPasswordMd5(adminId, password), adminId);
-		if(SystemObject.config.getIsPw()) {
-			// 明文密码
-			SP.publicMapper.updateColumnById("sp_admin", "pw", password, adminId);
-			return 2;
-		}
+//		if(SystemObject.config.getIsPw()) {
+//			// 明文密码
+//			SP.publicMapper.updateColumnById("sp_admin", "pw", password, adminId);
+//			return 2;
+//		}
 		return 1;
 	}
 

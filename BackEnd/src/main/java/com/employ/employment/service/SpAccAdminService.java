@@ -22,23 +22,25 @@ import java.util.Date;
 
 /**
  * service：admin账号相关
- * @author kong
+ * @author Zenglr
  *
  */
 @Service
 @Slf4j
 public class SpAccAdminService {
 
+	private final SpAdminMapper spAdminMapper;
 
+	private final SpAccAdminMapper spAccAdminMapper;
 
-	@Autowired
-	SpAccAdminMapper spAccAdminMapper;
-
-	@Autowired
-	SpAdminMapper spAdminMapper;
+	private final SpRolePermissionService spRolePermissionService;
 
 	@Autowired
-	SpRolePermissionService spRolePermissionService;
+	public SpAccAdminService(SpAdminMapper spAdminMapper, SpAccAdminMapper spAccAdminMapper, SpRolePermissionService spRolePermissionService) {
+		this.spAdminMapper = spAdminMapper;
+		this.spAccAdminMapper = spAccAdminMapper;
+		this.spRolePermissionService = spRolePermissionService;
+	}
 
 
 	/**
@@ -49,14 +51,17 @@ public class SpAccAdminService {
 	 */
 	public AjaxJson doLogin(String key, String password) {
 
-		// 0、判断 way (1=ID, 2=昵称，3=手机号  )
+		// 0、判断 way (1=ID, 2=昵称，3=邮箱  )
     	int way = 2;
     	if(utils.isNumber(key) == true){
     		way = 1;
-    		if(key.length() == 11){
-    			way = 3;
-    		}
+//    		if(key.length() == 11){
+//    			way = 3;
+//    		}
     	}
+		if(utils.isEmail(key) == true){
+			way = 3;
+		}
 
 		// 2、获取admin
         SpAdmin admin = null;
@@ -67,7 +72,7 @@ public class SpAccAdminService {
         	admin = spAdminMapper.getByName(key);
         }
         if(way == 3) {
-        	admin = spAdminMapper.getByPhone(key);
+        	admin = spAdminMapper.getByEmail(key);
         }
 
 
@@ -123,14 +128,15 @@ public class SpAccAdminService {
 	 * 修改手机号
 	 * @param adminId
 	 * @param newPhone
+	 * 不用了
 	 * @return
 	 */
-	@Transactional(rollbackFor = Exception.class, propagation=Propagation.REQUIRED)
-	public AjaxJson updatePhone(long adminId, String newPhone) {
-		// 修改admin手机号
-		int line = SP.publicMapper.updateColumnById("sys_admin", "phone", newPhone, adminId);
-		return AjaxJson.getByLine(line);
-	}
+//	@Transactional(rollbackFor = Exception.class, propagation=Propagation.REQUIRED)
+//	public AjaxJson updatePhone(long adminId, String newPhone) {
+//		// 修改admin手机号
+//		int line = SP.publicMapper.updateColumnById("sys_admin", "phone", newPhone, adminId);
+//		return AjaxJson.getByLine(line);
+//	}
 
 
 

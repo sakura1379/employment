@@ -37,7 +37,7 @@ public class SpCfgUtil {
 		// 1、获取配置字符串
 		String cfgJson = sysCfgService.getCfgValue(cfgName);
 		// 2、转换成Map
-		Map<String, Object> maps = (Map)JSON.parse(cfgJson);
+		Map<String, Object> maps = (Map) JSON.parse(cfgJson);
 		// 3、取值
 		Object value = maps.get(key);
 		if (value == null) {

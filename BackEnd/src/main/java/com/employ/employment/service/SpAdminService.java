@@ -11,18 +11,23 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service: admin管理员
+ * Service: 用户表
  *
  */
 @Service
 public class SpAdminService {
 
 
-	@Autowired
-	SpAdminMapper spAdminMapper;
+	private final SpAdminMapper spAdminMapper;
+
+	private final SpAdminPasswordService spAdminPasswordService;
 
 	@Autowired
-	SpAdminPasswordService spAdminPasswordService;
+	public SpAdminService(SpAdminMapper spAdminMapper, SpAdminPasswordService spAdminPasswordService) {
+		this.spAdminMapper = spAdminMapper;
+		this.spAdminPasswordService = spAdminPasswordService;
+	}
+
 
 
 	/**

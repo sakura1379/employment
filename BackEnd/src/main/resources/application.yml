@@ -9,7 +9,7 @@ management:
         include: "*"
       base-path: /MyActuator
   server:
-    port: 12583
+    port: 12589
     address: 127.0.0.1
 
 spring:
@@ -70,14 +70,14 @@ spring:
     # md5的盐
     md5-salt: whatclickme
     # 是否明文存储密码
-    is-pw: true
+    is-pw: false
     # 是否彩色SQl日志
     color-sql: true
     # 本项目部署到的服务器域名（文件上传等等模块  要用到）
     domain: http://127.0.0.1:8290
 
 server:
-  port: 8290
+  port: 8299
 
 #mybatis:
 #  # 指定映射文件的位置

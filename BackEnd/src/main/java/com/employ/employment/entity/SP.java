@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 公共Mapper 与 公共Service
- * @author kong
+ * @author Zenglr
  *
  */
 @Component

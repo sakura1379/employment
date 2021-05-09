@@ -270,7 +270,14 @@ public class utils {
 		return IdUtil.getSnowflake(1, 1).nextIdStr();
 	}
 
-
+	/**
+	 * 判断是否为邮箱
+	 * @param value
+	 * @return
+	 */
+	public static boolean isEmail(String value) {
+		return value.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
+	}
 
 
 }

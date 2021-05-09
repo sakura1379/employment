@@ -7,8 +7,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Model: 系统管理员表
- * @author kong
+ * Model: 用户表
+ * @author Zenglr
  */
 @Data
 public class SpAdmin implements Serializable  {
@@ -23,16 +23,19 @@ public class SpAdmin implements Serializable  {
 	public String name;
 
 	/** 头像地址 */
-	public String avatar;
+//	public String avatar;
 
 	/** 密码 */
 	public String password;
 
 	/** 明文密码 */
-	public String pw;
+//	public String pw;
 
 	/** 手机号 */
-	public String phone;
+//	public String phone;
+
+	/** 邮箱 */
+	public String mail;
 
 	/** 所属角色id */
 	public Integer roleId;

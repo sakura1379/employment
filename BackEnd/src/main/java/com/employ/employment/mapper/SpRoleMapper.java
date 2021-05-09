@@ -4,14 +4,16 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.employ.employment.entity.SoMap;
 import com.employ.employment.entity.SpRole;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Mapper: 系统角色表
- * @author kong
+ * @author Zenglr
  */
 @Mapper
+@Component
 public interface SpRoleMapper extends BaseMapper<SpRole> {
 
 

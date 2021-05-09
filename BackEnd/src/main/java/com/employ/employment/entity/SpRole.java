@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * Model: 系统角色表
- * @author kong
+ * @author Zenglr
  */
 @Data
 public class SpRole implements Serializable  {

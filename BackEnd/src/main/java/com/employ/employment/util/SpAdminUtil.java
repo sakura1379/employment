@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * admin工具类
- * @author kong
+ * @author Zenglr
  *
  */
 @Component

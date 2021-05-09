@@ -12,15 +12,22 @@ import java.util.stream.Collectors;
 
 /**
  * 角色权限中间表
- * @author kong
+ * @author Zenglr
  *
  */
 @Service
 public class SpRolePermissionService {
 
+	private final SpRolePermissionMapper spRolePermissionMapper;
 
 	@Autowired
-	SpRolePermissionMapper spRolePermissionMapper;
+	public SpRolePermissionService(SpRolePermissionMapper spRolePermissionMapper) {
+		this.spRolePermissionMapper = spRolePermissionMapper;
+	}
+
+
+	@Autowired
+
 
 
 	/**

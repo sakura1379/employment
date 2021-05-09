@@ -10,7 +10,9 @@ import com.employ.employment.service.SpAdminService;
 import com.employ.employment.entity.AjaxJson;
 import com.employ.employment.entity.SoMap;
 import com.employ.employment.util.SpAdminUtil;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,19 +23,25 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/admin/")
+@Api
 public class SpAdminController {
 
-	@Autowired
-	SpAdminMapper spAdminMapper;
+	private final SpAdminMapper spAdminMapper;
+
+	private final SpAdminService spAdminService;
+
+	private final SpAdminPasswordService spAdminPasswordService;
 
 	@Autowired
-	SpAdminService spAdminService;
+	public SpAdminController(SpAdminMapper spAdminMapper, SpAdminService spAdminService, SpAdminPasswordService spAdminPasswordService) {
+		this.spAdminMapper = spAdminMapper;
+		this.spAdminService = spAdminService;
+		this.spAdminPasswordService = spAdminPasswordService;
+	}
 
-	@Autowired
-	SpAdminPasswordService spAdminPasswordService;
 
 	/** 增  */
-	@RequestMapping("add")
+	@PostMapping("add")
 	AjaxJson add(SpAdmin admin){
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
 		long id = spAdminService.add(admin);

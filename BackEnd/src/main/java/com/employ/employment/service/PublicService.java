@@ -11,7 +11,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 /**
  * 公共service，一大堆常见方法
- * @author kong
+ * @author Zenglr
  *
  */
 @Service

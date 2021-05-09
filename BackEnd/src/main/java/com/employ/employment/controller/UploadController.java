@@ -2,17 +2,19 @@ package com.employ.employment.controller;
 
 import com.employ.employment.entity.AjaxJson;
 import com.employ.employment.util.UploadUtil;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 文件上传控制器 (基于应用服务器的文件上传)
- * @author kong
+ * @author Zenglr
  *
  */
 @RestController
 @RequestMapping("/upload/")
+@Api
 public class UploadController {
 
 	/** 上传图片 */

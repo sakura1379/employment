@@ -3,6 +3,7 @@ package com.employ.employment.mapper;
 import com.employ.employment.entity.SoMap;
 import com.employ.employment.entity.SpAdmin;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * Mapper: 系统管理员表
  */
 @Mapper
+@Component
 public interface SpAdminMapper {
 
 
@@ -58,10 +60,16 @@ public interface SpAdminMapper {
 	/**
 	 * 查询，根据 phone
 	 * @param phone
+	 * 没用了
 	 * @return
 	 */
-	SpAdmin getByPhone(String phone);
+//	SpAdmin getByPhone(String phone);
 
-
+	/**
+	 * 查询，根据 email
+	 * @param mail
+	 * @return
+	 */
+	SpAdmin getByEmail(String mail);
 
 }

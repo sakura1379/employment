@@ -8,7 +8,9 @@ import com.employ.employment.entity.SpRole;
 import com.employ.employment.mapper.SpRoleMapper;
 import com.employ.employment.entity.AjaxError;
 import com.employ.employment.entity.AjaxJson;
+import com.employ.employment.service.SpCfgService;
 import com.employ.employment.util.SpRoleUtil;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,15 +21,20 @@ import java.util.List;
 
 /**
  * Controller: 系统角色表
- * @author kong
+ * @author Zenglr
  */
 @RestController
 @RequestMapping("/role/")
+@Api
 public class SpRoleController {
 
-	/** 底层Mapper依赖 */
+	private final SpRoleMapper spRoleMapper;
+
 	@Autowired
-	SpRoleMapper spRoleMapper;
+	public SpRoleController(SpRoleMapper spRoleMapper) {
+		this.spRoleMapper = spRoleMapper;
+	}
+
 
 	/** 增 */
 	@RequestMapping("add")

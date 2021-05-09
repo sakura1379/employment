@@ -2,11 +2,15 @@ package com.employ.employment.controller;
 
 import com.employ.employment.config.SystemObject;
 import com.employ.employment.entity.SpAdmin;
+import com.employ.employment.mapper.SpAdminMapper;
 import com.employ.employment.service.SpAdminPasswordService;
 import com.employ.employment.entity.AjaxJson;
+import com.employ.employment.service.SpAdminService;
 import com.employ.employment.util.SpAdminUtil;
 import com.employ.employment.util.utils;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,14 +21,18 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/AdminPassword/")
+@Api
 public class SpAdminPasswordController {
 
+	private final SpAdminPasswordService spAdminPasswordService;
 
 	@Autowired
-	SpAdminPasswordService spAdminPasswordService;
+	public SpAdminPasswordController(SpAdminPasswordService spAdminPasswordService) {
+		this.spAdminPasswordService = spAdminPasswordService;
+	}
 
 	/** 指定用户修改自己密码 */
-	@RequestMapping("update")
+	@PostMapping("update")
 	AjaxJson updatePassword(String oldPwd, String newPwd) {
 		// 1、转md5
 		SpAdmin a = SpAdminUtil.getCurrAdmin();
