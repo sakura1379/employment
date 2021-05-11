@@ -6,7 +6,7 @@ import org.apache.ibatis.logging.Log;
  * 自定义mybatis日志层实现，优化mybatis日志输出，主要优化以下部分：
  * <p> 1、删除无用日志信息
  * <p> 2、SQL高亮显示
- * @author kong
+ * @author Zenglr
  *
  */
 public class MybatisStdOutImpl implements Log {

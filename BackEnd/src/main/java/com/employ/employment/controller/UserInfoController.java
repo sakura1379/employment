@@ -3,18 +3,19 @@ package com.employ.employment.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.employ.employment.config.token.AuthConst;
 import com.employ.employment.entity.SP;
-import com.employ.employment.entity.SpAdmin;
-import com.employ.employment.mapper.SpAdminMapper;
-import com.employ.employment.service.SpAdminPasswordService;
-import com.employ.employment.service.SpAdminService;
+import com.employ.employment.entity.UserInfo;
+import com.employ.employment.mapper.UserInfoMapper;
+import com.employ.employment.service.EpAdminPasswordService;
 import com.employ.employment.entity.AjaxJson;
 import com.employ.employment.entity.SoMap;
-import com.employ.employment.util.SpAdminUtil;
+import com.employ.employment.service.UserInfoService;
+import com.employ.employment.util.UserInfoUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,46 +23,50 @@ import java.util.List;
  * Controller -- 系统管理员表
  */
 @RestController
-@RequestMapping("/admin/")
+@RequestMapping("/user/")
 @Api
-public class SpAdminController {
+public class UserInfoController {
 
-	private final SpAdminMapper spAdminMapper;
+	private final UserInfoMapper userInfoMapper;
 
-	private final SpAdminService spAdminService;
+	private final UserInfoService userInfoService;
 
-	private final SpAdminPasswordService spAdminPasswordService;
+	private final EpAdminPasswordService epAdminPasswordService;
 
 	@Autowired
-	public SpAdminController(SpAdminMapper spAdminMapper, SpAdminService spAdminService, SpAdminPasswordService spAdminPasswordService) {
-		this.spAdminMapper = spAdminMapper;
-		this.spAdminService = spAdminService;
-		this.spAdminPasswordService = spAdminPasswordService;
+	public UserInfoController(UserInfoMapper userInfoMapper, UserInfoService userInfoService, EpAdminPasswordService epAdminPasswordService) {
+		this.userInfoMapper = userInfoMapper;
+		this.userInfoService = userInfoService;
+		this.epAdminPasswordService = epAdminPasswordService;
 	}
 
 
 	/** 增  */
-	@PostMapping("add")
-	AjaxJson add(SpAdmin admin){
+	@PutMapping("add")
+	@ApiOperation("增加管理员信息")
+	@ApiImplicitParam(dataTypeClass = UserInfo.class)
+	AjaxJson add(UserInfo user){
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
-		long id = spAdminService.add(admin);
+		long id = userInfoService.add(user);
 		return AjaxJson.getSuccessData(id);
 	}
 
 	/** 删 */
-	@RequestMapping("delete")
+	@DeleteMapping("delete")
+	@ApiOperation("删除管理员信息")
 	AjaxJson delete(long id){
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
 		// 不能自己删除自己
 		if(StpUtil.getLoginIdAsLong() == id) {
 			return AjaxJson.getError("不能自己删除自己");
 		}
-		int line = spAdminMapper.delete(id);
+		int line = userInfoMapper.delete(id);
 		return AjaxJson.getByLine(line);
 	}
 
 	/** 删 - 根据id列表 */
 	@RequestMapping("deleteByIds")
+	@ApiOperation("根据id列表删除管理员信息")
 	AjaxJson deleteByIds(){
 		// 鉴权
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
@@ -77,45 +82,50 @@ public class SpAdminController {
 
 	/** 改  -  name */
 	@RequestMapping("update")
-	AjaxJson update(SpAdmin obj){
+	@ApiOperation("改")
+	AjaxJson update(UserInfo obj){
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
-		SpAdminUtil.checkName(obj.getId(), obj.getName());
-		int line = spAdminMapper.update(obj);
+		UserInfoUtil.checkName(obj.getId(), obj.getName());
+		int line = userInfoMapper.update(obj);
 		return AjaxJson.getByLine(line);
 	}
 
 	/** 查  */
 	@RequestMapping("getById")
+	@ApiOperation("根据id查一个管理员信息")
 	AjaxJson getById(long id){
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
-		Object data = spAdminMapper.getById(id);
+		Object data = userInfoMapper.getById(id);
 		return AjaxJson.getSuccessData(data);
 	}
 
 	/** 查 - 集合 */
 	@RequestMapping("getList")
+	@ApiOperation("查管理员信息列表")
 	AjaxJson getList(){
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
 		SoMap so = SoMap.getRequestSoMap();
-		List<SpAdmin> list = spAdminMapper.getList(so.startPage());
+		List<UserInfo> list = userInfoMapper.getList(so.startPage());
 		return AjaxJson.getPageData(so.getDataCount(), list);
 	}
 
 	/** 改密码 */
 	@RequestMapping("updatePassword")
+	@ApiOperation("改密码")
 	AjaxJson updatePassword(long id, String password){
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
-		int line = spAdminPasswordService.updatePassword(id, password);
+		int line = epAdminPasswordService.updatePassword(id, password);
 		return AjaxJson.getByLine(line);
 	}
 
 	/** 改头像  */
-	@RequestMapping("updateAvatar")
-	AjaxJson updateAvatar(long id, String avatar){
-		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
-		int line = SP.publicMapper.updateColumnById("sp_admin", "avatar", avatar, id);
-		return AjaxJson.getByLine(line);
-	}
+//	@RequestMapping("updateAvatar")
+//	@ApiOperation("改头像")
+//	AjaxJson updateAvatar(long id, String avatar){
+//		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
+//		int line = SP.publicMapper.updateColumnById("sp_admin", "avatar", avatar, id);
+//		return AjaxJson.getByLine(line);
+//	}
 
 	/** 改状态  */
 	@RequestMapping("updateStatus")
@@ -147,16 +157,16 @@ public class SpAdminController {
 	/** 返回当前admin信息  */
 	@RequestMapping("getByCurr")
 	AjaxJson getByCurr() {
-		SpAdmin admin = SpAdminUtil.getCurrAdmin();
+		UserInfo admin = UserInfoUtil.getCurrAdmin();
 		return AjaxJson.getSuccessData(admin);
 	}
 
 	/** 当前admin修改信息 */
 	@RequestMapping("updateInfo")
-	AjaxJson updateInfo(SpAdmin obj){
+	AjaxJson updateInfo(UserInfo obj){
 		obj.setId(StpUtil.getLoginIdAsLong());
-		SpAdminUtil.checkName(obj.getId(), obj.getName());
-		int line = spAdminMapper.update(obj);
+		UserInfoUtil.checkName(obj.getId(), obj.getName());
+		int line = userInfoMapper.update(obj);
 		return AjaxJson.getByLine(line);
 	}
 

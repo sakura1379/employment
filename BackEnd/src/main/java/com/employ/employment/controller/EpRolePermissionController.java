@@ -2,10 +2,9 @@ package com.employ.employment.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.employ.employment.config.token.AuthConst;
-import com.employ.employment.mapper.SpRoleMapper;
-import com.employ.employment.service.SpRolePermissionService;
 import com.employ.employment.entity.AjaxJson;
-import com.employ.employment.util.SpRoleUtil;
+import com.employ.employment.service.EpRolePermissionService;
+import com.employ.employment.util.EpRoleUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +19,15 @@ import java.util.List;
  *
  */
 @RestController
-@RequestMapping("/SpRolePermission/")
+@RequestMapping("/EpRolePermission/")
 @Api
-public class SpRolePermissionController {
+public class EpRolePermissionController {
 
-	private final SpRolePermissionService spRolePermissionService;
+	private final EpRolePermissionService epRolePermissionService;
 
 	@Autowired
-	public SpRolePermissionController(SpRolePermissionService spRolePermissionService) {
-		this.spRolePermissionService = spRolePermissionService;
+	public EpRolePermissionController(EpRolePermissionService epRolePermissionService) {
+		this.epRolePermissionService = epRolePermissionService;
 	}
 
 	/**
@@ -45,15 +44,15 @@ public class SpRolePermissionController {
 		if(roleId == 0){
 			return AjaxJson.getError("roleId不能为null或0");
 		}
-		return AjaxJson.getSuccessData(spRolePermissionService.getPcodeByRid2(roleId));
+		return AjaxJson.getSuccessData(epRolePermissionService.getPcodeByRid2(roleId));
 	}
 
 
 	/** 拉取菜单id列表  根据当前用户roleId  */
 	@RequestMapping("getPcodeByCurrRid")
 	public AjaxJson getPcodeByCurrRid(){
-		long roleId = SpRoleUtil.getCurrRoleId();
-		List<Object> list = spRolePermissionService.getPcodeByRid2(roleId);
+		long roleId = EpRoleUtil.getCurrRoleId();
+		List<Object> list = epRolePermissionService.getPcodeByRid2(roleId);
 		return AjaxJson.getSuccessData(list);
 	}
 
@@ -68,7 +67,7 @@ public class SpRolePermissionController {
 	public AjaxJson updatePcodeByRid(long roleId, String[] code){
 		StpUtil.checkPermission(AuthConst.R1);
 		StpUtil.checkPermission(AuthConst.ROLE_LIST);
-		return AjaxJson.getSuccessData(spRolePermissionService.updateRoleMenu(roleId, code));
+		return AjaxJson.getSuccessData(epRolePermissionService.updateRoleMenu(roleId, code));
 	}
 
 

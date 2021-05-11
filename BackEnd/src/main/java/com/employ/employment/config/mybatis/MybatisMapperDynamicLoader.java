@@ -20,7 +20,7 @@ import java.util.*;
 
 /**
  * mapper.xml热刷新操作类
- * @author kong
+ * @author Zenglr
  */
 public class MybatisMapperDynamicLoader implements InitializingBean, ApplicationContextAware {
 

@@ -1,7 +1,7 @@
 package com.employ.employment.mapper;
 
 import com.employ.employment.entity.SoMap;
-import com.employ.employment.entity.SpAdmin;
+import com.employ.employment.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface SpAdminMapper {
+public interface UserInfoMapper {
 
 
 	/**
@@ -20,7 +20,7 @@ public interface SpAdminMapper {
 	 * @param obj
 	 * @return
 	 */
-	int add(SpAdmin obj);
+	int add(UserInfo obj);
 
 	/**
 	 * 删
@@ -34,28 +34,28 @@ public interface SpAdminMapper {
 	 * @param obj
 	 * @return
 	 */
-	int update(SpAdmin obj);
+	int update(UserInfo obj);
 
 	/**
 	 * 查
 	 * @param id
 	 * @return
 	 */
-	SpAdmin getById(long id);
+	UserInfo getById(long id);
 
 	/**
 	 * 查
 	 * @param so
 	 * @return
 	 */
-	List<SpAdmin> getList(SoMap so);
+	List<UserInfo> getList(SoMap so);
 
 	/**
 	 * 查询，根据name
 	 * @param name
 	 * @return
 	 */
-	SpAdmin getByName(String name);
+	UserInfo getByName(String name);
 
 	/**
 	 * 查询，根据 phone
@@ -70,6 +70,6 @@ public interface SpAdminMapper {
 	 * @param mail
 	 * @return
 	 */
-	SpAdmin getByEmail(String mail);
+	UserInfo getByEmail(String mail);
 
 }

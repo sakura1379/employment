@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * mapper.xml相关配置注入
- * @author kong
+ * @author Zenglr
  *
  */
 @Configuration

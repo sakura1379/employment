@@ -1,6 +1,6 @@
 package com.employ.employment.service;
 
-import com.employ.employment.mapper.SpRolePermissionMapper;
+import com.employ.employment.mapper.EpRolePermissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
  *
  */
 @Service
-public class SpRolePermissionService {
+public class EpRolePermissionService {
 
-	private final SpRolePermissionMapper spRolePermissionMapper;
+	private final EpRolePermissionMapper epRolePermissionMapper;
 
 	@Autowired
-	public SpRolePermissionService(SpRolePermissionMapper spRolePermissionMapper) {
-		this.spRolePermissionMapper = spRolePermissionMapper;
+	public EpRolePermissionService(EpRolePermissionMapper epRolePermissionMapper) {
+		this.epRolePermissionMapper = epRolePermissionMapper;
 	}
 
 
@@ -31,7 +31,7 @@ public class SpRolePermissionService {
 	 */
     @Cacheable(value="api_pcode_list", key="#roleId")
     public List<String> getPcodeByRid(long roleId){
-    	return spRolePermissionMapper.getPcodeByRoleId(roleId);
+    	return epRolePermissionMapper.getPcodeByRoleId(roleId);
     }
 
 	/**
@@ -39,7 +39,7 @@ public class SpRolePermissionService {
 	 */
     @Cacheable(value="api_pcode_list2", key="#roleId")
     public List<Object> getPcodeByRid2(long roleId){
-		List<String> codeList = spRolePermissionMapper.getPcodeByRoleId(roleId);
+		List<String> codeList = epRolePermissionMapper.getPcodeByRoleId(roleId);
 		return codeList.stream().map(String::valueOf).collect(Collectors.toList());
     }
 
@@ -56,11 +56,11 @@ public class SpRolePermissionService {
     	}
 
     	// 先删
-    	spRolePermissionMapper.deleteByRoleId(roleId);
+    	epRolePermissionMapper.deleteByRoleId(roleId);
 
     	// 再添加
     	for(String pcode : pcodeArray){
-    		spRolePermissionMapper.add(roleId, pcode);
+    		epRolePermissionMapper.add(roleId, pcode);
         }
 
     	// 返回

@@ -1,8 +1,8 @@
 package com.employ.employment.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.employ.employment.entity.EpRole;
 import com.employ.employment.entity.SoMap;
-import com.employ.employment.entity.SpRole;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface SpRoleMapper extends BaseMapper<SpRole> {
+public interface EpRoleMapper extends BaseMapper<EpRole> {
 
 
 	/**
@@ -22,7 +22,7 @@ public interface SpRoleMapper extends BaseMapper<SpRole> {
 	 * @param obj
 	 * @return
 	 */
-	int add(SpRole obj);
+	int add(EpRole obj);
 
 	/**
 	 * 删
@@ -36,21 +36,21 @@ public interface SpRoleMapper extends BaseMapper<SpRole> {
 	 * @param obj
 	 * @return
 	 */
-	int update(SpRole obj);
+	int update(EpRole obj);
 
 	/**
 	 *  查
 	 * @param id
 	 * @return
 	 */
-	SpRole getById(long id);
+	EpRole getById(long id);
 
 	/**
 	 * 查
 	 * @param soMap
 	 * @return
 	 */
-	List<SpRole> getList(SoMap soMap);
+	List<EpRole> getList(SoMap soMap);
 
 
 	/**
@@ -58,6 +58,6 @@ public interface SpRoleMapper extends BaseMapper<SpRole> {
 	 * @param name
 	 * @return
 	 */
-	SpRole getByRoleName(String name);
+	EpRole getByRoleName(String name);
 
 }

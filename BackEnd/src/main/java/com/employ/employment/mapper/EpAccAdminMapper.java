@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 
 /**
  * 账号相关
- * @author kong
+ * @author Zenglr
  *
  */
 @Mapper
 @Component
-public interface SpAccAdminMapper {
+public interface EpAccAdminMapper {
 
 	/**
 	 * 指定id的账号成功登录一次

@@ -75,19 +75,21 @@ CREATE TABLE `announcement` (
 
 
 CREATE TABLE `mail_info` (
+  `mailNum` int(11) NOT NULL AUTO_INCREMENT COMMENT '信箱编号 [no]',   /*信箱编号*/
   `stuNum` int(11) NOT NULL COMMENT '学生编号 [no]',   /*学生编号*/
   `infoId` int(11) DEFAULT NULL COMMENT '信息编号 [no]', /*信息编号*/
   `infoType` int(11) DEFAULT NULL COMMENT '信息类型 (1=宣讲会信息, 2=职位信息)[enum]',/*信息类型*/
-  PRIMARY KEY (`stuNum`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`mailNum`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `favor_info` (
+  `favorNum` int(11) NOT NULL AUTO_INCREMENT COMMENT '收藏编号 [no]',   /*收藏编号*/
   `stuNum` int(11) NOT NULL COMMENT '学生编号 [no]',   /*学生编号*/
   `compId` int(11) DEFAULT NULL COMMENT '企业编号 [no]', /*企业编号*/
   `jobId` int(11) DEFAULT NULL COMMENT '职位信息编号 [no]',/*职位信息编号*/
-  PRIMARY KEY (`stuNum`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`favorNum`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `user_info` (
@@ -145,3 +147,61 @@ CREATE TABLE `seminar_info` (
 
 
 -- 示例数据懒得写了，大家自己在本地添加吧 本地测试的时候不碍事的
+
+insert into ep_role_permission() values (0, '1', 'bas', now());
+insert into ep_role_permission() values (0, '1', '1', now());
+insert into ep_role_permission() values (0, '1', '11', now());
+insert into ep_role_permission() values (0, '1', '99', now());
+
+insert into ep_role_permission() values (0, '1', 'console', now());
+insert into ep_role_permission() values (0, '1', 'sql-console', now());
+insert into ep_role_permission() values (0, '1', 'redis-console', now());
+insert into ep_role_permission() values (0, '1', 'apilog-list', now());
+insert into ep_role_permission() values (0, '1', 'form-generator', now());
+
+insert into ep_role_permission() values (0, '1', 'auth', now());
+insert into ep_role_permission() values (0, '1', 'role-list', now());
+insert into ep_role_permission() values (0, '1', 'menu-list', now());
+insert into ep_role_permission() values (0, '1', 'admin-list', now());
+insert into ep_role_permission() values (0, '1', 'admin-add', now());
+
+insert into ep_role_permission() values (0, '1', 'sp-cfg', now());
+insert into ep_role_permission() values (0, '1', 'sp-cfg-app', now());
+insert into ep_role_permission() values (0, '1', 'sp-cfg-server', now());
+
+insert into ep_role_permission() values (0, '11', 'user_info', now());
+insert into ep_role_permission() values (0, '11', 'stu_info', now());
+insert into ep_role_permission() values (0, '121', 'user_info', now());
+insert into ep_role_permission() values (0, '1212', 'user_info', now());
+insert into ep_role_permission() values (0, '1', 'user_info', now());
+
+insert into ep_role_permission() values (0, '121', 'job_info', now());
+insert into ep_role_permission() values (0, '121', 'seminar_info', now());
+insert into ep_role_permission() values (0, '121', 'mail_info', now());
+insert into ep_role_permission() values (0, '1212', 'job_info', now());
+insert into ep_role_permission() values (0, '1212', 'seminar_info', now());
+insert into ep_role_permission() values (0, '1212', 'mail_info', now());
+insert into ep_role_permission() values (0, '1212', 'company_info', now());
+
+insert into ep_role_permission() values (0, '1', 'announcement', now());
+insert into ep_role_permission() values (0, '1212', 'comp_user', now());
+
+
+insert into ep_role_permission() values (0, '11', 'favor_info', now());
+insert into ep_role_permission() values (0, '121', 'favor_info', now());
+insert into ep_role_permission() values (0, '1212', 'favor_info', now());
+insert into ep_role_permission() values (0, '11', 'apply_info', now());
+insert into ep_role_permission() values (0, '121', 'apply_info', now());
+insert into ep_role_permission() values (0, '1212', 'apply_info', now());
+
+
+INSERT INTO `ep_role`(`role_id`, `name`, `info`, `is_lock`) VALUES (1, '超级管理员', '最高权限', 1);
+INSERT INTO `ep_role`(`role_id`, `name`, `info`, `is_lock`) VALUES (11, '学生用户', '普通账号', 2);
+INSERT INTO `ep_role`(`role_id`, `name`, `info`, `is_lock`) VALUES (121, '公司普通管理员hr', '普通管理账号', 2);
+INSERT INTO `ep_role`(`role_id`, `name`, `info`, `is_lock`) VALUES (1212, '公司超级管理员', '超级管理账号', 2);
+
+--密码实际上都是1234567
+INSERT INTO `user_info` VALUES (10001, 'zlr', '99140C1B8A8400747346571F9212BA0B', '18023893551@163.com', 1, 1, '2021-05-11 21:58:11', NULL, NULL, 0);
+INSERT INTO `user_info` VALUES (10002, 'clh', '5C41A87C54D63B760D81B039A2BAB3FF', '992456536@qq.com', 11, 1, '2021-05-11 21:59:11', NULL, NULL, 0);
+INSERT INTO `user_info` VALUES (10003, 'cjy', '7B51C5CF2E531C27B12672662BEC2C4C', '1234567@qq.com', 121, 1, '2021-05-11 22:01:07', NULL, NULL, 0);
+INSERT INTO `user_info` VALUES (10004, 'zy', '0CF04C6807910DEC54FA44104147E669', '123456@qq.com', 1212, 1, '2021-05-11 23:14:16', NULL, NULL, 0);

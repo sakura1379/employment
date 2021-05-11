@@ -2,14 +2,9 @@ package com.employ.employment.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.employ.employment.config.token.AuthConst;
-import com.employ.employment.entity.SP;
-import com.employ.employment.entity.SoMap;
-import com.employ.employment.entity.SpRole;
-import com.employ.employment.mapper.SpRoleMapper;
-import com.employ.employment.entity.AjaxError;
-import com.employ.employment.entity.AjaxJson;
-import com.employ.employment.service.SpCfgService;
-import com.employ.employment.util.SpRoleUtil;
+import com.employ.employment.entity.*;
+import com.employ.employment.mapper.EpRoleMapper;
+import com.employ.employment.util.EpRoleUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,34 +21,34 @@ import java.util.List;
 @RestController
 @RequestMapping("/role/")
 @Api
-public class SpRoleController {
+public class EpRoleController {
 
-	private final SpRoleMapper spRoleMapper;
+	private final EpRoleMapper epRoleMapper;
 
 	@Autowired
-	public SpRoleController(SpRoleMapper spRoleMapper) {
-		this.spRoleMapper = spRoleMapper;
+	public EpRoleController(EpRoleMapper epRoleMapper) {
+		this.epRoleMapper = epRoleMapper;
 	}
 
 
 	/** 增 */
 	@RequestMapping("add")
 	@Transactional(rollbackFor = Exception.class)
-	AjaxJson add(SpRole s, HttpServletRequest request){
+	AjaxJson add(EpRole s, HttpServletRequest request){
 		StpUtil.checkPermission(AuthConst.ROLE_LIST);
 		// 检验
-		if(spRoleMapper.getById(s.getId()) != null) {
+		if(epRoleMapper.getById(s.getId()) != null) {
 			return AjaxJson.getError("此id已存在，请更换");
 		}
-		SpRoleUtil.checkRoleThrow(s);
-		int line = spRoleMapper.add(s);
+		EpRoleUtil.checkRoleThrow(s);
+		int line = epRoleMapper.add(s);
 		AjaxError.throwByLine(line, "添加失败");
 		// 返回这个对象
 		long id = s.getId();
 		if(id == 0) {
 			id = SP.publicMapper.getPrimarykey();
 		}
-		return AjaxJson.getSuccessData(spRoleMapper.getById(id));
+		return AjaxJson.getSuccessData(epRoleMapper.getById(id));
 	}
 
 	/** 删 */
@@ -61,17 +56,17 @@ public class SpRoleController {
 	AjaxJson delete(long id, HttpServletRequest request){
 		StpUtil.checkPermission(AuthConst.R1);
 		StpUtil.checkPermission(AuthConst.ROLE_LIST);
-		int line = spRoleMapper.delete(id);
+		int line = epRoleMapper.delete(id);
 		return AjaxJson.getByLine(line);
 	}
 
 	/** 改 */
 	@RequestMapping("update")
-	AjaxJson update(SpRole s){
+	AjaxJson update(EpRole s){
 		StpUtil.checkPermission(AuthConst.R1);
 		StpUtil.checkPermission(AuthConst.ROLE_LIST);
-		SpRoleUtil.checkRoleThrow(s);
-		int line = spRoleMapper.update(s);
+		EpRoleUtil.checkRoleThrow(s);
+		int line = epRoleMapper.update(s);
 		return AjaxJson.getByLine(line);
 	}
 
@@ -79,7 +74,7 @@ public class SpRoleController {
 	@RequestMapping("getById")
 	AjaxJson getById(long id){
 		StpUtil.checkPermission(AuthConst.R99);
-		SpRole s = spRoleMapper.getById(id);
+		EpRole s = epRoleMapper.getById(id);
 		return AjaxJson.getSuccessData(s);
 	}
 
@@ -88,7 +83,7 @@ public class SpRoleController {
 	AjaxJson getList(){
 		StpUtil.checkPermission(AuthConst.R99);
 		SoMap so = SoMap.getRequestSoMap();
-		List<SpRole> list = spRoleMapper.getList(so);
+		List<EpRole> list = epRoleMapper.getList(so);
 		return AjaxJson.getSuccessData(list);
 	}
 

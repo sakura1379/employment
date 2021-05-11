@@ -1,8 +1,9 @@
 package com.employ.employment.config.token;
 
 import cn.dev33.satoken.stp.StpInterface;
-import com.employ.employment.mapper.SpAdminMapper;
-import com.employ.employment.service.SpRolePermissionService;
+import com.employ.employment.mapper.EpRoleMapper;
+import com.employ.employment.mapper.UserInfoMapper;
+import com.employ.employment.service.EpRolePermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,19 +18,23 @@ import java.util.List;
 public class StpInterfaceImpl implements StpInterface {
 
 
-	@Autowired
-	SpAdminMapper spAdminMapper;
+	private final EpRolePermissionService epRolePermissionService;
+
+	private final UserInfoMapper userInfoMapper;
 
 	@Autowired
-	SpRolePermissionService spRolePermissionService;
+	public StpInterfaceImpl(EpRolePermissionService epRolePermissionService, UserInfoMapper userInfoMapper) {
+		this.epRolePermissionService = epRolePermissionService;
+		this.userInfoMapper = userInfoMapper;
+	}
 
 
 	/** 返回一个账号所拥有的权限码集合  */
 	@Override
 	public List<String> getPermissionList(Object loginId, String loginKey) {
 		if(loginKey.equals("login")) {
-			long roleId = spAdminMapper.getById(Long.valueOf(loginId.toString())).getRoleId();
-			return spRolePermissionService.getPcodeByRid(roleId);
+			long roleId = userInfoMapper.getById(Long.valueOf(loginId.toString())).getRoleId();
+			return epRolePermissionService.getPcodeByRid(roleId);
 		}
 		return null;
 	}

@@ -6,17 +6,16 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.employ.employment.config.SystemObject;
 import com.employ.employment.entity.SP;
 import com.employ.employment.entity.SoMap;
-import com.employ.employment.entity.SpAdmin;
-import com.employ.employment.mapper.SpAccAdminMapper;
-import com.employ.employment.mapper.SpAdminMapper;
+import com.employ.employment.entity.UserInfo;
+import com.employ.employment.mapper.EpAccAdminMapper;
 import com.employ.employment.entity.AjaxJson;
+import com.employ.employment.mapper.UserInfoMapper;
 import com.employ.employment.util.WebUtil;
 import com.employ.employment.util.utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.Date;
 
@@ -27,19 +26,19 @@ import java.util.Date;
  */
 @Service
 @Slf4j
-public class SpAccAdminService {
+public class EpAccAdminService {
 
-	private final SpAdminMapper spAdminMapper;
+	private final UserInfoMapper userInfoMapper;
 
-	private final SpAccAdminMapper spAccAdminMapper;
+	private final EpAccAdminMapper epAccAdminMapper;
 
-	private final SpRolePermissionService spRolePermissionService;
+	private final EpRolePermissionService epRolePermissionService;
 
 	@Autowired
-	public SpAccAdminService(SpAdminMapper spAdminMapper, SpAccAdminMapper spAccAdminMapper, SpRolePermissionService spRolePermissionService) {
-		this.spAdminMapper = spAdminMapper;
-		this.spAccAdminMapper = spAccAdminMapper;
-		this.spRolePermissionService = spRolePermissionService;
+	public EpAccAdminService(UserInfoMapper userInfoMapper, EpAccAdminMapper epAccAdminMapper, EpRolePermissionService epRolePermissionService) {
+		this.userInfoMapper = userInfoMapper;
+		this.epAccAdminMapper = epAccAdminMapper;
+		this.epRolePermissionService = epRolePermissionService;
 	}
 
 
@@ -64,43 +63,43 @@ public class SpAccAdminService {
 		}
 
 		// 2、获取admin
-        SpAdmin admin = null;
+        UserInfo user = null;
         if(way == 1) {
-        	admin = spAdminMapper.getById(Long.parseLong(key));
+			user = userInfoMapper.getById(Long.parseLong(key));
         }
         if(way == 2) {
-        	admin = spAdminMapper.getByName(key);
+			user = userInfoMapper.getByName(key);
         }
         if(way == 3) {
-        	admin = spAdminMapper.getByEmail(key);
+			user = userInfoMapper.getByEmail(key);
         }
 
 
         // 3、开始验证
-        if(admin == null){
+        if(user == null){
         	return AjaxJson.getError("无此账号");
         }
-        if(utils.isNull(admin.getPassword2())) {
+        if(utils.isNull(user.getPassword2())) {
         	return AjaxJson.getError("此账号尚未设置密码，无法登陆");
         }
-        String md5Password = SystemObject.getPasswordMd5(admin.getId(), password);
-        if(admin.getPassword2().equals(md5Password) == false){
+        String md5Password = SystemObject.getPasswordMd5(user.getId(), password);
+        if(user.getPassword2().equals(md5Password) == false){
         	return AjaxJson.getError("密码错误");
         }
 
         // 4、是否禁用
-        if(admin.getStatus() == 2) {
+        if(user.getStatus() == 2) {
         	return AjaxJson.getError("此账号已被禁用，如有疑问，请联系管理员");
         }
 
         // =========== 至此, 已登录成功 ============
-        successLogin(admin);
-        StpUtil.setLoginId(admin.getId());
+        successLogin(user);
+        StpUtil.setLoginId(user.getId());
 
         // 组织返回参数
 		SoMap map = new SoMap();
-		map.put("admin", admin);
-		map.put("per_list", spRolePermissionService.getPcodeByRid2(admin.getRoleId()));
+		map.put("user", user);
+		map.put("per_list", epRolePermissionService.getPcodeByRid2(user.getRoleId()));
 		map.put("tokenInfo", StpUtil.getTokenInfo());
 		AjaxJson res = AjaxJson.getSuccessData(map);
 		log.info(res.toString());
@@ -113,9 +112,9 @@ public class SpAccAdminService {
 	 * @param s
 	 * @return
 	 */
-	public int successLogin(SpAdmin s){
+	public int successLogin(UserInfo s){
 		String loginIp = WebUtil.getIP(SpringMVCUtil.getRequest());
-		int line = spAccAdminMapper.successLogin(s.getId(), loginIp);
+		int line = epAccAdminMapper.successLogin(s.getId(), loginIp);
 		if(line > 0) {
 	        s.setLoginIp(loginIp);
 	        s.setLoginTime(new Date());

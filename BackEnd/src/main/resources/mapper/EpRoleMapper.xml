@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.employ.employment.mapper.SpRoleMapper">
+<mapper namespace="com.employ.employment.mapper.EpRoleMapper">
 
 
 	<!-- 增 -->
 	<insert id="add" >
 		insert into
-		sp_role(id, name, info, is_lock, create_time)
+		ep_role(id, name, info, is_lock, create_time)
 		values (#{id}, #{name}, #{info}, 2, now())
 	</insert>
 
 
 	<!-- 删 -->
 	<delete id="delete" >
-		delete from sp_role
+		delete from ep_role
 		where id = #{id}
 	</delete>
 
@@ -28,7 +28,7 @@
 
 
 	<!-- 通用映射 -->
-	<resultMap id="model" type="com.employ.employment.entity.SpRole">
+	<resultMap id="ep_role" type="com.employ.employment.entity.EpRole">
 		<result property="id" column="id" />
 		<result property="name" column="name" />
 		<result property="info" column="info" />
@@ -37,14 +37,14 @@
 	</resultMap>
 
 	<!-- 查 -->
-	<select id="getById" resultMap="model" >
+	<select id="getById" resultMap="ep_role" >
 		select * from ep_role
 		where id = #{id}
 	</select>
 
 
 	<!-- 查询 -->
-	<select id="getList" resultMap="model" >
+	<select id="getList" resultMap="ep_role" >
 		select * from ep_role where 1=1
 		<if test=' this.has("name")  '>
 			and name like concat('%', #{name}, '%')
@@ -52,7 +52,7 @@
 	</select>
 
 	<!-- 查 - 根据角色名字 -->
-	<select id="getByRoleName" resultMap="model">
+	<select id="getByRoleName" resultMap="ep_role">
 		select * from ep_role
 		where name = #{name}
 	</select>

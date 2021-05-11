@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.employ.employment.mapper.SpAdminMapper">
+<mapper namespace="com.employ.employment.mapper.UserInfoMapper">
 
 
 	<!-- 增 -->
 	<insert id="add">
 		insert into
-		sp_admin(name, avatar, phone, role_id, create_by_aid, create_time)
+		user_info(name, avatar, phone, role_id, create_by_aid, create_time)
 		values (#{name}, #{avatar}, #{phone}, #{roleId}, #{createByAid}, now())
 	</insert>
 
 
 	<!-- 删 -->
 	<delete id="delete">
-		delete from sp_admin where id = #{id}
+		delete from user_info where id = #{id}
 	</delete>
 
 
 	<!-- 改 -->
 	<delete id="update">
-		update sp_admin set
+		update user_info set
 		name = #{name}
 		where id = #{id}
 	</delete>
@@ -34,7 +34,7 @@
 	<!-- =================== 查询相关 =================== -->
 
 	<!-- 通用映射 -->
-	<resultMap id="model" type="com.employ.employment.entity.SpAdmin">
+	<resultMap id="user_info" type="com.employ.employment.entity.UserInfo">
 		<result property="id" column="id" />
 		<result property="name" column="name" />
 <!--		<result property="avatar" column="avatar" />-->
@@ -54,19 +54,19 @@
 	<!-- 查询sql -->
 	<sql id="select_sql">
 		select *,
-		(select name from ep_role where id = sp_admin.role_id) as role_name
-		from sp_admin
+		(select name from ep_role where id = user_info.role_id) as role_name
+		from user_info
 	</sql>
 
 
 	<!-- 查询，根据id -->
-	<select id="getById" resultMap="model">
+	<select id="getById" resultMap="user_info">
 		<include refid="select_sql"></include>
 		where id = #{id}
 	</select>
 
 	<!-- 查询，根据名称 -->
-	<select id="getByName" resultMap="model">
+	<select id="getByName" resultMap="user_info">
 		<include refid="select_sql"></include>
 		where name = #{name}
 	</select>
@@ -78,13 +78,13 @@
 <!--	</select>-->
 
 	<!-- 查询，根据名称 -->
-	<select id="getByEmail" resultMap="model">
+	<select id="getByEmail" resultMap="user_info">
 		<include refid="select_sql"></include>
 		where mail = #{mail}
 	</select>
 
 	<!-- 查询 -->
-	<select id="getList" resultMap="model">
+	<select id="getList" resultMap="user_info">
 		<include refid="select_sql"></include>
 		where 1=1
 		<if test=' this.has("id")  '>and id = #{id} </if>

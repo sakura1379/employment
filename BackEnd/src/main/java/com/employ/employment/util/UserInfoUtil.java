@@ -2,8 +2,8 @@ package com.employ.employment.util;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.employ.employment.entity.AjaxError;
-import com.employ.employment.entity.SpAdmin;
-import com.employ.employment.mapper.SpAdminMapper;
+import com.employ.employment.entity.UserInfo;
+import com.employ.employment.mapper.UserInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class SpAdminUtil {
+public class UserInfoUtil {
 
 
-	static SpAdminMapper spAdminMapper;
+	static UserInfoMapper userInfoMapper;
 	@Autowired
-	public void setSpAdminMapper(SpAdminMapper spAdminMapper) {
-		SpAdminUtil.spAdminMapper = spAdminMapper;
+	public void setSpAdminMapper(UserInfoMapper userInfoMapper) {
+		this.userInfoMapper = userInfoMapper;
 	}
 
 
@@ -27,9 +27,9 @@ public class SpAdminUtil {
 	 * 当前admin
 	 * @return
 	 */
-	public static SpAdmin getCurrAdmin() {
-		long adminId = StpUtil.getLoginIdAsLong();
-		return spAdminMapper.getById(adminId);
+	public static UserInfo getCurrAdmin() {
+		long loginId = StpUtil.getLoginIdAsLong();
+		return userInfoMapper.getById(loginId);
 	}
 
 	/**
@@ -49,23 +49,23 @@ public class SpAdminUtil {
 //			throw AjaxException.get("账号名称不能以字母a开头");
 //		}
 		// 如果能查出来数据，而且不是本人，则代表与已有数据重复
-		SpAdmin a2 = spAdminMapper.getByName(name);
-		if(a2 != null && a2.getId() != adminId) {
+		UserInfo u2 = userInfoMapper.getByName(name);
+		if(u2 != null && u2.getId() != adminId) {
 			throw AjaxError.get("账号名称已有账号使用，请更换");
 		}
 		return true;
 	}
 
 	/**
-	 * 检查整个admin是否合格
-	 * @param a
+	 * 检查整个用户是否合格
+	 * @param u
 	 * @return
 	 */
-	public static boolean checkAdmin(SpAdmin a) {
+	public static boolean checkAdmin(UserInfo u) {
 		// 检查姓名
-		checkName(a.getId(), a.getName());
+		checkName(u.getId(), u.getName());
 		// 检查密码
-		if(a.getPassword2().length() < 4) {
+		if(u.getPassword2().length() < 4) {
 			throw new AjaxError("密码不得低于4位");
 		}
 		return true;
@@ -79,8 +79,8 @@ public class SpAdminUtil {
 	 * @return
 	 */
 	public static boolean nameIsOk(String name) {
-		SpAdmin a2 = spAdminMapper.getByName(name);
-		if(a2 == null) {
+		UserInfo u2 = userInfoMapper.getByName(name);
+		if(u2 == null) {
 			return true;
 		}
 		return false;

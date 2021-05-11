@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 用户表 密码相关
- * @author kong
+ * @author Zenglr
  *
  */
 @Service
-public class SpAdminPasswordService {
+public class EpAdminPasswordService {
 
 
 	// REQUIRED=如果调用方有事务  就继续使用调用方的事务
@@ -20,7 +20,7 @@ public class SpAdminPasswordService {
 	@Transactional(rollbackFor = Exception.class, propagation=Propagation.REQUIRED)
 	public int updatePassword(long adminId, String password) {
 		// 更改密码
-		SP.publicMapper.updateColumnById("sp_admin", "password", SystemObject.getPasswordMd5(adminId, password), adminId);
+		SP.publicMapper.updateColumnById("user_info", "password", SystemObject.getPasswordMd5(adminId, password), adminId);
 //		if(SystemObject.config.getIsPw()) {
 //			// 明文密码
 //			SP.publicMapper.updateColumnById("sp_admin", "pw", password, adminId);

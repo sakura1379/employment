@@ -11,7 +11,7 @@ import java.util.Date;
  * @author Zenglr
  */
 @Data
-public class SpAdmin implements Serializable  {
+public class UserInfo implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
 
