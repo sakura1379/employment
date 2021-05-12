@@ -10,6 +10,7 @@ import com.employ.employment.util.UserInfoUtil;
 import com.employ.employment.util.utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/AccAdmin/")
 @Api
+@Slf4j
 public class EpAccAdminController {
 
 	private final EpAccAdminService epAccAdminService;
@@ -43,6 +45,8 @@ public class EpAccAdminController {
 	@PostMapping("doLogin")
 	@ApiOperation("账号密码登录")
 	AjaxJson doLogin(String key, String password) {
+		log.info("Start login=============");
+		log.info("Receive key: {}, password: {}", key, password);
 		// 1、验证参数
 		if(utils.isOneNull(key, password)) {
 			return AjaxJson.getError("请提供key与password参数");
@@ -55,15 +59,17 @@ public class EpAccAdminController {
 	@GetMapping("doExit")
 	@ApiOperation("退出登录")
 	AjaxJson doExit() {
+		log.info("Start ExitLogin=======");
 		StpUtil.logout();
 		return AjaxJson.getSuccess();
 	}
 
 
 	/** 管理员登录后台时需要返回的信息 */
-	@RequestMapping("fristOpenAdmin")
+	@GetMapping("firstOpenAdmin")
 	@ApiOperation("管理员登录后台时需要返回的信息")
 	AjaxJson fristOpenAdmin(HttpServletRequest request) {
+		log.info("Start getFirstOpenAdmin=========");
 		// 当前user
 		UserInfo user = UserInfoUtil.getCurrAdmin();
 

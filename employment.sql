@@ -32,7 +32,7 @@ CREATE TABLE `job_info` (
   `jobDeadline` date DEFAULT NULL COMMENT '截止日期 [date]', /*投递截止日期*/
   `deliverNum` int(11) DEFAULT NULL COMMENT '已投递人数 [num]',/*已投递人数*/
   `salary` varchar(50) DEFAULT NULL COMMENT '薪资 [text]', /*薪资*/
-  `approveStatus` int(11) NOT NULL COMMENT '审核状态 (1=未审核, 2=审核通过, 3=审核不通过) [enum]', /*审核状态*/
+  `approveStatus` int(11) DEFAULT '1' COMMENT '审核状态 (1=未审核, 2=审核通过, 3=审核不通过) [enum]', /*审核状态*/
   PRIMARY KEY (`jobId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='职位信息表';
 
@@ -47,7 +47,7 @@ CREATE TABLE `company_info`(
   `creditcode` varchar(30) DEFAULT NULL COMMENT '统一社会信用代码 [text]',
   `compEsDate` date DEFAULT NULL COMMENT '企业成立日期 [date]',
   `compIntro` text COMMENT '企业介绍 [textarea]',
-  `approveStatus` varchar(20) NOT NULL COMMENT '审核状态 (1=未审核, 2=审核通过, 3=审核不通过) [enum]', 
+  `approveStatus` varchar(20) DEFAULT '1' COMMENT '审核状态 (1=未审核, 2=审核通过, 3=审核不通过) [enum]', 
   PRIMARY KEY (`compId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='企业信息表';
 
@@ -57,8 +57,8 @@ CREATE TABLE `apply_info` (
   `jobId` int(11) NOT NULL COMMENT '职位信息编号 [no]',     /*招聘信息编号*/
   `internshipTime` int(11) DEFAULT NULL COMMENT '一周可实习时间 (1=一天, 2=两天, 3=三天, 4=四天, 5=五天, 6=六天) [enum]', /*一周可实习时间*/
   `dutyTime` int(11) DEFAULT NULL COMMENT '最快到岗时间 (1=一周内, 2=两周内, 3=一个月内, 4=三个月内) [enum]',/*最快到岗时间*/
-  `ApplyStatus` int(11) NOT NULL COMMENT '历史申请状态 (1=简历待筛选, 2=未通过, 3=一面, 4=二面, 5=HR面, 6=录用评估中, 7=录用意向, 8=已录用) [enum]',/*历史申请状态*/
-  `newApplyStatus` int(11) NOT NULL COMMENT '最近申请状态 (1=简历待筛选, 2=未通过, 3=一面, 4=二面, 5=HR面, 6=录用评估中, 7=录用意向, 8=已录用) [enum]',/*最近申请状态*/
+  `ApplyStatus` int(11) DEFAULT '1' COMMENT '历史申请状态 (1=简历待筛选, 2=未通过, 3=一面, 4=二面, 5=HR面, 6=录用评估中, 7=录用意向, 8=已录用) [enum]',/*历史申请状态*/
+  `newApplyStatus` int(11) DEFAULT '1' COMMENT '最近申请状态 (1=简历待筛选, 2=未通过, 3=一面, 4=二面, 5=HR面, 6=录用评估中, 7=录用意向, 8=已录用) [enum]',/*最近申请状态*/
   PRIMARY KEY (`stuNum`,`JobId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='职位申请表';
 
@@ -140,7 +140,7 @@ CREATE TABLE `comp_user` (
 CREATE TABLE `seminar_info` (
   `seminarId` int(11) NOT NULL AUTO_INCREMENT  COMMENT '宣讲会信息编号 [no]',
   `hrId` int(11) DEFAULT NULL COMMENT 'hr编号 [no]', /*hr编号*/
-  `approveStatus` int(11) NOT NULL COMMENT '审核状态 (1=未审核, 2=审核通过, 3=审核不通过) [enum]', /*审核状态*/
+  `approveStatus` int(11) DEFAULT '1' COMMENT '审核状态 (1=未审核, 2=审核通过, 3=审核不通过) [enum]', /*审核状态*/
   `seminarTime` date DEFAULT NULL COMMENT '发布时间 [date-create]',/*发布时间*/
   PRIMARY KEY (`seminarId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

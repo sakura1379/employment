@@ -6,8 +6,8 @@
 	<!-- 增 -->
 	<insert id="add">
 		insert into
-		user_info(name, avatar, phone, role_id, create_by_aid, create_time)
-		values (#{name}, #{avatar}, #{phone}, #{roleId}, #{createByAid}, now())
+		user_info(name, mail, role_id, create_time)
+		values (#{name}, #{mail}, #{roleId}, now())
 	</insert>
 
 
@@ -18,11 +18,11 @@
 
 
 	<!-- 改 -->
-	<delete id="update">
+	<update id="update">
 		update user_info set
 		name = #{name}
 		where id = #{id}
-	</delete>
+	</update>
 
 	<!-- 自己改自己 -->
 	<!-- <delete id="updateBy">
@@ -40,7 +40,7 @@
 <!--		<result property="avatar" column="avatar" />-->
 		<result property="password" column="password" />
 <!--		<result property="pw" column="pw" />-->
-		<result property="mail" column="phone" />
+		<result property="mail" column="mail" />
 		<result property="roleId" column="role_id" />
 		<result property="status" column="status" />
 		<result property="createByAid" column="create_by_aid" />
@@ -54,7 +54,7 @@
 	<!-- 查询sql -->
 	<sql id="select_sql">
 		select *,
-		(select name from ep_role where id = user_info.role_id) as role_name
+		(select name from ep_role where role_id = user_info.role_id) as role_name
 		from user_info
 	</sql>
 

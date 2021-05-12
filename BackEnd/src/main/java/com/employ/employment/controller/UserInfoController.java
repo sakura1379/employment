@@ -12,19 +12,23 @@ import com.employ.employment.service.UserInfoService;
 import com.employ.employment.util.UserInfoUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * Controller -- 系统管理员表
+ * Controller -- 用户表
  */
 @RestController
 @RequestMapping("/user/")
 @Api
+@Slf4j
 public class UserInfoController {
 
 	private final UserInfoMapper userInfoMapper;
@@ -43,9 +47,16 @@ public class UserInfoController {
 
 	/** 增  */
 	@PutMapping("add")
-	@ApiOperation("增加管理员信息")
-	@ApiImplicitParam(dataTypeClass = UserInfo.class)
+	@ApiOperation("增加用户信息")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "name", value = "用户名", required = true),
+			@ApiImplicitParam(name = "password", value = "密码", required = true),
+			@ApiImplicitParam(name = "mail", value = "邮箱", required = true),
+			@ApiImplicitParam(name = "roleId", value = "用户角色", required = true)
+	})
 	AjaxJson add(UserInfo user){
+		log.info("Start addUser========");
+		log.info("Receive userInfo:{}", user.toString());
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
 		long id = userInfoService.add(user);
 		return AjaxJson.getSuccessData(id);
@@ -53,8 +64,10 @@ public class UserInfoController {
 
 	/** 删 */
 	@DeleteMapping("delete")
-	@ApiOperation("删除管理员信息")
+	@ApiOperation("删除用户信息")
 	AjaxJson delete(long id){
+		log.info("Start deleteUser========");
+		log.info("Receive id:{}", id);
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
 		// 不能自己删除自己
 		if(StpUtil.getLoginIdAsLong() == id) {
@@ -65,9 +78,10 @@ public class UserInfoController {
 	}
 
 	/** 删 - 根据id列表 */
-	@RequestMapping("deleteByIds")
-	@ApiOperation("根据id列表删除管理员信息")
+	@DeleteMapping("deleteByIds")
+	@ApiOperation("根据id列表删除用户信息")
 	AjaxJson deleteByIds(){
+		log.info("Start deleteUserInfoByIdList========");
 		// 鉴权
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
 		// 不能自己删除自己
@@ -81,9 +95,15 @@ public class UserInfoController {
 	}
 
 	/** 改  -  name */
-	@RequestMapping("update")
-	@ApiOperation("改")
+	@PostMapping("update")
+	@ApiOperation("改用户名字")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "用户id", required = true),
+			@ApiImplicitParam(name = "name", value = "新用户名", required = true)
+	})
 	AjaxJson update(UserInfo obj){
+		log.info("Start updateUser========");
+		log.info("Receive userInfo:{}", obj.toString());
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
 		UserInfoUtil.checkName(obj.getId(), obj.getName());
 		int line = userInfoMapper.update(obj);
@@ -91,18 +111,21 @@ public class UserInfoController {
 	}
 
 	/** 查  */
-	@RequestMapping("getById")
-	@ApiOperation("根据id查一个管理员信息")
+	@GetMapping("getById")
+	@ApiOperation("根据id查一个用户信息")
 	AjaxJson getById(long id){
+		log.info("Start getUserInfoById========");
+		log.info("Receive id:{}", id);
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
 		Object data = userInfoMapper.getById(id);
 		return AjaxJson.getSuccessData(data);
 	}
 
 	/** 查 - 集合 */
-	@RequestMapping("getList")
-	@ApiOperation("查管理员信息列表")
+	@GetMapping("getList")
+	@ApiOperation("查用户信息列表")
 	AjaxJson getList(){
+		log.info("Start getUserInfoList========");
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
 		SoMap so = SoMap.getRequestSoMap();
 		List<UserInfo> list = userInfoMapper.getList(so.startPage());
@@ -110,7 +133,7 @@ public class UserInfoController {
 	}
 
 	/** 改密码 */
-	@RequestMapping("updatePassword")
+	@PostMapping("updatePassword")
 	@ApiOperation("改密码")
 	AjaxJson updatePassword(long id, String password){
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
@@ -128,42 +151,54 @@ public class UserInfoController {
 //	}
 
 	/** 改状态  */
-	@RequestMapping("updateStatus")
-	public AjaxJson updateStatus(long adminId, int status) {
+	@PostMapping("updateStatus")
+	@ApiOperation("改状态")
+	public AjaxJson updateStatus(long id, int status) {
+		log.info("Start updateUserStatus========");
+		log.info("Receive id:{}, status:{}", id, status);
 		StpUtil.checkPermission(AuthConst.R1);
 
 		// 验证对方是否为超管(保护超管不受摧残)
-		if(StpUtil.hasPermission(adminId, AuthConst.R1)){
+		if(StpUtil.hasPermission(id, AuthConst.R1)){
 			return AjaxJson.getError("抱歉，对方角色为系统超级管理员，您暂无权限操作");
 		}
 
 		// 修改状态
-		SP.publicMapper.updateColumnById("sp_admin", "status", status, adminId);
+		SP.publicMapper.updateColumnById("user_info", "status", status, id);
 		// 如果是禁用，就停掉其秘钥有效果性，使其账号的登录状态立即无效
 		if(status == 2) {
-			StpUtil.logoutByLoginId(adminId);
+			StpUtil.logoutByLoginId(id);
 		}
 		return AjaxJson.getSuccess();
 	}
 
 	/** 改角色  */
-	@RequestMapping("updateRole")
+	@PostMapping("updateRole")
+	@ApiOperation("根据id改角色")
 	AjaxJson updateRole(long id, String roleId){
+		log.info("Start updateUserRole========");
+		log.info("Receive id:{}, roleId:{}", id, roleId);
 		StpUtil.checkPermission(AuthConst.R1);
-		int line = SP.publicMapper.updateColumnById("sp_admin", "role_id", roleId, id);
+		int line = SP.publicMapper.updateColumnById("user_info", "role_id", roleId, id);
 		return AjaxJson.getByLine(line);
 	}
 
 	/** 返回当前admin信息  */
-	@RequestMapping("getByCurr")
+	@GetMapping("getByCurr")
+	@ApiOperation("返回当前用户信息")
 	AjaxJson getByCurr() {
+		log.info("Start getCurrentUserInfo========");
 		UserInfo admin = UserInfoUtil.getCurrAdmin();
 		return AjaxJson.getSuccessData(admin);
 	}
 
 	/** 当前admin修改信息 */
-	@RequestMapping("updateInfo")
+	@PostMapping("updateInfo")
+	@ApiOperation("当前用户修改名字")
+	@ApiImplicitParam(name = "name", value = "新用户名", required = true)
 	AjaxJson updateInfo(UserInfo obj){
+		log.info("Start updateUserInfo========");
+		log.info("Receive userInfo:{}", obj.toString());
 		obj.setId(StpUtil.getLoginIdAsLong());
 		UserInfoUtil.checkName(obj.getId(), obj.getName());
 		int line = userInfoMapper.update(obj);

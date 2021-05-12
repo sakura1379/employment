@@ -95,6 +95,7 @@ public class EpAccAdminService {
         // =========== 至此, 已登录成功 ============
         successLogin(user);
         StpUtil.setLoginId(user.getId());
+        log.info("loginId{} 登录成功==========",user.getId());
 
         // 组织返回参数
 		SoMap map = new SoMap();
@@ -114,6 +115,7 @@ public class EpAccAdminService {
 	 */
 	public int successLogin(UserInfo s){
 		String loginIp = WebUtil.getIP(SpringMVCUtil.getRequest());
+		log.info("loginIp{}登录一次==========",loginIp);
 		int line = epAccAdminMapper.successLogin(s.getId(), loginIp);
 		if(line > 0) {
 	        s.setLoginIp(loginIp);

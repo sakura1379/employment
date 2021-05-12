@@ -6,10 +6,13 @@ import com.employ.employment.entity.*;
 import com.employ.employment.mapper.EpRoleMapper;
 import com.employ.employment.util.EpRoleUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -21,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/role/")
 @Api
+@Slf4j
 public class EpRoleController {
 
 	private final EpRoleMapper epRoleMapper;
@@ -32,9 +36,17 @@ public class EpRoleController {
 
 
 	/** 增 */
-	@RequestMapping("add")
+	@PutMapping("add")
 	@Transactional(rollbackFor = Exception.class)
+	@ApiOperation("增加角色")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "roleId", required = true),
+			@ApiImplicitParam(name = "name", value = "角色名称", required = true),
+			@ApiImplicitParam(name = "info", value = "角色详细描述", required = true)
+	})
 	AjaxJson add(EpRole s, HttpServletRequest request){
+		log.info("Start addRole========");
+		log.info("Receive EpRole:{}", s.toString());
 		StpUtil.checkPermission(AuthConst.ROLE_LIST);
 		// 检验
 		if(epRoleMapper.getById(s.getId()) != null) {
@@ -52,8 +64,11 @@ public class EpRoleController {
 	}
 
 	/** 删 */
-	@RequestMapping("delete")
+	@DeleteMapping("delete")
+	@ApiOperation("删除角色")
 	AjaxJson delete(long id, HttpServletRequest request){
+		log.info("Start deleteRole========");
+		log.info("Receive id:{}", id);
 		StpUtil.checkPermission(AuthConst.R1);
 		StpUtil.checkPermission(AuthConst.ROLE_LIST);
 		int line = epRoleMapper.delete(id);
@@ -61,8 +76,16 @@ public class EpRoleController {
 	}
 
 	/** 改 */
-	@RequestMapping("update")
+	@PostMapping("update")
+	@ApiOperation("修改角色")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "roleId", required = true),
+			@ApiImplicitParam(name = "name", value = "角色名称", required = true),
+			@ApiImplicitParam(name = "info", value = "角色详细描述", required = true)
+	})
 	AjaxJson update(EpRole s){
+		log.info("Start updateRole========");
+		log.info("Receive EpRole:{}", s.toString());
 		StpUtil.checkPermission(AuthConst.R1);
 		StpUtil.checkPermission(AuthConst.ROLE_LIST);
 		EpRoleUtil.checkRoleThrow(s);
@@ -71,16 +94,21 @@ public class EpRoleController {
 	}
 
 	/** 查 */
-	@RequestMapping("getById")
+	@GetMapping("getById")
+	@ApiOperation("根据id查角色")
 	AjaxJson getById(long id){
+		log.info("Start getRoleById========");
+		log.info("Receive id:{}", id);
 		StpUtil.checkPermission(AuthConst.R99);
 		EpRole s = epRoleMapper.getById(id);
 		return AjaxJson.getSuccessData(s);
 	}
 
 	/** 查 - 集合  */
-	@RequestMapping("getList")
+	@GetMapping("getList")
+	@ApiOperation("查所有的角色列表")
 	AjaxJson getList(){
+		log.info("Start getRoleList========");
 		StpUtil.checkPermission(AuthConst.R99);
 		SoMap so = SoMap.getRequestSoMap();
 		List<EpRole> list = epRoleMapper.getList(so);

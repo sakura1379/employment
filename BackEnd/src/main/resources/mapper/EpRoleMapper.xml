@@ -6,7 +6,7 @@
 	<!-- 增 -->
 	<insert id="add" >
 		insert into
-		ep_role(id, name, info, is_lock, create_time)
+		ep_role(role_id, name, info, is_lock, create_time)
 		values (#{id}, #{name}, #{info}, 2, now())
 	</insert>
 
@@ -14,7 +14,7 @@
 	<!-- 删 -->
 	<delete id="delete" >
 		delete from ep_role
-		where id = #{id}
+		where role_id = #{id}
 	</delete>
 
 
@@ -23,13 +23,13 @@
 		update ep_role set
 		name = #{name},
 		info = #{info}
-		where id=#{id}
+		where role_id=#{id}
 	</update>
 
 
 	<!-- 通用映射 -->
 	<resultMap id="ep_role" type="com.employ.employment.entity.EpRole">
-		<result property="id" column="id" />
+		<result property="id" column="role_id" />
 		<result property="name" column="name" />
 		<result property="info" column="info" />
 		<result property="isLock" column="is_lock" />
@@ -39,7 +39,7 @@
 	<!-- 查 -->
 	<select id="getById" resultMap="ep_role" >
 		select * from ep_role
-		where id = #{id}
+		where role_id = #{id}
 	</select>
 
 

@@ -43,8 +43,8 @@ public class UserInfo implements Serializable  {
 	/** 账号状态(1=正常, 2=禁用) */
 	public Integer status;
 
-	/** 创建自哪个管理员 */
-	public Long createByAid;
+//	/** 创建自哪个管理员 */
+//	public Long createByAid;
 
 	/** 创建时间 */
 	public Date createTime;

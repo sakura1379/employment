@@ -6,10 +6,10 @@ import com.employ.employment.entity.AjaxJson;
 import com.employ.employment.service.EpRolePermissionService;
 import com.employ.employment.util.EpRoleUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/EpRolePermission/")
 @Api
+@Slf4j
 public class EpRolePermissionController {
 
 	private final EpRolePermissionService epRolePermissionService;
@@ -35,8 +36,11 @@ public class EpRolePermissionController {
 	 * @param roleId
 	 * @return
 	 */
-	@RequestMapping("getPcodeByRid")
+	@GetMapping("getPcodeByRid")
+	@ApiOperation("根据指定roleId,拉取权限id列表")
     public AjaxJson getPcodeByRid(@RequestParam(defaultValue="0") long roleId){
+		log.info("Start getIdListByRoleId========");
+		log.info("Receive roleId:{}", roleId);
 		// 鉴权
 		StpUtil.checkPermission(AuthConst.R1);
 		StpUtil.checkPermission(AuthConst.ROLE_LIST);
@@ -49,8 +53,10 @@ public class EpRolePermissionController {
 
 
 	/** 拉取菜单id列表  根据当前用户roleId  */
-	@RequestMapping("getPcodeByCurrRid")
+	@GetMapping("getPcodeByCurrRid")
+	@ApiOperation("根据当前用户roleId拉取菜单id列表")
 	public AjaxJson getPcodeByCurrRid(){
+		log.info("Start getIdListByCurrentId========");
 		long roleId = EpRoleUtil.getCurrRoleId();
 		List<Object> list = epRolePermissionService.getPcodeByRid2(roleId);
 		return AjaxJson.getSuccessData(list);
@@ -63,8 +69,11 @@ public class EpRolePermissionController {
 	 * @param code 拥有的权限码集合
 	 * @return
 	 */
-	@RequestMapping("updatePcodeByRid")
+	@PostMapping("updatePcodeByRid")
+	@ApiOperation("修改指定角色的拥有的权限")
 	public AjaxJson updatePcodeByRid(long roleId, String[] code){
+		log.info("Start updatePcodeByRid========");
+		log.info("Receive roleId:{} ,code:{}", roleId, code.toString());
 		StpUtil.checkPermission(AuthConst.R1);
 		StpUtil.checkPermission(AuthConst.ROLE_LIST);
 		return AjaxJson.getSuccessData(epRolePermissionService.updateRoleMenu(roleId, code));

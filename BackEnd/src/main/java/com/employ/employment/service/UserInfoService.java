@@ -31,7 +31,7 @@ public class UserInfoService {
 
 
 	/**
-	 * 管理员添加一个管理员
+	 * 添加一个用户
 	 * @param user
 	 * @return
 	 */
@@ -41,7 +41,7 @@ public class UserInfoService {
 		UserInfoUtil.checkAdmin(user);
 
 		// 创建人，为当前账号
-		user.setCreateByAid(StpUtil.getLoginIdAsLong());
+//		user.setCreateByAid(StpUtil.getLoginIdAsLong());
 		// 开始添加
 		userInfoMapper.add(user);
 		// 获取主键

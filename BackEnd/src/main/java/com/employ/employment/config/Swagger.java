@@ -37,7 +37,7 @@ public class Swagger {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 // 页面标题
-                .title("trace项目API")
+                .title("employment项目API")
                 // 创建人信息
                 .contact(new Contact("Zenglr",  "https://github.com/sakura1379",  "18023893551@163.com"))
                 // 版本号
