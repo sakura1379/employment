@@ -39,6 +39,8 @@ public final class AuthConst {
 	public static final String SP_CFG_APP = "sp-cfg-app";		  	 // 系统配置 - 系统对公配置
 	public static final String SP_CFG_SERVER = "sp-cfg-server";		   // 系统配置 - 服务器私有配置
 
+	public static final String PERMISSION_CODE = "stu-info";
+
 //	public static final String RESUME = "resume";  //简历管理
 //	public static final String ANNOUNCEMENT = "announcement";  //公告管理
 //	public static final String HR_AUTH = "hr-auth";  //公司hr权限管理

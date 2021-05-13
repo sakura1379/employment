@@ -1,5 +1,6 @@
 package com.employ.employment.controller;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
 import com.employ.employment.config.token.AuthConst;
 import com.employ.employment.entity.SP;
@@ -206,7 +207,19 @@ public class UserInfoController {
 	}
 
 
-
+	/** 删 */
+	@DeleteMapping("deleteCurrent")
+	@ApiOperation("当前用户注销")
+	@SaCheckLogin
+	public AjaxJson delete(){
+		log.info("Start deleteUserInfo========");
+		long id = StpUtil.getLoginIdAsLong();
+		log.info("Current user id:{}",id);
+        int line = userInfoService.deleteCurrent(id);
+		log.info("Start ExitLogin=======");
+		StpUtil.logout();
+        return AjaxJson.getByLine(line);
+	}
 
 
 

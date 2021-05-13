@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.employ.employment.mapper.StuInfoMapper">
+
+	<!-- 增 [G] -->
+	<insert id="add">
+		insert into 
+		stu_info (stuNum, stuName, stuGraUniversity, stuMajor, stuEducation, stJodKind, stuGraduateTime, stuTelephone, dreamAddress, dreamPosition)
+		values (#{stuNum}, #{stuName}, #{stuGraUniversity}, #{stuMajor}, #{stuEducation}, #{stJodKind}, #{stuGraduateTime}, #{stuTelephone}, #{dreamAddress}, #{dreamPosition})
+	</insert>
+
+	<!-- 删 -->
+	<delete id="delete">
+		delete from stu_info 
+		where stuNum = #{stuNum}
+	</delete>
+
+	<!-- 改 [G] -->
+	<update id="update">
+		update stu_info
+		<trim prefix="set" suffixOverrides=",">
+		<if test="s.stuName != null">stuName = #{s.stuName},</if>
+		<if test="s.stuGraUniversity != null">stuGraUniversity = #{s.stuGraUniversity},</if>
+		<if test="s.stuMajor != null">stuMajor = #{s.stuMajor},</if>
+		<if test="s.stuEducation != null">stuEducation = #{s.stuEducation},</if>
+		<if test="s.stJodKind != null">stJodKind = #{s.stJodKind},</if>
+		<if test="s.stuGraduateTime != null">stuGraduateTime = #{s.stuGraduateTime},</if>
+		<if test="s.stuTelephone != null">stuTelephone = #{s.stuTelephone},</if>
+		<if test="s.dreamAddress != null">dreamAddress = #{s.dreamAddress},</if>
+		<if test="s.dreamPosition != null">dreamPosition = #{s.dreamPosition},</if>
+		<if test="s.resume != null">resume = #{s.resume},</if>
+		</trim>
+		where stuNum = #{id}
+	</update>
+
+
+	<!-- ================================== 查询相关 ================================== -->
+	<!-- select stuNum, stuName, stuGraUniversity, stuMajor, stuEducation, stJodKind, stuGraduateTime, stuTelephone, dreamAddress, dreamPosition, resume from stu_info  -->
+	
+	<!-- 通用映射：手动模式 -->
+	<resultMap id="model" type="com.employ.employment.entity.StuInfo">
+		<result property="stuNum" column="stuNum" />
+		<result property="stuName" column="stuName" />
+		<result property="stuGraUniversity" column="stuGraUniversity" />
+		<result property="stuMajor" column="stuMajor" />
+		<result property="stuEducation" column="stuEducation" />
+		<result property="stJodKind" column="stJodKind" />
+		<result property="stuGraduateTime" column="stuGraduateTime" />
+		<result property="stuTelephone" column="stuTelephone" />
+		<result property="dreamAddress" column="dreamAddress" />
+		<result property="dreamPosition" column="dreamPosition" />
+		<result property="resume" column="resume" />
+	</resultMap>
+	
+	<!-- 公共查询sql片段 -->
+	<sql id="select_sql">
+		select * 
+		from stu_info 
+	</sql>
+	
+	<!-- 查 - 根据id -->
+	<select id="getById" resultMap="model">
+		<include refid="select_sql"></include>
+		where stuNum = #{stuNum}
+	</select>
+	
+	<!-- 查集合 - 根据条件（参数为空时代表忽略指定条件） [G] -->
+	<select id="getList" resultMap="model">
+		<include refid="select_sql"></include>
+		<where>
+			<if test=' this.has("stuNum") '> and stuNum = #{stuNum} </if>
+			<if test=' this.has("stuName") '> and stuName = #{stuName} </if>
+			<if test=' this.has("stuGraUniversity") '> and stuGraUniversity = #{stuGraUniversity} </if>
+			<if test=' this.has("stuMajor") '> and stuMajor = #{stuMajor} </if>
+			<if test=' this.has("stuEducation") '> and stuEducation = #{stuEducation} </if>
+			<if test=' this.has("stJodKind") '> and stJodKind = #{stJodKind} </if>
+			<if test=' this.has("stuTelephone") '> and stuTelephone = #{stuTelephone} </if>
+			<if test=' this.has("dreamAddress") '> and dreamAddress = #{dreamAddress} </if>
+			<if test=' this.has("dreamPosition") '> and dreamPosition = #{dreamPosition} </if>
+		</where>
+		order by
+		<choose>
+			<when test='sortType == 1'> stuNum desc </when>
+			<when test='sortType == 2'> stuName desc </when>
+			<when test='sortType == 3'> stuGraUniversity desc </when>
+			<when test='sortType == 4'> stuMajor desc </when>
+			<when test='sortType == 5'> stuEducation desc </when>
+			<when test='sortType == 6'> stJodKind desc </when>
+			<when test='sortType == 7'> stuGraduateTime desc </when>
+			<when test='sortType == 8'> stuTelephone desc </when>
+			<when test='sortType == 9'> dreamAddress desc </when>
+			<when test='sortType == 10'> dreamPosition desc </when>
+			<otherwise> stuNum desc </otherwise>
+		</choose>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>

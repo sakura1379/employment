@@ -83,6 +83,13 @@
 		where mail = #{mail}
 	</select>
 
+
+	<!-- 查询RoleId，根据id -->
+	<select id="getRoleIdById" resultType="Long">
+		select role_id from user_info where id = #{id}
+	</select>
+
+
 	<!-- 查询 -->
 	<select id="getList" resultMap="user_info">
 		<include refid="select_sql"></include>

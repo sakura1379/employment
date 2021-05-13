@@ -72,4 +72,10 @@ public interface UserInfoMapper {
 	 */
 	UserInfo getByEmail(String mail);
 
+	/**
+	 * 查询roleId
+	 * @param id
+	 * @return
+	 */
+	long getRoleIdById(long id);
 }
