@@ -3,6 +3,7 @@ package com.employ.employment.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * 账号相关
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Mapper
-@Component
+@Repository
 public interface EpAccAdminMapper {
 
 	/**

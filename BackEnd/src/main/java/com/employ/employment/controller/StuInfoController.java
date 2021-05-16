@@ -11,6 +11,7 @@ import com.employ.employment.service.EpAdminPasswordService;
 import com.employ.employment.service.StuService;
 import com.employ.employment.service.UserInfoService;
 import com.employ.employment.util.UploadUtil;
+import com.sun.xml.internal.bind.v2.TODO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -62,6 +63,7 @@ public class StuInfoController {
             @ApiImplicitParam(name = "dreamPosition", value = "期望职位类别", required = true)
     })
     public AjaxJson add(StuInfo s, UserInfo u){
+        //TODO 验证学生邮箱
         log.info("Start addStuInfo========");
         stuService.add(s, u);
         return AjaxJson.getSuccessData(s);
@@ -73,8 +75,11 @@ public class StuInfoController {
     @ApiOperation("学生用户修改个人基本信息")
     public AjaxJson update(StuInfo s){
         log.info("Start updateStuInfo========");
+        StpUtil.checkPermission("stu_info");
         long id = StpUtil.getLoginIdAsLong();
-        int line = stuInfoMapper.update(s,id);
+        log.info("current user id:{}",id);
+        s.setStuNum(id);
+        int line = stuInfoMapper.update(s);
         return AjaxJson.getByLine(line);
     }
 
@@ -83,6 +88,7 @@ public class StuInfoController {
     @ApiOperation("学生用户查看个人信息")
     public AjaxJson getCurrent(){
         log.info("Start getCurrentStuInfo========");
+        StpUtil.checkPermission("stu_info");
         long id = StpUtil.getLoginIdAsLong();
         log.info("Current user id:{}",id);
         StuInfo s = stuInfoMapper.getById(id);
@@ -100,8 +106,7 @@ public class StuInfoController {
         String httpUrl = UploadUtil.saveFile(file, UploadUtil.uploadConfig.fileFolder);
         long id = StpUtil.getLoginIdAsLong();
         log.info("Current user id:{}",id);
-//        更改当前学生信息表中的简历信息
-//        未完成==========================
+//       TODO 更改当前学生信息表中的简历信息
 
         return AjaxJson.getSuccessData(httpUrl);
     }

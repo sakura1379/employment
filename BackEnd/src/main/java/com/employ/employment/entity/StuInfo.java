@@ -27,7 +27,7 @@ public class StuInfo implements Serializable {
     /**
      * 学生id
      */
-    public long stuNum;
+    public Long stuNum;
 
     /**
      * 学生姓名

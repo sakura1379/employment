@@ -5,6 +5,7 @@ import com.employ.employment.entity.EpRole;
 import com.employ.employment.entity.SoMap;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @author Zenglr
  */
 @Mapper
-@Component
+@Repository
 public interface EpRoleMapper extends BaseMapper<EpRole> {
 
 

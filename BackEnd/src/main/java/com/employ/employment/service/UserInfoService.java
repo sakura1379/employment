@@ -81,6 +81,7 @@ public class UserInfoService {
 			line += stuInfoMapper.delete(id);
 			log.info("delete stuInfo and userInfo, id:{}",id);
 		}else if (roleId == 121 || roleId == 1212 ){
+			//TODO 企业用户
 //			企业用户，则首先到企业用户表中获得到对应企业id
 
 //			到企业用户表中查该企业的用户列表

@@ -41,13 +41,13 @@ CREATE TABLE `company_info`(
   `compId` int(11) NOT NULL AUTO_INCREMENT COMMENT '公司编号 [no]',/*唯一主键*/
   `compName` varchar(50) DEFAULT NULL COMMENT '企业名称 [text]',
   `compIndustry` varchar(30) DEFAULT NULL COMMENT '企业所在行业 [text]',
-  `compSize` varchar(30) DEFAULT NULL COMMENT '企业规模 [text]',
+  `compSize` int(11) DEFAULT NULL COMMENT '企业规模 (1=100人以下, 2=999人以下, 3=9999人以下, 4=9999人以上) [enum]',
   `compAddress` varchar(50) DEFAULT NULL COMMENT '企业地址 [text]',
   `complink` varchar(50) DEFAULT NULL COMMENT '企业官网链接 [link]',
   `creditcode` varchar(30) DEFAULT NULL COMMENT '统一社会信用代码 [text]',
   `compEsDate` date DEFAULT NULL COMMENT '企业成立日期 [date]',
   `compIntro` text COMMENT '企业介绍 [textarea]',
-  `approveStatus` varchar(20) DEFAULT '1' COMMENT '审核状态 (1=未审核, 2=审核通过, 3=审核不通过) [enum]', 
+  `approveStatus` int(11) DEFAULT '1' COMMENT '审核状态 (1=未审核, 2=审核通过, 3=审核不通过) [enum]', 
   PRIMARY KEY (`compId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='企业信息表';
 
@@ -98,7 +98,7 @@ CREATE TABLE `user_info` (
   /*`avatar` varchar(500) DEFAULT NULL COMMENT '头像地址'可不要,*/
   `password` varchar(100) DEFAULT NULL COMMENT '密码',
   /*`pw` varchar(50) DEFAULT NULL COMMENT '明文密码'打算不要,*/
-  `mail` varchar(20) DEFAULT NULL COMMENT '邮箱',
+  `mail` varchar(50) DEFAULT NULL COMMENT '邮箱',
   `role_id` int(11) DEFAULT '11' COMMENT '所属角色id',
   `status` int(11) DEFAULT '1' COMMENT '账号状态 (1=正常, 2=禁用)',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -139,6 +139,8 @@ CREATE TABLE `comp_user` (
 
 CREATE TABLE `seminar_info` (
   `seminarId` int(11) NOT NULL AUTO_INCREMENT  COMMENT '宣讲会信息编号 [no]',
+  `seminarTitle` varchar(50) DEFAULT NULL COMMENT '宣讲会标题 [text]',/*宣讲会标题*/
+  `seminarContent` text COMMENT '宣讲会内容 [f]',/*宣讲会内容*/
   `hrId` int(11) DEFAULT NULL COMMENT 'hr编号 [no]', /*hr编号*/
   `approveStatus` int(11) DEFAULT '1' COMMENT '审核状态 (1=未审核, 2=审核通过, 3=审核不通过) [enum]', /*审核状态*/
   `seminarTime` date DEFAULT NULL COMMENT '发布时间 [date-create]',/*发布时间*/
@@ -178,10 +180,12 @@ insert into ep_role_permission() values (0, '1', 'user_info', now());
 insert into ep_role_permission() values (0, '121', 'job_info', now());
 insert into ep_role_permission() values (0, '121', 'seminar_info', now());
 insert into ep_role_permission() values (0, '121', 'mail_info', now());
+insert into ep_role_permission() values (0, '121', 'company_info', now());
 insert into ep_role_permission() values (0, '1212', 'job_info', now());
 insert into ep_role_permission() values (0, '1212', 'seminar_info', now());
 insert into ep_role_permission() values (0, '1212', 'mail_info', now());
 insert into ep_role_permission() values (0, '1212', 'company_info', now());
+insert into ep_role_permission() values (0, '1212', 'company_info_update', now());
 
 insert into ep_role_permission() values (0, '1', 'announcement', now());
 insert into ep_role_permission() values (0, '1212', 'comp_user', now());

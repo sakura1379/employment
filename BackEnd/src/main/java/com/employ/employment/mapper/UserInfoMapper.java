@@ -4,6 +4,7 @@ import com.employ.employment.entity.SoMap;
 import com.employ.employment.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * Mapper: 系统管理员表
  */
 @Mapper
-@Component
+@Repository
 public interface UserInfoMapper {
 
 

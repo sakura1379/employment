@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.employ.employment.mapper.CompUserMapper">
+
+	<!-- 增 [G] -->
+	<insert id="add">
+		insert into 
+		comp_user (hrId, compId) 
+		values (#{hrId}, #{compId}) 
+	</insert>
+
+	<!-- 删 -->
+	<delete id="delete">
+		delete from comp_user 
+		where hrId = #{hrId}
+	</delete>
+
+	<!-- 改 [G] -->
+<!--	<update id="update">-->
+<!--		update comp_user set-->
+<!--		hrId = #{hrId}, -->
+<!--		compId = #{compId}-->
+<!--		where hrId = #{hrId}-->
+<!--	</update>-->
+
+
+	<!-- ================================== 查询相关 ================================== -->
+	<!-- select hrId, compId from comp_user  -->
+	
+	<!-- 通用映射：手动模式 -->
+	<resultMap id="model" type="com.employ.employment.entity.CompUser">
+		<result property="hrId" column="hrId" />
+		<result property="compId" column="compId" />
+	</resultMap>
+	
+	<!-- 公共查询sql片段 -->
+	<sql id="select_sql">
+		select * 
+		from comp_user 
+	</sql>
+	
+	<!-- 查 - 根据id -->
+	<select id="getById" resultMap="model">
+		<include refid="select_sql"></include>
+		where hrId = #{hrId}
+	</select>
+	
+	<!-- 查集合 - 根据条件（参数为空时代表忽略指定条件） [G] -->
+	<select id="getList" resultMap="model">
+		<include refid="select_sql"></include>
+		<where>
+			<if test=' this.has("hrId") '> and hrId = #{hrId} </if>
+			<if test=' this.has("compId") '> and compId = #{compId} </if>
+		</where>
+		order by
+		<choose>
+			<when test='sortType == 1'> hrId desc </when>
+			<when test='sortType == 2'> compId desc </when>
+			<otherwise> hrId desc </otherwise>
+		</choose>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>

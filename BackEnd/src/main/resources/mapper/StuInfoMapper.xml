@@ -19,18 +19,18 @@
 	<update id="update">
 		update stu_info
 		<trim prefix="set" suffixOverrides=",">
-		<if test="s.stuName != null">stuName = #{s.stuName},</if>
-		<if test="s.stuGraUniversity != null">stuGraUniversity = #{s.stuGraUniversity},</if>
-		<if test="s.stuMajor != null">stuMajor = #{s.stuMajor},</if>
-		<if test="s.stuEducation != null">stuEducation = #{s.stuEducation},</if>
-		<if test="s.stJodKind != null">stJodKind = #{s.stJodKind},</if>
-		<if test="s.stuGraduateTime != null">stuGraduateTime = #{s.stuGraduateTime},</if>
-		<if test="s.stuTelephone != null">stuTelephone = #{s.stuTelephone},</if>
-		<if test="s.dreamAddress != null">dreamAddress = #{s.dreamAddress},</if>
-		<if test="s.dreamPosition != null">dreamPosition = #{s.dreamPosition},</if>
-		<if test="s.resume != null">resume = #{s.resume},</if>
+		<if test="stuName != null">stuName = #{stuName},</if>
+		<if test="stuGraUniversity != null">stuGraUniversity = #{stuGraUniversity},</if>
+		<if test="stuMajor != null">stuMajor = #{stuMajor},</if>
+		<if test="stuEducation != null">stuEducation = #{stuEducation},</if>
+		<if test="stJodKind != null">stJodKind = #{stJodKind},</if>
+		<if test="stuGraduateTime != null">stuGraduateTime = #{stuGraduateTime},</if>
+		<if test="stuTelephone != null">stuTelephone = #{stuTelephone},</if>
+		<if test="dreamAddress != null">dreamAddress = #{dreamAddress},</if>
+		<if test="dreamPosition != null">dreamPosition = #{dreamPosition},</if>
+		<if test="resume != null">resume = #{resume},</if>
 		</trim>
-		where stuNum = #{id}
+		where stuNum = #{stuNum}
 	</update>
 
 

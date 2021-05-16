@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 文件上传配置类  (基于应用服务器的文件上传)
- * @author kong
+ * @author Zenglr
  *
  */
 @Data
