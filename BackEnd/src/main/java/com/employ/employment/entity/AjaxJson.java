@@ -135,62 +135,63 @@ public class AjaxJson extends LinkedHashMap<String, Object> implements Serializa
 
 	// ============================  构建  ==================================
 
-	public AjaxJson(int code, String msg, Object data, Long dataCount) {
+	public AjaxJson(int code, String msg, Object data, Long dataCount, Integer page, Integer pageRecord) {
 		this.setCode(code);
 		this.setMsg(msg);
 		this.setData(data);
 		this.setDataCount(dataCount == null ? -1 : dataCount);
+		this.setPageNoAndSize(page == null ? -1 : page,pageRecord == null ? -1 : pageRecord);
 	}
 
 	/** 返回成功 */
 	public static AjaxJson getSuccess() {
-		return new AjaxJson(CODE_SUCCESS, "ok", null, null);
+		return new AjaxJson(CODE_SUCCESS, "ok", null, null, null, null);
 	}
 	public static AjaxJson getSuccess(String msg) {
-		return new AjaxJson(CODE_SUCCESS, msg, null, null);
+		return new AjaxJson(CODE_SUCCESS, msg, null, null, null, null);
 	}
 	public static AjaxJson getSuccess(String msg, Object data) {
-		return new AjaxJson(CODE_SUCCESS, msg, data, null);
+		return new AjaxJson(CODE_SUCCESS, msg, data, null, null, null);
 	}
 	public static AjaxJson getSuccessData(Object data) {
-		return new AjaxJson(CODE_SUCCESS, "ok", data, null);
+		return new AjaxJson(CODE_SUCCESS, "ok", data, null, null, null);
 	}
 
 
 	/** 返回失败 */
 	public static AjaxJson getError() {
-		return new AjaxJson(CODE_ERROR, "error", null, null);
+		return new AjaxJson(CODE_ERROR, "error", null, null, null, null);
 	}
 	public static AjaxJson getError(String msg) {
-		return new AjaxJson(CODE_ERROR, msg, null, null);
+		return new AjaxJson(CODE_ERROR, msg, null, null, null, null);
 	}
 
 	/** 返回警告  */
 	public static AjaxJson getWarning() {
-		return new AjaxJson(CODE_ERROR, "warning", null, null);
+		return new AjaxJson(CODE_ERROR, "warning", null, null, null, null);
 	}
 	public static AjaxJson getWarning(String msg) {
-		return new AjaxJson(CODE_WARNING, msg, null, null);
+		return new AjaxJson(CODE_WARNING, msg, null, null, null, null);
 	}
 
 	/** 返回未登录  */
 	public static AjaxJson getNotLogin() {
-		return new AjaxJson(CODE_NOT_LOGIN, "未登录，请登录后再次访问", null, null);
+		return new AjaxJson(CODE_NOT_LOGIN, "未登录，请登录后再次访问", null, null, null, null);
 	}
 
 	/** 返回没有权限的  */
 	public static AjaxJson getNotJur(String msg) {
-		return new AjaxJson(CODE_NOT_JUR, msg, null, null);
+		return new AjaxJson(CODE_NOT_JUR, msg, null, null, null, null);
 	}
 
 	/** 返回一个自定义状态码的  */
 	public static AjaxJson get(int code, String msg){
-		return new AjaxJson(code, msg, null, null);
+		return new AjaxJson(code, msg, null, null, null, null);
 	}
 
 	/** 返回分页和数据的  */
-	public static AjaxJson getPageData(Long dataCount, Object data){
-		return new AjaxJson(CODE_SUCCESS, "ok", data, dataCount);
+	public static AjaxJson getPageData(Long dataCount, Object data, Integer page, Integer pageRecord){
+		return new AjaxJson(CODE_SUCCESS, "ok", data, dataCount, page, pageRecord);
 	}
 
 	/** 返回, 根据受影响行数的(大于0=ok，小于0=error)  */

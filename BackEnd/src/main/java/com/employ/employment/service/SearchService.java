@@ -3,6 +3,7 @@ package com.employ.employment.service;
 import com.employ.employment.dao.SeminarRedisDao;
 import com.employ.employment.entity.AjaxJson;
 import com.employ.employment.entity.SeminarInfo;
+import com.employ.employment.entity.SoMap;
 import com.employ.employment.mapper.CompUserMapper;
 import com.employ.employment.mapper.CompanyInfoMapper;
 import com.employ.employment.mapper.SeminarInfoMapper;
@@ -50,27 +51,31 @@ public class SearchService {
      */
     public AjaxJson getSeminarList(String query, int page, int sortType){
         log.info("receive query:{}, page:{}",query,page);
+        if (!query.trim().isEmpty()){
+            //到redis中模糊查询到对应的SeminarList
+            List<String> seminarIdList = seminarRedisDao.fuzzySearchSeminarIdList(query);
 
-        //到redis中模糊查询到对应的SeminarList
-        List<String> seminarIdList = seminarRedisDao.fuzzySearchSeminarIdList(query);
+            //分页并获取页码总数
+            int length = seminarIdList.size();
+            int start = (page - 1) * seminarPageRecord;
+            int end = start + seminarPageRecord;
+            end = Math.min(end, length);
+            List<String> res = seminarIdList.subList(start, end);
+            long pageCount = jedisUtil.getPageNumber(length, seminarPageRecord);
+            log.info("start:{}, end:{}, res:{}, pageCount:{}", start, end, res.toString(), pageCount);
 
-        //分页并获取页码总数
-        int length = seminarIdList.size();
-        int start = (page - 1) * seminarPageRecord;
-        int end = start + seminarPageRecord;
-        end = Math.min(end, length);
-        List<String> res = seminarIdList.subList(start, end);
-        long pageCount = jedisUtil.getPageNumber(length, seminarPageRecord);
-        log.info("start:{}, end:{}, res:{}, pageCount:{}", start, end, res.toString(), pageCount);
-
-        if(!res.isEmpty()){
-            //根据SeminarIdList到mysql中查询到【已通过审核】的宣讲会信息
-            List<SeminarInfo> seminarInfos = seminarInfoMapper.selectSeminarBySeminarIds(res, sortType);
-            return AjaxJson.getPageData(pageCount,seminarInfos);
+            if(!res.isEmpty()){
+                //根据SeminarIdList到mysql中查询到【已通过审核】的宣讲会信息
+                List<SeminarInfo> seminarInfos = seminarInfoMapper.selectSeminarBySeminarIds(res, sortType);
+                return AjaxJson.getPageData(pageCount, seminarInfos, page, seminarPageRecord);
+            }else {
+                return AjaxJson.getError("未查询到对应的宣讲会信息，请检查检索词或页码");
+            }
         }else {
-            return AjaxJson.getError("未查询到对应的宣讲会信息，请检查检索词或页码");
+            SoMap so = SoMap.getSoMap();
+            List<SeminarInfo> seminarInfos = seminarInfoMapper.getList(so.startPage());
+            return AjaxJson.getPageData(so.getDataCount(), seminarInfos, page, seminarPageRecord);
         }
-
 
     }
 }

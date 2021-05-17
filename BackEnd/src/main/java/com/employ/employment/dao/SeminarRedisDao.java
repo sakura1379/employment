@@ -71,7 +71,7 @@ public class SeminarRedisDao {
         List<String> seminarIdList = new ArrayList<>();
         String cid = String.valueOf(compId);
         Jedis jedis = jedisUtil.getClient();
-        jedis.select(4);
+        jedis.select(3);
 
         // 根据页码获取对应index
         int start = (page - 1) * pageRecord;
@@ -135,12 +135,100 @@ public class SeminarRedisDao {
         log.info("模糊匹配到{}条keys",keys.size());
         List<String> list = new ArrayList<>();
         for (String key : keys) {
-            list.add(jedis.get(key));
+            list.addAll(jedis.smembers(key));
         }
         long finishQueryTime = System.currentTimeMillis();
+        jedis.close();
         log.info("Jedis process time:" + (finishQueryTime - startTime));
         return list;
     }
 
+    /**
+     * 插入标题索引
+     * @param key
+     * @param value
+     * @return
+     */
 
+    public Long insertIndex(String key, String value){
+        log.info("start insert Index into redis======");
+        log.info("receive key:{}, value:{}", key, value);
+        Jedis jedis = jedisUtil.getClient();
+        jedis.select(4);
+
+        long line = jedis.sadd(key, value);
+        log.info("line:{}",line);
+
+        jedis.close();
+
+        return line;
+    }
+
+    /**
+     * 插入宣讲会信息compId索引
+     * @param key
+     * @param value
+     * @return
+     */
+    public int insertCompIndex(String key, String value){
+        log.info("start insertCompIndex into redis======");
+        log.info("receive key:{}, value；{}", key, value);
+        Jedis jedis = jedisUtil.getClient();
+        jedis.select(3);
+
+        long line = jedis.lpush(key,value);
+        log.info("line:{}",line);
+
+        jedis.close();
+
+        return (int) line;
+    }
+
+
+    /**
+     * 更新宣讲会信息标题的索引
+     * @param oldKey
+     * @param newKey
+     * @param value
+     * @return
+     */
+    public int updateTitleIndex(String oldKey, String newKey, String value){
+        log.info("start updateTitleIndex========");
+        log.info("receive oldKey:{}, newKey:{}, value:{}", oldKey, newKey, value);
+        Jedis jedis = jedisUtil.getClient();
+        jedis.select(4);
+        int line = 0;
+
+        //删除旧的
+        line += jedis.srem(oldKey, value);
+        //插入新的
+        line += jedis.sadd(newKey, value);
+
+        jedis.close();
+        return line;
+    }
+
+    /**
+     * 删除宣讲会信息标题索引和compId索引
+     * @param oldKey
+     * @param compId
+     * @param oldValue
+     * @return
+     */
+    public int deleteIndex(String oldKey, String compId,String oldValue){
+        log.info("start deleteTitleIndex========");
+        log.info("receive oldKey:{}, oldValue:{}", oldKey, oldValue);
+        Jedis jedis = jedisUtil.getClient();
+        int line = 0;
+        //删除标题索引
+        jedis.select(4);
+        line += jedis.srem(oldKey, oldValue);
+
+        //删除compId索引
+        jedis.select(3);
+        jedis.lrem(compId,0,oldValue);
+
+        jedis.close();
+        return line;
+    }
 }

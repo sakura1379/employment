@@ -19,11 +19,11 @@
 	<update id="update">
 		update seminar_info
 		<trim prefix="set" suffixOverrides=",">
-		<if test="stuName != null">seminarId = #{seminarId},</if>
-		<if test="stuGraUniversity != null">seminarTitle = #{seminarTitle},</if>
-		<if test="stuMajor != null">seminarContent = #{seminarContent},</if>
-		<if test="stuEducation != null">hrId = #{hrId},</if>
-		<if test="stJodKind != null">approveStatus = #{approveStatus},</if>
+		<if test="seminarId != null">seminarId = #{seminarId},</if>
+		<if test="seminarTitle != null">seminarTitle = #{seminarTitle},</if>
+		<if test="seminarContent != null">seminarContent = #{seminarContent},</if>
+		<if test="hrId != null">hrId = #{hrId},</if>
+		<if test="approveStatus != null">approveStatus = #{approveStatus},</if>
 		</trim>
 		where seminarId = #{seminarId}
 	</update>
@@ -71,7 +71,7 @@
 			<when test='sortType == 3'> hrId desc </when>
 			<when test='sortType == 4'> approveStatus desc </when>
 			<when test='sortType == 5'> seminarTime desc </when>
-			<otherwise> seminarId desc </otherwise>
+			<otherwise> seminarTime desc </otherwise>
 		</choose>
 	</select>
 

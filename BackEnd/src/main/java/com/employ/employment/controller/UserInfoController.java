@@ -16,8 +16,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -125,12 +123,12 @@ public class UserInfoController {
 	/** 查 - 集合 */
 	@GetMapping("getList")
 	@ApiOperation("查用户信息列表")
-	AjaxJson getList(){
+	AjaxJson getList(int page){
 		log.info("Start getUserInfoList========");
 		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
 		SoMap so = SoMap.getRequestSoMap();
 		List<UserInfo> list = userInfoMapper.getList(so.startPage());
-		return AjaxJson.getPageData(so.getDataCount(), list);
+		return AjaxJson.getPageData(so.getDataCount(), list, page, 10);
 	}
 
 	/** 改密码 */

@@ -43,8 +43,8 @@ public class AdminController {
     @PostMapping("reviewSeminar")
     @ApiOperation("管理员审核宣讲会信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "seminarId", value = "宣讲会信息编号"),
-            @ApiImplicitParam(name = "approveStatus", value = "审核状态", allowableValues = "2,3")
+            @ApiImplicitParam(name = "seminarId", value = "宣讲会信息编号", required = true),
+            @ApiImplicitParam(name = "approveStatus", value = "审核状态", allowableValues = "2,3", required = true)
     })
     public AjaxJson reviewSeminar(SeminarInfo seminarInfo){
         log.info("Start reviewSeminarInfo========");

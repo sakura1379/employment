@@ -11,6 +11,7 @@ import com.employ.employment.mapper.SeminarInfoMapper;
 import com.employ.employment.mapper.StuInfoMapper;
 import com.employ.employment.service.CompService;
 import com.employ.employment.service.StuService;
+import com.sun.xml.internal.bind.v2.TODO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -60,7 +61,7 @@ public class CompController {
             @ApiImplicitParam(name = "mail", value = "邮箱", required = true),
             @ApiImplicitParam(name = "compName", value = "企业名称", required = true),
             @ApiImplicitParam(name = "compIndustry", value = "企业所在行业", required = true),
-            @ApiImplicitParam(name = "compSize", value = "企业规模", required = true),
+            @ApiImplicitParam(name = "compSize", value = "企业规模", required = true, allowableValues = "1,2,3,4"),
             @ApiImplicitParam(name = "compAddress", value = "企业地址", required = true),
             @ApiImplicitParam(name = "complink", value = "企业官网链接"),
             @ApiImplicitParam(name = "creditcode", value = "统一社会信用代码", required = true),
@@ -128,7 +129,6 @@ public class CompController {
             @ApiImplicitParam(name = "seminarTitle", value = "宣讲会标题", required = true),
             @ApiImplicitParam(name = "seminarContent", value = "宣讲会内容", required = true)
     })
-    @Transactional(rollbackFor = Exception.class)
     public AjaxJson addSeminar(SeminarInfo s){
         log.info("Start addSeminarInfo========");
         log.info("Receive seminarInfo:{}",s);
@@ -136,9 +136,26 @@ public class CompController {
         long id = StpUtil.getLoginIdAsLong();
         log.info("Current user id:{}",id);
         s.setHrId(id);
-        int line = seminarInfoMapper.add(s);
-        s = seminarInfoMapper.getById(SP.publicMapper.getPrimarykey());
-        return AjaxJson.getSuccessData(s);
+        return compService.addSeminar(s);
+    }
+
+    /** 改 */
+    @PostMapping("updateSeminar")
+    @ApiOperation("修改宣讲会信息,修改标题或内容")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "seminarId", value = "宣讲会信息编号", required = true),
+            @ApiImplicitParam(name = "seminarTitle", value = "宣讲会标题"),
+            @ApiImplicitParam(name = "seminarContent", value = "宣讲会内容")
+    })
+    public AjaxJson updateSeminar(SeminarInfo s){
+        log.info("Start updateSeminarInfo========");
+        log.info("Receive seminarInfo:{}",s);
+        StpUtil.checkPermission("seminar_info");
+        long id = StpUtil.getLoginIdAsLong();
+        log.info("Current user id:{}",id);
+        //每次修改都要将发布人更改为现在用户
+        s.setHrId(id);
+        return compService.updateSeminarInfo(s);
     }
 
     @DeleteMapping("deleteSeminar")
@@ -146,8 +163,9 @@ public class CompController {
     public AjaxJson deleteSeminar(long seminarId){
         log.info("Start deleteSeminarInfo========");
         log.info("Receive SeminarId:{}",seminarId);
-        int line = seminarInfoMapper.delete(seminarId);
-        return AjaxJson.getByLine(line);
+        StpUtil.checkPermission("seminar_info");
+        long id = StpUtil.getLoginIdAsLong();
+        return compService.deleteSeminarInfo(id, seminarId);
     }
 
     @GetMapping("getSeminarList")

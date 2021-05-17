@@ -288,17 +288,17 @@ public class SoMap extends LinkedHashMap<String, Object> {
 			return this;
 		}
 		Field[] fields = model.getClass().getDeclaredFields();
-	    for (Field field : fields) {
-	        try{
-	            field.setAccessible(true);
-	            boolean isStatic = Modifier.isStatic(field.getModifiers());
-	            if(!isStatic) {
-		            this.set(field.getName(), field.get(model));
-	            }
-	        }catch (Exception e){
-	        	throw new RuntimeException(e);
-	        }
-	    }
+		for (Field field : fields) {
+			try{
+				field.setAccessible(true);
+				boolean isStatic = Modifier.isStatic(field.getModifiers());
+				if(!isStatic) {
+					this.set(field.getName(), field.get(model));
+				}
+			}catch (Exception e){
+				throw new RuntimeException(e);
+			}
+		}
 		return this;
 	}
 
@@ -513,7 +513,7 @@ public class SoMap extends LinkedHashMap<String, Object> {
 		if(value == null) {
 			return false;
 		}
-	    return patternNumber.matcher(value).matches();
+		return patternNumber.matcher(value).matches();
 	}
 
 

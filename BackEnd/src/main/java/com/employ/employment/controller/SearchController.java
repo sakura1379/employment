@@ -1,11 +1,6 @@
 package com.employ.employment.controller;
 
-import cn.dev33.satoken.stp.StpUtil;
 import com.employ.employment.entity.AjaxJson;
-import com.employ.employment.mapper.CompUserMapper;
-import com.employ.employment.mapper.CompanyInfoMapper;
-import com.employ.employment.mapper.SeminarInfoMapper;
-import com.employ.employment.service.CompService;
 import com.employ.employment.service.SearchService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -48,4 +43,6 @@ public class SearchController {
         log.info("Start getSeminarList========");
         return searchService.getSeminarList(query, page, sortType);
     }
+
+
 }
