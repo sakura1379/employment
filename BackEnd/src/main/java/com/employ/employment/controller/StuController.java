@@ -33,14 +33,14 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/stu/")
 @Api
 @Slf4j
-public class StuInfoController {
+public class StuController {
 
     private final StuService stuService;
 
     private final StuInfoMapper stuInfoMapper;
 
     @Autowired
-    public StuInfoController(StuService stuService,StuInfoMapper stuInfoMapper) {
+    public StuController(StuService stuService, StuInfoMapper stuInfoMapper) {
         this.stuService = stuService;
         this.stuInfoMapper = stuInfoMapper;
     }
@@ -55,8 +55,8 @@ public class StuInfoController {
             @ApiImplicitParam(name = "stuName", value = "学生姓名", required = true),
             @ApiImplicitParam(name = "stuGraUniversity", value = "学生学校", required = true),
             @ApiImplicitParam(name = "stuMajor", value = "学生专业", required = true),
-            @ApiImplicitParam(name = "stuEducation", value = "学生学历（1=本科,2=硕士研究生", required = true),
-            @ApiImplicitParam(name = "stJodKind", value = "求职性质 (1=实习, 2=校招, 3=实习和校招)", required = true),
+            @ApiImplicitParam(name = "stuEducation", value = "学生学历（1=本科,2=硕士研究生", required = true, allowableValues = "1,2"),
+            @ApiImplicitParam(name = "stJodKind", value = "求职性质 (1=实习, 2=校招, 3=实习和校招)", required = true, allowableValues = "1,2,3"),
             @ApiImplicitParam(name = "stuGraduateTime", value = "学生毕业年份 [date]", required = true),
             @ApiImplicitParam(name = "stuTelephone", value = "学生电话号码", required = true),
             @ApiImplicitParam(name = "dreamAddress", value = "期望城市", required = true),
@@ -106,8 +106,11 @@ public class StuInfoController {
         String httpUrl = UploadUtil.saveFile(file, UploadUtil.uploadConfig.fileFolder);
         long id = StpUtil.getLoginIdAsLong();
         log.info("Current user id:{}",id);
-//       TODO 更改当前学生信息表中的简历信息
-
+        log.info("resume address:{}", httpUrl);
+        StuInfo s = new StuInfo();
+        s.setStuNum(id);
+        s.setResume(httpUrl);
+        stuInfoMapper.update(s);
         return AjaxJson.getSuccessData(httpUrl);
     }
 
