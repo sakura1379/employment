@@ -75,10 +75,12 @@ CREATE TABLE `announcement` (
 
 
 CREATE TABLE `mail_info` (
-  `mailNum` int(11) NOT NULL AUTO_INCREMENT COMMENT '信箱编号 [no]',   /*信箱编号*/
+  `mailNum` int(11) NOT NULL AUTO_INCREMENT COMMENT '信件编号 [no]',   /*信件编号*/
   `stuNum` int(11) NOT NULL COMMENT '学生编号 [no]',   /*学生编号*/
   `infoId` int(11) DEFAULT NULL COMMENT '信息编号 [no]', /*信息编号*/
   `infoType` int(11) DEFAULT NULL COMMENT '信息类型 (1=宣讲会信息, 2=职位信息)[enum]',/*信息类型*/
+  `mailTitle` varchar(50) DEFAULT NULL COMMENT '信件标题 [text]',/*信件标题*/
+  `mailContent` text COMMENT '信件内容 [f]',/*信件内容*/
   PRIMARY KEY (`mailNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
