@@ -83,7 +83,7 @@ CREATE TABLE `mail_info` (
   `mailContent` text COMMENT '信件内容 [f]',/*信件内容*/
   PRIMARY KEY (`mailNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
-
+/*信箱表有更改*/
 
 CREATE TABLE `favor_info` (
   `favorNum` int(11) NOT NULL AUTO_INCREMENT COMMENT '收藏编号 [no]',   /*收藏编号*/
