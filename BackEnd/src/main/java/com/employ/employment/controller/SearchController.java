@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author Zenglr
+ * @author Zenglr, clh
  * @program: employment
  * @packagename: com.employ.employment.controller
  * @Description 首页查找信息接口，包括查找职位信息、宣讲会信息、公告信息等
@@ -42,6 +42,18 @@ public class SearchController {
     public AjaxJson getSeminarList(String query, int page, int sortType){
         log.info("Start getSeminarList========");
         return searchService.getSeminarList(query, page, sortType);
+    }
+
+    @GetMapping("getJobList")
+    @ApiOperation("根据检索词查找所有的审核通过的职位信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "query", value = "检索词 可加空格", required = true),
+            @ApiImplicitParam(name = "page", value = "页码", required = true),
+            @ApiImplicitParam(name = "sortType", value = "排序类型【1为按时间排，2为按匹配度排】", required = true)
+    })
+    public AjaxJson getJobList(String query, int page, int sortType){
+        log.info("Start getJobList========");
+        return searchService.getJobList(query, page, sortType);
     }
 
 

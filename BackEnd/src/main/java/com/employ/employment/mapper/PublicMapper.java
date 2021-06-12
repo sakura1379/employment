@@ -27,6 +27,7 @@ public interface PublicMapper {
 	long getPrimarykey();
 
 
+
 	// ------------------------ 新增SQL相关 ------------------------
 
 

@@ -11,6 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>employment</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+<!-- name 一般和项目名保持一致-->
     <name>employment</name>
     <description>Employment project for Spring Boot</description>
     <properties>
@@ -22,6 +23,7 @@
         <os-maven-plugin.version>1.6.2</os-maven-plugin.version>
         <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
     </properties>
+<!--    存放依赖-->
     <dependencies>
         <!-- web starter -->
         <dependency>
@@ -222,6 +224,19 @@
                     </image>
                 </configuration>
             </plugin>
+<!-- 下面是我加的-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <compilerArguments>
+                        <bootclasspath>${JAVA_HOME}/jre/lib/rt.jar</bootclasspath>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            <!-- 上面是我加的-->
         </plugins>
         <!-- 配置资源目录  -->
         <resources>
@@ -253,5 +268,4 @@
             <url>https://repo.spring.io/release</url>
         </pluginRepository>
     </pluginRepositories>
-
 </project>
