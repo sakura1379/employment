@@ -45,12 +45,8 @@ public class StuController {
     //
 
     @Autowired
-<<<<<<< Updated upstream:BackEnd/src/main/java/com/employ/employment/controller/StuController.java
-    public StuController(StuService stuService, StuInfoMapper stuInfoMapper) {
-=======
-    public StuInfoController(StuService stuService,StuInfoMapper stuInfoMapper,
+    public StuController(StuService stuService,StuInfoMapper stuInfoMapper,
                              JobInfoMapper jobInfoMapper, ApplyInfoMapper applyInfoMapper) {
->>>>>>> Stashed changes:BackEnd/src/main/java/com/employ/employment/controller/StuInfoController.java
         this.stuService = stuService;
         this.stuInfoMapper = stuInfoMapper;
         this.jobInfoMapper = jobInfoMapper;
