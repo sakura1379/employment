@@ -1,0 +1,29 @@
+{
+  "code": 200,
+  "msg": "ok",
+  "data": [
+    {
+      "stuNum": 10002,
+      "jobId": 24,
+      "internshipTime": 1,
+      "dutyTime": 1,
+      "ApplyStatus": 1,
+      "newApplyStatus": 1,
+      "applyStatus": 1
+    },
+    {
+      "stuNum": 10015,
+      "jobId": 19,
+      "internshipTime": 1,
+      "dutyTime": 1,
+      "ApplyStatus": 1,
+      "newApplyStatus": 1,
+      "applyStatus": 1
+    }
+  ],
+  "dataCount": 1,
+  "pageNo": 1,
+  "pageSize": 10,
+  "startIndex": 0,
+  "pageCount": 1
+}
