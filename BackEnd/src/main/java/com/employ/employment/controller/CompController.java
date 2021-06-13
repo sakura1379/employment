@@ -44,18 +44,22 @@ public class CompController {
     private final JobInfoMapper jobInfoMapper;
 
     private final ApplyInfoMapper applyInfoMapper;
+
+    private final StuInfoMapper stuInfoMapper;
     //
 
     @Autowired
     public CompController(CompService compService, CompUserMapper compUserMapper,
                           CompanyInfoMapper companyInfoMapper, SeminarInfoMapper seminarInfoMapper,
-                          JobInfoMapper jobInfoMapper, ApplyInfoMapper applyInfoMapper) {
+                          JobInfoMapper jobInfoMapper, ApplyInfoMapper applyInfoMapper,
+                          StuInfoMapper stuInfoMapper) {
         this.compService = compService;
         this.compUserMapper = compUserMapper;
         this.companyInfoMapper = companyInfoMapper;
         this.seminarInfoMapper = seminarInfoMapper;
         this.jobInfoMapper = jobInfoMapper;
         this.applyInfoMapper = applyInfoMapper;
+        this.stuInfoMapper = stuInfoMapper;
     }
 
     /** 增 */
@@ -298,5 +302,17 @@ public class CompController {
 //        //每次修改都要将发布人更改为现在用户
 //        a.setCompId(id);
         return compService.updateApplyInfo(a);
+    }
+
+    /** 查 - 根据id */
+    @GetMapping("getStuApplyInfo")
+    @ApiOperation("企业用户查看学生信息")
+    public AjaxJson getStuApplyInfo(long stuNum){
+        log.info("Start getStuApplyInfo========");
+//        StpUtil.checkPermission("stu_info");
+//        long id = StpUtil.getLoginIdAsLong();
+//        log.info("Current user id:{}",id);
+        StuInfo s = stuInfoMapper.getById(stuNum);
+        return AjaxJson.getSuccessData(s.resume);
     }
 }
