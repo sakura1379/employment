@@ -95,16 +95,21 @@
         </choose>
     </select>
 
+<!--    select `apply_info`.stuNum,`stu_info`.stuName,`apply_info`.jobId,`job_info`.jobName,`apply_info`.internshipTime,`apply_info`.dutyTime,`apply_info`.ApplyStatus,`apply_info`.newApplyStatus-->
+<!--    from `apply_info` left join `job_info` on `apply_info`.jobId = `job_info`-->
+<!--    left join `stu_info`.stuNum = `apply_info`.stuNum and `jobId` in-->
+<!--    <select id="selectAllApplyByJobIds" parameterType="java.util.List" resultType="ApplyInfo">-->
     <select id="selectAllApplyByJobIds" parameterType="java.util.List" resultType="ApplyInfo">
-        select stuNum,jobId,internshipTime,dutyTime,ApplyStatus,newApplyStatus
-        from `apply_info`
-        where `jobId` in
+        select `apply_info`.stuNum,`stu_info`.stuName,`apply_info`.jobId,`job_info`.jobName,`apply_info`.internshipTime,`apply_info`.dutyTime,`apply_info`.ApplyStatus,`apply_info`.newApplyStatus
+        from `apply_info`, `job_info`, `stu_info`
+        where `stu_info`.stuNum = `apply_info`.stuNum and `apply_info`.jobId = `job_info`.jobId
+        and `apply_info`.jobId in
         <foreach collection="jobIds" item="jobId" index="index"
                  open="(" close=")" separator=",">
             #{jobId}
         </foreach>
         order by field(
-        `jobId`,
+        `apply_info`.`jobId`,
         <foreach collection="jobIds" separator="," item="jobId">
             #{jobId}
         </foreach>
@@ -112,15 +117,15 @@
     </select>
 
     <select id="selectAllApplyByAppIds" parameterType="java.util.List" resultType="ApplyInfo">
-        select stuNum,jobId,internshipTime,dutyTime,ApplyStatus,newApplyStatus
-        from `apply_info`
-        where `stuNum` = #{stuNum} and `jobId` in
+        select stuNum,`apply_info`.jobId,`job_info`.jobName,internshipTime,dutyTime,ApplyStatus,newApplyStatus
+        from `apply_info`, `job_info`
+        where `stuNum` = #{stuNum} and `apply_info`.jobId = `job_info`.jobId and `apply_info`.`jobId` in
         <foreach collection="jobIds" item="jobId" index="index"
                  open="(" close=")" separator=",">
             #{jobId}
         </foreach>
         order by field(
-        `jobId`,
+        `apply_info`.`jobId`,
         <foreach collection="jobIds" separator="," item="jobId">
             #{jobId}
         </foreach>
@@ -128,8 +133,10 @@
     </select>
 
     <select id="getByAppId" resultType="com.employ.employment.entity.ApplyInfo">
-        select * from apply_info
-        where jobId = #{jobId} and stuNum = #{stuNum}
+        select `apply_info`.stuNum,`apply_info`.jobId,`job_info`.jobName,`apply_info`.internshipTime,`apply_info`.dutyTime,`apply_info`.ApplyStatus,`apply_info`.newApplyStatus
+        from `apply_info`, `job_info`
+        where `apply_info`.jobId = #{jobId} and `apply_info`.stuNum = #{stuNum}
+        and `job_info`.jobId = #{jobId}
     </select>
 
 </mapper>
