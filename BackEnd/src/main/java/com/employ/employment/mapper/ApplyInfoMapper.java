@@ -87,6 +87,7 @@ public interface ApplyInfoMapper{
      * @return 数据列表
      */
     List<ApplyInfo> selectAllApplyByJobIds(@Param("jobIds") List<String> jobIds);
+//    List<String> selectAllApplyByJobIds(@Param("jobIds") List<String> jobIds);
 
     /**
      * 根据所有申请的jobid, stuNum查集合
