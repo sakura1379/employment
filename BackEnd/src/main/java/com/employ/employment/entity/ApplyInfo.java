@@ -25,6 +25,16 @@ public class ApplyInfo implements Serializable {
     public Long stuNum;
 
     /**
+     * 学生姓名
+     */
+    public String stuName;
+
+    /**
+     * 职位名称
+     */
+    public String jobName;
+
+    /**
      * 职位id
      */
     public Long jobId;
