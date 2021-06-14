@@ -52,7 +52,7 @@ public class JobRedisDao {
         }
         //去重（顺序不变）
         List<String> result = new ArrayList<>(new LinkedHashSet<>(res));
-        log.debug("redis fuzzy search:" + query + ",return" + result.toString());
+        log.debug("redis fuzzy search:" + query.toString() + ",return" + result.toString());
         log.info("redis fuzzy search:{},return {} lines", query, result.size());
         return result;
     }
@@ -125,10 +125,11 @@ public class JobRedisDao {
     public List<String> fuzzySearchJobList(String query) {
         log.info("====start fuzzySearchJobList from redis======");
         long startTime = System.currentTimeMillis();
-        List<String> keys = jedisUtil.fuzzySearchKeys(query,4);
+        List<String> keys = jedisUtil.fuzzySearchKeys(query,5);
         Jedis jedis = jedisUtil.getClient();
-        jedis.select(4);
+        jedis.select(5);
         log.debug("模糊匹配到keys：" + keys.toString());
+        log.info("模糊匹配到keys：" + keys.toString());
         log.info("模糊匹配到{}条keys",keys.size());
         List<String> list = new ArrayList<>();
         for (String key : keys) {
