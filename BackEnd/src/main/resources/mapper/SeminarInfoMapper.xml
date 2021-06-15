@@ -5,13 +5,13 @@
 	<!-- 增 [G] -->
 	<insert id="add">
 		insert into 
-		seminar_info (seminarTitle, seminarContent, hrId, seminarTime)
-		values (#{seminarTitle}, #{seminarContent}, #{hrId}, now())
+		seminar_info (seminarTitle, seminarContent, seminarTime, seminarAddress, hrId, releaseTime)
+		values (#{seminarTitle}, #{seminarContent}, #{seminarTime}, #{seminarAddress}, #{hrId}, now())
 	</insert>
 
 	<!-- 删 -->
 	<delete id="delete">
-		delete from seminar_info 
+		delete from seminar_info
 		where seminarId = #{seminarId}
 	</delete>
 
@@ -19,11 +19,13 @@
 	<update id="update">
 		update seminar_info
 		<trim prefix="set" suffixOverrides=",">
-		<if test="seminarId != null">seminarId = #{seminarId},</if>
-		<if test="seminarTitle != null">seminarTitle = #{seminarTitle},</if>
-		<if test="seminarContent != null">seminarContent = #{seminarContent},</if>
-		<if test="hrId != null">hrId = #{hrId},</if>
-		<if test="approveStatus != null">approveStatus = #{approveStatus},</if>
+			<if test="seminarId != null">seminarId = #{seminarId},</if>
+			<if test="seminarTitle != null">seminarTitle = #{seminarTitle},</if>
+			<if test="seminarContent != null">seminarContent = #{seminarContent},</if>
+			<if test="seminarTime != null">seminarTime = #{seminarTime},</if>
+			<if test="seminarAddress != null">seminarAddress = #{seminarAddress},</if>
+			<if test="hrId != null">hrId = #{hrId},</if>
+			<if test="approveStatus != null">approveStatus = #{approveStatus},</if>
 		</trim>
 		where seminarId = #{seminarId}
 	</update>
@@ -31,29 +33,31 @@
 
 	<!-- ================================== 查询相关 ================================== -->
 	<!-- select seminarId, seminarTitle, seminarContent, hrId, approveStatus, seminarTime from seminar_info  -->
-	
+
 	<!-- 通用映射：手动模式 -->
 	<resultMap id="model" type="com.employ.employment.entity.SeminarInfo">
 		<result property="seminarId" column="seminarId" />
 		<result property="seminarTitle" column="seminarTitle" />
 		<result property="seminarContent" column="seminarContent" />
+		<result property="seminarTime" column="seminarTime" />
+		<result property="seminarAddress" column="seminarAddress" />
 		<result property="hrId" column="hrId" />
 		<result property="approveStatus" column="approveStatus" />
-		<result property="seminarTime" column="seminarTime" />
+		<result property="releaseTime" column="releaseTime" />
 	</resultMap>
-	
+
 	<!-- 公共查询sql片段 -->
 	<sql id="select_sql">
-		select * 
-		from seminar_info 
+		select *
+		from seminar_info
 	</sql>
-	
+
 	<!-- 查 - 根据id -->
 	<select id="getById" resultMap="model">
 		<include refid="select_sql"></include>
 		where seminarId = #{seminarId}
 	</select>
-	
+
 	<!-- 查集合 - 根据条件（参数为空时代表忽略指定条件） [G] -->
 	<select id="getList" resultMap="model">
 		<include refid="select_sql"></include>
@@ -61,6 +65,8 @@
 			<if test=' this.has("seminarId") '> and seminarId = #{seminarId} </if>
 			<if test=' this.has("seminarTitle") '> and seminarTitle = #{seminarTitle} </if>
 			<if test=' this.has("seminarContent") '> and seminarContent = #{seminarContent} </if>
+			<if test=' this.has("seminarTime") '> and seminarContent = #{seminarContent} </if>
+			<if test=' this.has("seminarAddress") '> and seminarContent = #{seminarContent} </if>
 			<if test=' this.has("hrId") '> and hrId = #{hrId} </if>
 			<if test=' this.has("approveStatus") '> and approveStatus = #{approveStatus} </if>
 		</where>
@@ -105,7 +111,7 @@
 		<choose>
 			<when test='sortType == 1'> seminarTime desc </when>
 			<otherwise>
-			 field(
+				field(
 				`seminarId`,
 				<foreach collection="seminarIds" separator="," item="seminarId">
 					#{seminarId}
