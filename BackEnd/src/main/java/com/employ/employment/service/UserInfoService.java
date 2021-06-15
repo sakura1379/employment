@@ -1,8 +1,12 @@
 package com.employ.employment.service;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.employ.employment.entity.CompUser;
 import com.employ.employment.entity.SP;
+import com.employ.employment.entity.SoMap;
 import com.employ.employment.entity.UserInfo;
+import com.employ.employment.mapper.CompUserMapper;
+import com.employ.employment.mapper.CompanyInfoMapper;
 import com.employ.employment.mapper.StuInfoMapper;
 import com.employ.employment.mapper.UserInfoMapper;
 import com.employ.employment.util.UserInfoUtil;
@@ -11,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Service: 用户表
@@ -26,11 +32,19 @@ public class UserInfoService {
 
 	private final StuInfoMapper stuInfoMapper;
 
+	private final CompanyInfoMapper companyInfoMapper;
+
+	private final CompUserMapper compUserMapper;
+
 	@Autowired
-	public UserInfoService(UserInfoMapper userInfoMapper, EpAdminPasswordService epAdminPasswordService, StuInfoMapper stuInfoMapper) {
+	public UserInfoService(UserInfoMapper userInfoMapper, EpAdminPasswordService epAdminPasswordService,
+						   StuInfoMapper stuInfoMapper, CompanyInfoMapper companyInfoMapper,
+						   CompUserMapper compUserMapper) {
 		this.userInfoMapper = userInfoMapper;
 		this.epAdminPasswordService = epAdminPasswordService;
 		this.stuInfoMapper = stuInfoMapper;
+		this.companyInfoMapper = companyInfoMapper;
+		this.compUserMapper = compUserMapper;
 	}
 
 
@@ -81,17 +95,30 @@ public class UserInfoService {
 			line += stuInfoMapper.delete(id);
 			log.info("delete stuInfo and userInfo, id:{}",id);
 		}else if (roleId == 121 || roleId == 1212 ){
-			//TODO 企业用户
 //			企业用户，则首先到企业用户表中获得到对应企业id
-
+			long compId = compUserMapper.getById(id).getCompId();
+			log.info("current compId:{}", compId);
 //			到企业用户表中查该企业的用户列表
-
+			List<CompUser> compUserList = compUserMapper.getList(SoMap.getSoMap("compId",compId));
+			log.info("get all company user:{}", compUserList.toString());
 //			如果只有一个用户，首先则删除该用户信息以及对应企业信息
+			if(compUserList.size() == 1){
+				log.info("current company only has one user.");
+				log.info("delete current user info======");
+				line = userInfoMapper.delete(id);
+				line += compUserMapper.delete(id);
+				log.info("delete current company info======");
+				line += companyInfoMapper.delete(compId);
+			}else {
+				//	如果不只有一个用户，则只删除该用户信息
+				log.info("current company has more than one user.");
+				log.info("delete current user info======");
+				line = userInfoMapper.delete(id);
+				line += compUserMapper.delete(id);
+			}
 
-//			如果不只有一个用户，则只删除该用户信息
-
-		}else if (roleId == 2){
-//			普通管理员用户，直接删除用户信息
+		}else if (roleId == 1){
+//			就业管理员用户，直接删除用户信息
 			line = userInfoMapper.delete(id);
 		}else {
 //			超级管理员不可删除
