@@ -78,7 +78,7 @@ CREATE TABLE `mail_info` (
   `mailNum` int(11) NOT NULL AUTO_INCREMENT COMMENT '信箱编号 [no]',   /*信箱编号*/
   `stuNum` int(11) NOT NULL COMMENT '学生编号 [no]',   /*学生编号*/
   `infoId` int(11) DEFAULT NULL COMMENT '信息编号 [no]', /*信息编号*/
-  `infoType` int(11) DEFAULT NULL COMMENT '信息类型 (1=宣讲会信息, 2=职位信息)[enum]',/*信息类型*/
+  `infoType` int(11) DEFAULT NULL COMMENT '信息类型 (1=宣讲会信息, 2=职位信息，3=公告信息)[enum]',/*信息类型*/
   PRIMARY KEY (`mailNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
