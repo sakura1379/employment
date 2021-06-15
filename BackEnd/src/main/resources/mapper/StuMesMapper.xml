@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.employ.employment.mapper.StuMesMapper">
+
+    <!-- 增 [G] -->
+    <insert id="add">
+        insert into
+            mail_info (mailNum, stuNum, infoId, infoType)
+        values (#{mailNum}, #{stuNum}, #{infoId}, #{infoType})
+    </insert>
+
+    <insert id="addAnnouncement">
+        insert into
+            mail_info (mailNum, stuNum, infoId, infoType)
+        values (#{mailNum}, #{stuNum}, #{infoId}, #{infoType})
+    </insert>
+    
+    <update id="createTempTable">
+        create table ${pvsTb} (`mailNum` int(11), `stuNum` int(11), `infoId` int(11),`infoType` int(11));
+    </update>
+    <update id="dropTempTable">
+        drop table if exists ${pvsTb}
+    </update>
+    <!--更新临时表，获取全部mail与stu编号-->
+    <update id="updateTempTable1">
+        insert into ${pvsTb} select distinct mailNum, stuNum from mail_info
+    </update>
+    <!--更新临时表，全局更新信息编号-->
+    <update id="updateTempTable2">
+        update ${pvsTb} set infoId=#{infoId}, infoType=#{infoType}
+    </update>
+    <!--更新临时表，获取符合要求mail与stu编号-->
+    <update id="updateTempTable3">
+        insert into ${pvsTb} select distinct mailNum, stuNum from mail_info where stuNum in (select stuNum from favor_info where compId=${compId})
+    </update>
+    <!--临时表与原表合并-->
+    <update id="updateTable">
+        insert into mail_info select * from ${pvsTb}
+    </update>
+
+    <!-- 删 删除某一特定信箱的特定信息-->
+    <delete id="deleteOne">
+        delete from mail_info
+        where mailNum = #{mailNum} and infoId = #{infoId}
+    </delete>
+
+    <!-- 删 删除所有信箱的特定信息-->
+    <delete id="deleteAll">
+        delete from mail_info
+        where infoId = #{infoId}
+    </delete>
+
+    <!-- 改 [G] -->
+    <update id="update">
+        update mail_info
+        <trim prefix="set" suffixOverrides=",">
+            <if test="stuNum != null">stuNum = #{stuNum},</if>
+            <if test="infoId != null">infoId = #{infoId},</if>
+            <if test="infoType != null">infoType = #{infoType},</if>
+        </trim>
+        where mailNum = #{mailNum} and infoId = #{infoId}
+    </update>
+
+
+    <!-- ================================== 查询相关 ================================== -->
+    <!-- select stuNum, infoId, infoType from mail_info  -->
+
+    <!-- 通用映射：手动模式 -->
+    <resultMap id="model" type="com.employ.employment.entity.StuMes">
+        <result property="mailNum" column="mailNum" />
+        <result property="stuNum" column="stuNum" />
+        <result property="infoId" column="infoId" />
+        <result property="infoType" column="infoType" />
+    </resultMap>
+
+    <!-- 公共查询sql片段 -->
+    <sql id="select_sql">
+        select *
+        from mail_info
+    </sql>
+
+    <!-- 查 - 根据信件id -->
+    <select id="getById" resultMap="model">
+        <include refid="select_sql"></include>
+        where infoId = #{infoId}
+    </select>
+
+    <!-- 查集合 - 根据学生id查该学生所有信件 [G] -->
+    <select id="getList" resultMap="model">
+        <include refid="select_sql"></include>
+<!--        <where>
+            <if test=' this.has("mailNum") '> and mailNum = #{mailNum} </if>
+            <if test=' this.has("stuNum") '> and stuNum = #{stuNum} </if>
+            <if test=' this.has("infoId") '> and infoId = #{infoId} </if>
+            <if test=' this.has("infoType") '> and infoType = #{infoType} </if>
+            <if test=' this.has("mailTitle") '> and mailTitle = #{mailTitle} </if>
+            <if test=' this.has("mailContent") '> and mailContent = #{mailContent} </if>
+        </where>
+        order by
+        <choose>
+            <when test='sortType == 1'> mailNum desc </when>
+            <when test='sortType == 2'> stuNum desc </when>
+            <when test='sortType == 3'> infoId desc </when>
+            <when test='sortType == 4'> infoType desc </when>
+            <when test='sortType == 5'> mailTitle desc </when>
+            <when test='sortType == 6'> mailContent desc </when>
+            <otherwise> mailNum desc </otherwise>
+        </choose>
+-->
+        where stuNum = #{stuNum}
+    </select>
+
+
+
+
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.employ.employment.mapper.StuFavorMapper">
+
+    <!-- 增 [G] -->
+    <insert id="add">
+        insert into
+            favor_info (favorNum, stuNum, compId, jobId)
+        values (#{favorNum}, #{stuNum}, #{compId}, #{jobId})
+    </insert>
+
+    <!-- 删 -->
+    <delete id="delete">
+        delete from favor_info
+        where favorNum = #{favorNum}
+    </delete>
+
+    <!-- 改 [G] -->
+    <update id="update">
+        update favor_info
+        <trim prefix="set" suffixOverrides=",">
+            <if test="stuNum != null">stuNum = #{stuNum},</if>
+            <if test="compId != null">compId = #{compId},</if>
+            <if test="jobId != null">jobId = #{jobId},</if>
+        </trim>
+        where favorNum = #{favorNum}
+    </update>
+
+
+    <!-- ================================== 查询相关 ================================== -->
+    <!-- select favorNum, stuNum, compId, jobId from favor_info  -->
+
+    <!-- 通用映射：手动模式 -->
+    <resultMap id="model" type="com.employ.employment.entity.StuFavor">
+        <result property="favorNum" column="favorNum" />
+        <result property="stuNum" column="stuNum" />
+        <result property="compId" column="compId" />
+        <result property="jobId" column="jobId" />
+    </resultMap>
+
+    <!-- 公共查询sql片段 -->
+    <sql id="select_sql">
+        select *
+        from favor_info
+    </sql>
+
+    <!-- 查 - 根据收藏id查具体收藏项信息 -->
+    <select id="getById" resultMap="model">
+        <include refid="select_sql"></include>
+        where favorNum = #{favorNum}
+    </select>
+
+    <!-- 查集合 - 根据学生id查该学生收藏的所有收藏信息 [G] -->
+    <select id="getList" resultMap="model">
+ <!--       <include refid="select_sql"></include>
+        <where>
+            <if test=' this.has("favorNum") '> and favorNum = #{favorNum} </if>
+            <if test=' this.has("stuNum") '> and stuNum = #{stuNum} </if>
+            <if test=' this.has("compId") '> and compId = #{compId} </if>
+            <if test=' this.has("jobId") '> and jobId = #{jobId} </if>
+        </where>
+        order by
+        <choose>
+            <when test='sortType == 1'> favorNum desc </when>
+            <when test='sortType == 2'> stuNum desc </when>
+            <when test='sortType == 3'> compId desc </when>
+            <when test='sortType == 4'> jobId desc </when>
+            <otherwise> favorNum desc </otherwise>
+        </choose>
+-->
+        <include refid="select_sql"></include>
+        where stuNum = #{stuNum}
+    </select>
+
+
+
+
+
+
+
+
+
+
+</mapper>
