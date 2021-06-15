@@ -35,9 +35,19 @@ public class SeminarInfo {
     public String seminarTitle;
 
     /**
-     * 宣讲会内容
+     * 宣讲会内容链接
      */
     public String seminarContent;
+
+    /**
+     * 宣讲会时间
+     */
+    public String seminarTime;
+
+    /**
+     * 宣讲会地点
+     */
+    public String seminarAddress;
 
     /**
      * hr编号
@@ -52,6 +62,6 @@ public class SeminarInfo {
     /**
      * 发布时间
      */
-    public Date seminarTime;
+    public Date releaseTime;
 
 }
