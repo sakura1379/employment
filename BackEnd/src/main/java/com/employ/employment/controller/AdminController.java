@@ -1,10 +1,7 @@
 package com.employ.employment.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.employ.employment.entity.AjaxJson;
-import com.employ.employment.entity.SP;
-import com.employ.employment.entity.SeminarInfo;
-import com.employ.employment.entity.UserInfo;
+import com.employ.employment.entity.*;
 import com.employ.employment.mapper.CompUserMapper;
 import com.employ.employment.mapper.CompanyInfoMapper;
 import com.employ.employment.mapper.SeminarInfoMapper;
@@ -15,9 +12,12 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author Zenglr
@@ -41,7 +41,7 @@ public class AdminController {
 
 
     @PostMapping("reviewSeminar")
-    @ApiOperation("管理员审核宣讲会信息")
+    @ApiOperation("管理员审核宣讲会信息，1为未审核，2为通过，3为不通过")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "seminarId", value = "宣讲会信息编号", required = true),
             @ApiImplicitParam(name = "approveStatus", value = "审核状态", allowableValues = "2,3", required = true)
@@ -54,5 +54,17 @@ public class AdminController {
         log.info("Current user id:{}",id);
         int line = seminarInfoMapper.update(seminarInfo);
         return AjaxJson.getByLine(line);
+    }
+
+    @GetMapping("getAllSeminar")
+    @ApiOperation("管理员查看所有宣讲会信息")
+    public AjaxJson getAllSeminar(int page){
+        log.info("Start getAllSeminarInfo========");
+        StpUtil.checkPermission("review");
+        long id = StpUtil.getLoginIdAsLong();
+        log.info("Current user id:{}",id);
+        SoMap so = SoMap.getRequestSoMap();
+        List<SeminarInfo> seminarInfos = seminarInfoMapper.getList(so.startPage());
+        return AjaxJson.getPageData(so.getDataCount(), seminarInfos, page, 10);
     }
 }
