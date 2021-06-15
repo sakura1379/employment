@@ -8,7 +8,6 @@ import com.employ.employment.entity.*;
 import com.employ.employment.mapper.*;
 import com.employ.employment.service.CompService;
 import com.employ.employment.service.StuService;
-import com.sun.xml.internal.bind.v2.TODO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -137,7 +136,9 @@ public class CompController {
     @ApiOperation("添加宣讲会信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "seminarTitle", value = "宣讲会标题", required = true),
-            @ApiImplicitParam(name = "seminarContent", value = "宣讲会内容", required = true)
+            @ApiImplicitParam(name = "seminarContent", value = "宣讲会内容链接", required = true),
+            @ApiImplicitParam(name = "seminarTime", value = "宣讲会时间", required = true),
+            @ApiImplicitParam(name = "seminarAddress", value = "宣讲会地点", required = true)
     })
     public AjaxJson addSeminar(SeminarInfo s){
         log.info("Start addSeminarInfo========");
@@ -151,11 +152,13 @@ public class CompController {
 
     /** 改 */
     @PostMapping("updateSeminar")
-    @ApiOperation("修改宣讲会信息,修改标题或内容")
+    @ApiOperation("修改宣讲会信息,修改标题or内容链接or时间or地点")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "seminarId", value = "宣讲会信息编号", required = true),
             @ApiImplicitParam(name = "seminarTitle", value = "宣讲会标题"),
-            @ApiImplicitParam(name = "seminarContent", value = "宣讲会内容")
+            @ApiImplicitParam(name = "seminarContent", value = "宣讲会内容链接"),
+            @ApiImplicitParam(name = "seminarTime", value = "宣讲会时间"),
+            @ApiImplicitParam(name = "seminarAddress", value = "宣讲会地点")
     })
     public AjaxJson updateSeminar(SeminarInfo s){
         log.info("Start updateSeminarInfo========");
@@ -187,6 +190,7 @@ public class CompController {
         log.info("Current user id:{}",id);
         return compService.getCurrentCompSeminarList(id,page);
     }
+
 
     /**
      * 增 职位信息
