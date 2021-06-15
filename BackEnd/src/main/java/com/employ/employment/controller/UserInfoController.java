@@ -46,17 +46,16 @@ public class UserInfoController {
 
 	/** 增  */
 	@PutMapping("add")
-	@ApiOperation("增加用户信息")
+	@ApiOperation("就业中心管理员注册")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "name", value = "用户名", required = true),
 			@ApiImplicitParam(name = "password", value = "密码", required = true),
-			@ApiImplicitParam(name = "mail", value = "邮箱", required = true),
-			@ApiImplicitParam(name = "roleId", value = "用户角色", required = true)
+			@ApiImplicitParam(name = "mail", value = "邮箱", required = true)
 	})
 	AjaxJson add(UserInfo user){
 		log.info("Start addUser========");
 		log.info("Receive userInfo:{}", user.toString());
-		StpUtil.checkPermission(AuthConst.ADMIN_LIST);
+		user.setRoleId(1);
 		long id = userInfoService.add(user);
 		return AjaxJson.getSuccessData(id);
 	}
