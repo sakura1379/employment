@@ -137,15 +137,34 @@ CREATE TABLE `comp_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+
+-- ----------------------------
+-- Table structure for seminar_info
+-- ----------------------------
+DROP TABLE IF EXISTS `seminar_info`;
 CREATE TABLE `seminar_info` (
-  `seminarId` int(11) NOT NULL AUTO_INCREMENT  COMMENT '宣讲会信息编号 [no]',
-  `seminarTitle` varchar(50) DEFAULT NULL COMMENT '宣讲会标题 [text]',/*宣讲会标题*/
-  `seminarContent` text COMMENT '宣讲会内容 [f]',/*宣讲会内容*/
-  `hrId` int(11) DEFAULT NULL COMMENT 'hr编号 [no]', /*hr编号*/
-  `approveStatus` int(11) DEFAULT '1' COMMENT '审核状态 (1=未审核, 2=审核通过, 3=审核不通过) [enum]', /*审核状态*/
-  `seminarTime` date DEFAULT NULL COMMENT '发布时间 [date-create]',/*发布时间*/
+  `seminarId` int NOT NULL AUTO_INCREMENT COMMENT '宣讲会信息编号 [no]',
+  `seminarTitle` varchar(100) DEFAULT NULL COMMENT '宣讲会标题 [text]',
+  `seminarContent` varchar(200) DEFAULT NULL COMMENT '宣讲会内容链接 [f]',
+  `seminarTime` varchar(100) DEFAULT NULL COMMENT '宣讲会时间 [date-create]',
+  `seminarAddress` varchar(100) DEFAULT NULL COMMENT '宣讲会地点 [text]',
+  `hrId` int DEFAULT NULL COMMENT 'hr编号 [no]',
+  `approveStatus` int DEFAULT '1' COMMENT '审核状态 (1=未审核, 2=审核通过, 3=审核不通过) [enum]',
+  `releaseTime` date DEFAULT NULL COMMENT '发布时间 [date-create]',
   PRIMARY KEY (`seminarId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1209 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of seminar_info
+-- ----------------------------
+BEGIN;
+INSERT INTO `seminar_info` VALUES (1202, '宣讲会标题测试4', 'www.github.com', '2021-05-05 18:00', '东校园人文社科楼', 10011, 2, '2021-05-15');
+INSERT INTO `seminar_info` VALUES (1203, '标题修改测试', 'www.baidu.com', '2021-06-04 19:00(周四)', '东校园行政楼A100', 10003, 2, '2021-05-16');
+INSERT INTO `seminar_info` VALUES (1204, '垃圾中山大学', 'www.baidu.com', '2021-06-05 19:00(周四)', '东校园行政楼A109', 10009, 1, '2021-05-17');
+INSERT INTO `seminar_info` VALUES (1206, '宣讲会标题添加测试', 'www.baidu.com', '2021-06-06 19:00(周四)', '东校园行政楼B108', 10004, 2, '2021-06-10');
+INSERT INTO `seminar_info` VALUES (1207, '宣讲会标题测试3', 'www.baidu.com', '2021-06-07 19:00(周四)', '东校园行政楼B109', 10004, 2, '2021-06-10');
+COMMIT;
+
 
 
 -- 示例数据懒得写了，大家自己在本地添加吧 本地测试的时候不碍事的
