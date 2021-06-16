@@ -175,7 +175,8 @@ public class JobRedisDao {
 
         //删除compId索引
         jedis.select(2);
-        jedis.del(compId,jobId);
+        //jedis.del(compId,jobId);
+        jedis.lrem(compId,0,jobId);
 
         jedis.close();
         return line;
