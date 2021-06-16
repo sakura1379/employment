@@ -6,8 +6,8 @@
 <!--  jobId, status, deliverNum, approveStatus-->
     <insert id="add">
         insert into
-        job_info (compId, jobName, jobType, jobKind, relDate, jobAddress, jobCon,jobDeadline,salary)
-        values (#{compId}, #{jobName}, #{jobType}, #{jobKind}, now(), #{jobAddress}, #{jobCon}, #{jobDeadline}, #{salary})
+        job_info (compId, jobName, jobType, jobKind, status, relDate, jobAddress, jobCon,jobDeadline,salary)
+        values (#{compId}, #{jobName}, #{jobType}, #{jobKind}, #{status}, now(), #{jobAddress}, #{jobCon}, #{jobDeadline}, #{salary})
     </insert>
 
     <!-- 删 -->
@@ -113,6 +113,7 @@
                  open="(" close=")" separator=",">
             #{jobId}
         </foreach>
+        and status=1
         order by field(
         `jobId`,
         <foreach collection="jobIds" separator="," item="jobId">
@@ -129,7 +130,7 @@
                  open="(" close=")" separator=",">
             #{jobId}
         </foreach>
-        and approveStatus = 2
+        and approveStatus = 2 and status =1
         order by
         <choose>
             <when test='sortType == 1'> relDate desc </when>
