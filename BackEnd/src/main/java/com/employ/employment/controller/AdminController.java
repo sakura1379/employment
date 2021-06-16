@@ -4,6 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.employ.employment.entity.*;
 import com.employ.employment.mapper.CompUserMapper;
 import com.employ.employment.mapper.CompanyInfoMapper;
+import com.employ.employment.mapper.JobInfoMapper;
 import com.employ.employment.mapper.SeminarInfoMapper;
 import com.employ.employment.service.CompService;
 import io.swagger.annotations.Api;
@@ -34,9 +35,12 @@ public class AdminController {
 
     private final SeminarInfoMapper seminarInfoMapper;
 
+    private final JobInfoMapper jobInfoMapper;
+
     @Autowired
-    public AdminController(SeminarInfoMapper seminarInfoMapper) {
+    public AdminController(SeminarInfoMapper seminarInfoMapper, JobInfoMapper jobInfoMapper) {
         this.seminarInfoMapper = seminarInfoMapper;
+        this.jobInfoMapper = jobInfoMapper;
     }
 
 
@@ -66,5 +70,21 @@ public class AdminController {
         SoMap so = SoMap.getRequestSoMap();
         List<SeminarInfo> seminarInfos = seminarInfoMapper.getList(so.startPage());
         return AjaxJson.getPageData(so.getDataCount(), seminarInfos, page, 10);
+    }
+
+    @PostMapping("reviewJobInfo")
+    @ApiOperation("管理员审核职位信息，1为未审核，2为通过，3为不通过")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "jobId", value = "职位信息编号", required = true),
+            @ApiImplicitParam(name = "approveStatus", value = "审核状态", allowableValues = "2,3", required = true)
+    })
+    public AjaxJson reviewJobInfo(JobInfo jobInfo){
+        log.info("Start reviewJobInfo========");
+        log.info("Receive jobInfo:{}",jobInfo.toString());
+        StpUtil.checkPermission("review");
+        long id = StpUtil.getLoginIdAsLong();
+        log.info("Current user id:{}",id);
+        int line = jobInfoMapper.update(jobInfo);
+        return AjaxJson.getByLine(line);
     }
 }
