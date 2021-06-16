@@ -8,6 +8,7 @@ import com.employ.employment.entity.*;
 import com.employ.employment.mapper.*;
 import com.employ.employment.service.CompService;
 import com.employ.employment.service.StuService;
+import com.sun.xml.internal.bind.v2.TODO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -136,9 +137,7 @@ public class CompController {
     @ApiOperation("添加宣讲会信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "seminarTitle", value = "宣讲会标题", required = true),
-            @ApiImplicitParam(name = "seminarContent", value = "宣讲会内容链接", required = true),
-            @ApiImplicitParam(name = "seminarTime", value = "宣讲会时间", required = true),
-            @ApiImplicitParam(name = "seminarAddress", value = "宣讲会地点", required = true)
+            @ApiImplicitParam(name = "seminarContent", value = "宣讲会内容", required = true)
     })
     public AjaxJson addSeminar(SeminarInfo s){
         log.info("Start addSeminarInfo========");
@@ -152,13 +151,11 @@ public class CompController {
 
     /** 改 */
     @PostMapping("updateSeminar")
-    @ApiOperation("修改宣讲会信息,修改标题or内容链接or时间or地点")
+    @ApiOperation("修改宣讲会信息,修改标题或内容")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "seminarId", value = "宣讲会信息编号", required = true),
             @ApiImplicitParam(name = "seminarTitle", value = "宣讲会标题"),
-            @ApiImplicitParam(name = "seminarContent", value = "宣讲会内容链接"),
-            @ApiImplicitParam(name = "seminarTime", value = "宣讲会时间"),
-            @ApiImplicitParam(name = "seminarAddress", value = "宣讲会地点")
+            @ApiImplicitParam(name = "seminarContent", value = "宣讲会内容")
     })
     public AjaxJson updateSeminar(SeminarInfo s){
         log.info("Start updateSeminarInfo========");
@@ -191,7 +188,6 @@ public class CompController {
         return compService.getCurrentCompSeminarList(id,page);
     }
 
-
     /**
      * 增 职位信息
      * */
@@ -216,6 +212,8 @@ public class CompController {
         long comp_id = compUserMapper.getById(hrid).getCompId();
         log.info("Current company id:{}",comp_id);
         j.setCompId(comp_id);
+        j.setStatus(1);
+        j.setApproveStatus(1);
         return compService.addJob(j);
     }
 
@@ -248,6 +246,7 @@ public class CompController {
 
     /**
      * 删除职位信息
+     * 其实没有删除 只是把status 改成2
      * */
     @DeleteMapping("deleteJobInfo")
     @ApiOperation("删除职位信息")
@@ -256,7 +255,10 @@ public class CompController {
         log.info("Receive JobId:{}",jobId);
         StpUtil.checkPermission("job_info");
         long id = StpUtil.getLoginIdAsLong();
-        return compService.deleteJobInfo(id, jobId);
+//        return compService.deleteJobInfo(id, jobId); 原本的
+        JobInfo  j = jobInfoMapper.getById(jobId);
+        j.setStatus(2);
+        return compService.updateJobInfo(j);
     }
 
     /**
