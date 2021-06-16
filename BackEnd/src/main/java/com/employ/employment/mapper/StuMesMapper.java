@@ -68,10 +68,11 @@ public interface StuMesMapper {
     /**
      * 改
      * @param pvsTb 临时表名称
-     * @param s 实体对象
+     * @param infoId 信息编号
+     * @param infoType 信息种类
      * @return 受影响行数
      */
-    int updateTempTable2(@Param("pvsTb") String pvsTb, @Param("s") StuMes s);
+    int updateTempTable2(@Param("pvsTb") String pvsTb, @Param("infoId") long infoId, @Param("infoType") long infoType);
 
     /**
      * 改
