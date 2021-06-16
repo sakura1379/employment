@@ -30,8 +30,8 @@ public class TimeListMongoDao {
             mongoClient = MongoDBUtil.getConn();
             collection = mongoClient.getDatabase("employment").getCollection("timeList");
             sb= new StringBuilder();
-//            Pattern pattern = Pattern.compile("*"+compName+"*", Pattern.CASE_INSENSITIVE);
-            BasicDBObject compName1 = new BasicDBObject("compName",compName);
+            Pattern pattern = Pattern.compile("^.*" +compName+ ".*$", Pattern.CASE_INSENSITIVE);
+            BasicDBObject compName1 = new BasicDBObject("compName",pattern);
             Document originDoc = collection.find(compName1).first();
             Document extractedDoc = new Document();
             if (originDoc!=null&&!originDoc.isEmpty()) {
