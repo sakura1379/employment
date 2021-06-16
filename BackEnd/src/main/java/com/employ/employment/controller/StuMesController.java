@@ -53,8 +53,8 @@ public class StuMesController {
             @ApiImplicitParam(name = "infoId", value = "信息编号", required = true),
             @ApiImplicitParam(name = "infoType", value = "信息类型（1=宣讲会信息，2=职位信息，3=公告信息）", required = true, allowableValues = "1,2,3"),
     })
-    public AjaxJson add(StuMes s){
-        if(s.infoType==3){
+    public AjaxJson add(StuMes stuMes){
+        if(stuMes.infoType==3){
             log.info("Start dropTempTable========");
             stuMesMapper.dropTempTable("tem");
             log.info("Start createTempTable========");
@@ -62,14 +62,14 @@ public class StuMesController {
             log.info("Start updateTempTable1========");
             stuMesMapper.updateTempTable1("tem");
             log.info("Start updateTempTable2========");
-            stuMesMapper.updateTempTable2("tem",s);
+            stuMesMapper.updateTempTable2("tem",stuMes.infoId,stuMes.infoType);
             log.info("Start updateTable========");
             int line=stuMesMapper.updateTable("tem");
             log.info("Start dropTempTable========");
             stuMesMapper.dropTempTable("tem");
             return AjaxJson.getSuccessData(line);
         }
-        else if (s.infoType==1||s.infoType==2){
+        else if (stuMes.infoType==1||stuMes.infoType==2){
             log.info("Start dropTempTable========");
             stuMesMapper.dropTempTable("tem");
             log.info("Start createTempTable========");
@@ -79,7 +79,7 @@ public class StuMesController {
             log.info("Start updateTempTable3========");
             stuMesMapper.updateTempTable3("tem",id);
             log.info("Start updateTempTable2========");
-            stuMesMapper.updateTempTable2("tem",s);
+            stuMesMapper.updateTempTable2("tem",stuMes.infoId,stuMes.infoType);
             log.info("Start updateTable========");
             int line=stuMesMapper.updateTable("tem");
             log.info("Start dropTempTable========");
@@ -88,7 +88,7 @@ public class StuMesController {
         }
         return AjaxJson.getError();
     }
-
+    
 //    public AjaxJson add(StuMes s){
 //        log.info("Start dropTempTable========");
 //        stuMesMapper.dropTempTable("temp");
@@ -169,18 +169,27 @@ public class StuMesController {
         log.info("Start getCurrentMailTitle========");
         StpUtil.checkPermission("mail_info");
         if(infoType==1){
-            SeminarInfo seminarInfo = seminarInfoMapper.getById(infoId);
-            return AjaxJson.getSuccessData(seminarInfo.seminarTitle);
+            if(seminarInfoMapper.getById(infoId)!=null){
+                SeminarInfo seminarInfo = seminarInfoMapper.getById(infoId);
+                return AjaxJson.getSuccessData(seminarInfo.seminarTitle);
+            }
+            else return AjaxJson.getError("该信息已被删除或已失效");
         }
         if(infoType==2){
-            JobInfo jobInfo = jobInfoMapper.getById(infoId);
-            return AjaxJson.getSuccessData(jobInfo.jobName);
+            if(jobInfoMapper.getById(infoId)!=null){
+                JobInfo jobInfo = jobInfoMapper.getById(infoId);
+                return AjaxJson.getSuccessData(jobInfo.jobName);
+            }
+            else return AjaxJson.getError("该信息已被删除或已失效");
         }
         if(infoType==3){
-            Announcement announcement = announcementMapper.getById((int) infoId);
-            return AjaxJson.getSuccessData(announcement.announceTitle);
+            if (announcementMapper.getById((int) infoId)!=null){
+                Announcement announcement = announcementMapper.getById((int) infoId);
+                return AjaxJson.getSuccessData(announcement.announceTitle);
+            }
+            else return AjaxJson.getError("该信息已被删除或已失效");
         }
-        return AjaxJson.getError();
+        return AjaxJson.getError("查询出现错误");
     }
 
     /** 查 - 根据信件id查内容 */
@@ -190,17 +199,26 @@ public class StuMesController {
         log.info("Start getCurrentMailContent========");
         StpUtil.checkPermission("mail_info");
         if(infoType==1){
-            SeminarInfo seminarInfo = seminarInfoMapper.getById(infoId);
-            return AjaxJson.getSuccessData(seminarInfo.seminarContent);
+            if(seminarInfoMapper.getById(infoId)!=null){
+                SeminarInfo seminarInfo = seminarInfoMapper.getById(infoId);
+                return AjaxJson.getSuccessData(seminarInfo.seminarContent);
+            }
+            else return AjaxJson.getError("该信息已被删除或已失效");
         }
         if(infoType==2){
-            JobInfo jobInfo = jobInfoMapper.getById(infoId);
-            return AjaxJson.getSuccessData(jobInfo.jobCon);
+            if(jobInfoMapper.getById(infoId)!=null){
+                JobInfo jobInfo = jobInfoMapper.getById(infoId);
+                return AjaxJson.getSuccessData(jobInfo.jobCon);
+            }
+            else return AjaxJson.getError("该信息已被删除或已失效");
         }
         if(infoType==3){
-            Announcement announcement = announcementMapper.getById((int) infoId);
-            return AjaxJson.getSuccessData(announcement.announceContent);
+            if (announcementMapper.getById((int) infoId)!=null){
+                Announcement announcement = announcementMapper.getById((int) infoId);
+                return AjaxJson.getSuccessData(announcement.announceContent);
+            }
+            else return AjaxJson.getError("该信息已被删除或已失效");
         }
-        return AjaxJson.getError();
+        return AjaxJson.getError("查询出现错误");
     }
 }
