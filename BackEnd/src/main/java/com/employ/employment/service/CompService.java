@@ -318,6 +318,7 @@ public class CompService {
         log.info("start update JobInfo======");
         log.info("receive jobInfo:{}", j.toString());
         int line = 0;
+        int line2 = 0;
         // 每次修改都要把审核状态变为未审核 1
         // 审核状态 (1=未审核, 2=审核通过, 3=审核不通过)
         j.setApproveStatus(1);
@@ -344,6 +345,11 @@ public class CompService {
 
         //mysql中修改
         line += jobInfoMapper.update(j);
+        if(j.status==2)
+        {
+            //删除redis中索引
+            line2 += jobRedisDao.deleteIndex(String.valueOf(currentCompId), String.valueOf(j.jobId));
+        }
         return AjaxJson.getByLine(line);
 
     }
