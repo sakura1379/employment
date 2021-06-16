@@ -1,5 +1,6 @@
 package com.employ.employment.controller;
 
+import com.employ.employment.dao.TimeListMongoDao;
 import com.employ.employment.entity.AjaxJson;
 import com.employ.employment.service.SearchService;
 import io.swagger.annotations.Api;
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,9 +29,12 @@ public class SearchController {
 
     private final SearchService searchService;
 
+    private final TimeListMongoDao timeListMongoDao;
+
     @Autowired
-    public SearchController(SearchService searchService) {
+    public SearchController(SearchService searchService, TimeListMongoDao timeListMongoDao) {
         this.searchService = searchService;
+        this.timeListMongoDao = timeListMongoDao;
     }
 
     @GetMapping("getSeminarList")
@@ -56,5 +61,57 @@ public class SearchController {
         return searchService.getJobList(query, page, sortType);
     }
 
+    @GetMapping("getAnnouncementList")
+    @ApiOperation("根据公告类型搜索所有公告信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "announceType", value = "公告类型 (1=系统公告, 2=经验分享)", required = true),
+            @ApiImplicitParam(name = "page", value = "页码", required = true)
+    })
+    public AjaxJson getAnnouncementList(Integer announceType, int page) {
+        return searchService.getAnnouncementList(announceType, page);
+    }
+
+    @GetMapping("getTimeList")
+    @ApiOperation("根据公司名称搜索时间轴信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "compName", value = "公司名称", required = true)
+    })
+    public AjaxJson getTimeLineList(String compName) {
+        log.info("start getTimeLineList======");
+        log.info("receive compName:{}", compName);
+        return timeListMongoDao.getTimeList(compName);
+    }
+
+
+    /**
+     * 查询所有公告信息
+     */
+    @GetMapping("getAllAnnouncement")
+    @ApiOperation("分页查询所有公告")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "页码", required = true)
+    })
+    public AjaxJson getAllAnnouncement(int page) {
+        log.info("start getAllAnnouncement=======");
+        log.info("receive page:{}", page);
+        return searchService.getAllAnnouncement(page);
+    }
+
+
+    /**
+     * 根据检索词查询所有公告信息
+     */
+    @GetMapping("getAnnouncementByQuery")
+    @ApiOperation("根据检索词和公告类型分页查询所有公告")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "query", value = "检索词", required = true),
+            @ApiImplicitParam(name = "page", value = "页码", required = true),
+            @ApiImplicitParam(name = "announceType", value = "公告类型 (1=系统公告, 2=经验分享)", required = true)
+    })
+    public AjaxJson getAnnouncementByQuery(int page, int announceType, String query) {
+        log.info("start getAllAnnouncement=======");
+        log.info("receive page:{}, announceType:{}, query:{}", page, announceType, query);
+        return searchService.getAllAnnouncementByQuery(page, announceType, query);
+    }
 
 }

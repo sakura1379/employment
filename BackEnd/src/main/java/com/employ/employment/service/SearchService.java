@@ -2,10 +2,7 @@ package com.employ.employment.service;
 
 import com.employ.employment.dao.JobRedisDao;
 import com.employ.employment.dao.SeminarRedisDao;
-import com.employ.employment.entity.AjaxJson;
-import com.employ.employment.entity.JobInfo;
-import com.employ.employment.entity.SeminarInfo;
-import com.employ.employment.entity.SoMap;
+import com.employ.employment.entity.*;
 import com.employ.employment.mapper.*;
 import com.employ.employment.util.JedisUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -41,16 +38,19 @@ public class SearchService {
     private final JobRedisDao jobredisDao;
 
     private final JobInfoMapper jobInfoMapper;
+
+    private final AnnouncementMapper announcementMapper;
     //
     @Autowired
     public SearchService(SeminarRedisDao seminarRedisDao, SeminarInfoMapper seminarInfoMapper,
-                         JedisUtil jedisUtil,
-                         JobRedisDao jobredisDao, JobInfoMapper jobInfoMapper) {
+                         JedisUtil jedisUtil, JobRedisDao jobredisDao,
+                         JobInfoMapper jobInfoMapper, AnnouncementMapper announcementMapper) {
         this.seminarRedisDao = seminarRedisDao;
         this.seminarInfoMapper = seminarInfoMapper;
         this.jedisUtil = jedisUtil;
         this.jobredisDao = jobredisDao;
         this.jobInfoMapper = jobInfoMapper;
+        this.announcementMapper = announcementMapper;
     }
 
     /**
@@ -125,4 +125,49 @@ public class SearchService {
         }
 
     }
+
+
+    /**
+     * 根据公告类型查询公告信息
+     *
+     * @param announceType
+     * @param page
+     * @return
+     */
+    public AjaxJson getAnnouncementList(int announceType, int page) {
+        SoMap so = SoMap.getSoMap();
+        so.set("announceType", announceType);
+        so.set("pageNo",page);
+        List<Announcement> announcementList = announcementMapper.getList(so.startPage());
+        return AjaxJson.getPageData(so.getDataCount(), announcementList, page, seminarPageRecord);
+    }
+
+    /**
+     * 查询所有公告信息
+     * @param page
+     * @return
+     */
+    public AjaxJson getAllAnnouncement(int page) {
+        SoMap so=new SoMap();
+        so.set("pageNo",page);
+        List<Announcement> announcementList = announcementMapper.getList(so.startPage());
+        return AjaxJson.getPageData(so.getDataCount(), announcementList, page, 10);
+    }
+
+    /**
+     * 根据检索词和公告类型查找公告
+     * @param page
+     * @param announceType
+     * @param query
+     * @return
+     */
+    public AjaxJson getAllAnnouncementByQuery(int page, int announceType, String query){
+        SoMap so=new SoMap();
+        so.set("pageNo",page);
+        so.set("announceType", announceType);
+        so.set("announceTitle", query);
+        List<Announcement> announcementList = announcementMapper.getList(so.startPage());
+        return AjaxJson.getPageData(so.getDataCount(), announcementList, page, 10);
+    }
+
 }

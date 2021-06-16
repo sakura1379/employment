@@ -2,10 +2,8 @@ package com.employ.employment.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.employ.employment.entity.*;
-import com.employ.employment.mapper.CompUserMapper;
-import com.employ.employment.mapper.CompanyInfoMapper;
-import com.employ.employment.mapper.JobInfoMapper;
-import com.employ.employment.mapper.SeminarInfoMapper;
+import com.employ.employment.mapper.*;
+import com.employ.employment.service.AnnouncementService;
 import com.employ.employment.service.CompService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -37,10 +35,17 @@ public class AdminController {
 
     private final JobInfoMapper jobInfoMapper;
 
+    private final AnnouncementService announcementService;
+
+    private final AnnouncementMapper announcementMapper;
+
     @Autowired
-    public AdminController(SeminarInfoMapper seminarInfoMapper, JobInfoMapper jobInfoMapper) {
+    public AdminController(SeminarInfoMapper seminarInfoMapper, JobInfoMapper jobInfoMapper,
+                           AnnouncementService announcementService, AnnouncementMapper announcementMapper) {
         this.seminarInfoMapper = seminarInfoMapper;
         this.jobInfoMapper = jobInfoMapper;
+        this.announcementService = announcementService;
+        this.announcementMapper = announcementMapper;
     }
 
 
@@ -87,4 +92,57 @@ public class AdminController {
         int line = jobInfoMapper.update(jobInfo);
         return AjaxJson.getByLine(line);
     }
+
+
+    /**
+     * 增
+     */
+    @PostMapping("addAnnouncement")
+    @ApiOperation("新增公告")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "announceTitle", value = "公告标题", required = true),
+            @ApiImplicitParam(name = "announceContent", value = "公告内容", required = true),
+            @ApiImplicitParam(name = "announceType", value = "公告类型 (1=系统公告, 2=经验分享)", required = true)
+    })
+    public AjaxJson addAnnouncement(Announcement announcement) {
+        log.info("Start addAnnouncement========");
+        log.info("Receive announcement:{}",announcement.toString());
+        StpUtil.checkPermission("announcement");
+        long id = StpUtil.getLoginIdAsLong();
+        log.info("Current user id:{}",id);
+        announcement.setAdminId(id);
+        return announcementService.add(announcement);
+    }
+
+
+    /**
+     * 改
+     */
+    @PostMapping("updateAnnouncement")
+    @ApiOperation("修改公告信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "announceId", value = "公告编号", required = true)
+    })
+    public AjaxJson updateAnnouncement(Announcement announcement) {
+        log.info("Start updateAnnouncement========");
+        log.info("Receive announcement:{}",announcement.toString());
+        StpUtil.checkPermission("announcement");
+        long id = StpUtil.getLoginIdAsLong();
+        log.info("Current user id:{}",id);
+        announcement.setAdminId(id);
+        return announcementService.update(announcement);
+    }
+
+    /**
+     * 查公告信息 - 根据id
+     */
+    @GetMapping("getAnnouncementById")
+    @ApiOperation("根据id查询公告信息")
+    public AjaxJson getAnnouncementById(long id) {
+        log.info("Start getAnnouncementById========");
+        log.info("Receive id:{}",id);
+        Announcement a = announcementMapper.getById(id);
+        return AjaxJson.getSuccessData(a);
+    }
+
 }

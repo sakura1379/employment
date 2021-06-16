@@ -175,8 +175,9 @@ public class CompService {
 
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation= Propagation.REQUIRED)
     public AjaxJson deleteSeminarInfo(long id, long seminarId){
-        log.info("start updateSeminarInfo======");
+        log.info("start deleteSeminarInfo======");
         log.info("receive id:{}, seminarId:{}", id, seminarId);
         int line = 0;
 
