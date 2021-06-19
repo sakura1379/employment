@@ -2,6 +2,8 @@ package com.employ.employment.controller;
 
 import com.employ.employment.dao.TimeListMongoDao;
 import com.employ.employment.entity.AjaxJson;
+import com.employ.employment.entity.JobInfo;
+import com.employ.employment.mapper.JobInfoMapper;
 import com.employ.employment.service.SearchService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -29,10 +31,15 @@ public class SearchController {
 
     private final TimeListMongoDao timeListMongoDao;
 
+    private final JobInfoMapper jobInfoMapper;
+
     @Autowired
-    public SearchController(SearchService searchService, TimeListMongoDao timeListMongoDao) {
+    public SearchController(SearchService searchService, TimeListMongoDao timeListMongoDao,
+                            JobInfoMapper jobInfoMapper) {
         this.searchService = searchService;
         this.timeListMongoDao = timeListMongoDao;
+        this.jobInfoMapper = jobInfoMapper;
+
     }
 
     @GetMapping("getSeminarList")
@@ -112,4 +119,18 @@ public class SearchController {
         return searchService.getAllAnnouncementByQuery(page, announceType, query);
     }
 
+    /**
+     * 根据JobId查询对应的岗位详情
+     */
+    @GetMapping("getJobInfobyJobId")
+    @ApiOperation("根据JobId查询对应的岗位详情")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "jobId", value = "职位编号", required = true)
+    })
+    public AjaxJson getJobInfobyJobId(long jobId) {
+        log.info("start getJobInfobyJobId=======");
+        log.info("receive jobId:{}", jobId);
+        JobInfo j = jobInfoMapper.getById(jobId);
+        return AjaxJson.getSuccessData(j);
+    }
 }

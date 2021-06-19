@@ -21,6 +21,7 @@
         update job_info
         <trim prefix="set" suffixOverrides=",">
             <if test="compId != null">compId = #{compId},</if>
+<!--            <if test="compName != null">compName = #{compName},</if>-->
             <if test="jobName != null">jobName = #{jobName},</if>
             <if test="jobType != null">jobType = #{jobType},</if>
             <if test="jobKind != null">jobKind = #{jobKind},</if>
@@ -63,9 +64,16 @@
     </sql>
 
     <!-- 查 - 根据id -->
-    <select id="getById" resultMap="model">
-        <include refid="select_sql"></include>
-        where jobId = #{jobId}
+
+<!--    <select id="getById" resultMap="model">-->
+<!--        <include refid="select_sql"></include>-->
+<!--        where jobId = #{jobId}-->
+<!--    </select>-->
+    <!-- 查 - 根据id -->
+    <select id="getById" parameterType="java.util.List" resultType="JobInfo">
+        select jobId,`job_info`.compId,compName,jobName,jobType,jobKind,status,relDate,jobAddress,jobCon,jobDeadline,deliverNum,salary,`job_info`.approveStatus
+        from `job_info`, `company_info`
+        where `job_info`.`jobId` = #{jobId} and `job_info`.compId = `company_info`.compId
     </select>
 
     <!-- 查集合 - 根据条件（参数为空时代表忽略指定条件） [G] -->
@@ -106,14 +114,14 @@
     </select>
 
     <select id="selectAllJobByJobIds" parameterType="java.util.List" resultType="JobInfo">
-        select jobId,compId,jobName,jobType,jobKind,status,relDate,jobAddress,jobCon,jobDeadline,deliverNum,salary,approveStatus
-        from `job_info`
-        where `jobId` in
+        select jobId,`job_info`.compId,compName,jobName,jobType,jobKind,status,relDate,jobAddress,jobCon,jobDeadline,deliverNum,salary,`job_info`.approveStatus
+        from `job_info`, `company_info`
+        where `job_info`.`jobId` in
         <foreach collection="jobIds" item="jobId" index="index"
                  open="(" close=")" separator=",">
             #{jobId}
         </foreach>
-        and status=1
+        and status=1 and `job_info`.compId = `company_info`.compId
         order by field(
         `jobId`,
         <foreach collection="jobIds" separator="," item="jobId">
@@ -123,14 +131,14 @@
     </select>
 
     <select id="selectJobByJobIds" parameterType="java.util.List" resultType="JobInfo">
-        select jobId,compId,jobName,jobType,jobKind,status,relDate,jobAddress,jobCon,jobDeadline,deliverNum,salary,approveStatus
-        from `job_info`
-        where `jobId` in
+        select jobId,`job_info`.compId,compName, jobName,jobType,jobKind,status,relDate,jobAddress,jobCon,jobDeadline,deliverNum,salary,`job_info`.approveStatus
+        from `job_info`, `company_info`
+        where `job_info`.`jobId` in
         <foreach collection="jobIds" item="jobId" index="index"
                  open="(" close=")" separator=",">
             #{jobId}
         </foreach>
-        and approveStatus = 2 and status =1
+        and `job_info`.approveStatus = 2 and status =1 and `company_info`.compId = `job_info`.compId
         order by
         <choose>
             <when test='sortType == 1'> relDate desc </when>
