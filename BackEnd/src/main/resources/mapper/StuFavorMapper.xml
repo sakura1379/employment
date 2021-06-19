@@ -5,8 +5,8 @@
     <!-- 增 [G] -->
     <insert id="add">
         insert into
-            favor_info (favorNum, stuNum, compId, jobId)
-        values (#{favorNum}, #{stuNum}, #{compId}, #{jobId})
+            favor_info (stuNum, compId, jobId)
+        values (${stuNum}, ${compId}, ${jobId})
     </insert>
 
     <!-- 删 -->
@@ -48,6 +48,11 @@
     <select id="getById" resultMap="model">
         <include refid="select_sql"></include>
         where favorNum = #{favorNum}
+    </select>
+    
+    <!-- 根据职位id查公司id  -->
+    <select id="getCompId" resultType="long">
+        select compId from job_info where jobId=${jobId}
     </select>
 
     <!-- 查集合 - 根据学生id查该学生收藏的所有收藏信息 [G] -->
