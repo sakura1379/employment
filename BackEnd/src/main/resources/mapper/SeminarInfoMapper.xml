@@ -83,7 +83,7 @@
 
 
 	<select id="selectAllSeminarBySeminarIds" parameterType="java.util.List" resultType="SeminarInfo">
-		select seminarId,seminarTitle,seminarContent,hrId,approveStatus,seminarTime
+		select seminarId,seminarTitle,seminarContent,hrId,approveStatus,seminarTime,seminarAddress,releaseTime
 		from `seminar_info`
 		where `seminarId` in
 		<foreach collection="seminarIds" item="seminarId" index="index"
@@ -99,7 +99,7 @@
 	</select>
 
 	<select id="selectSeminarBySeminarIds" parameterType="java.util.List" resultType="SeminarInfo">
-		select seminarId,seminarTitle,seminarContent,hrId,approveStatus,seminarTime
+		select seminarId,seminarTitle,seminarContent,hrId,approveStatus,seminarTime,seminarAddress,releaseTime
 		from `seminar_info`
 		where `seminarId` in
 		<foreach collection="seminarIds" item="seminarId" index="index"

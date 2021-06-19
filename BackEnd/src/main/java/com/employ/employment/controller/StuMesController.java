@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,13 +35,18 @@ public class StuMesController {
 
     private final JobInfoMapper jobInfoMapper;
 
+    private final CompUserMapper compUserMapper;
+
     @Autowired
-    public StuMesController(StuMesService stuMesService, StuMesMapper stuMesMapper, SeminarInfoMapper seminarInfoMapper, AnnouncementMapper announcementMapper, JobInfoMapper jobInfoMapper) {
+    public StuMesController(StuMesService stuMesService, StuMesMapper stuMesMapper,
+                            SeminarInfoMapper seminarInfoMapper, AnnouncementMapper announcementMapper,
+                            JobInfoMapper jobInfoMapper, CompUserMapper compUserMapper) {
         this.stuMesService = stuMesService;
         this.stuMesMapper = stuMesMapper;
         this.seminarInfoMapper = seminarInfoMapper;
         this.announcementMapper = announcementMapper;
         this.jobInfoMapper= jobInfoMapper;
+        this.compUserMapper = compUserMapper;
     }
 
     /** 增 */
@@ -51,7 +58,9 @@ public class StuMesController {
             @ApiImplicitParam(name = "infoId", value = "信息编号", required = true),
             @ApiImplicitParam(name = "infoType", value = "信息类型（1=宣讲会信息，2=职位信息，3=公告信息）", required = true, allowableValues = "1,2,3"),
     })
+    @Transactional(rollbackFor = Exception.class, propagation= Propagation.REQUIRED)
     public AjaxJson add(StuMes stuMes){
+        log.info(stuMes.toString());
         if(stuMes.infoType==3){
             log.info("Start dropTempTable========");
             stuMesMapper.dropTempTable("tem");
@@ -74,8 +83,9 @@ public class StuMesController {
             stuMesMapper.createTempTable("tem");
             long id = StpUtil.getLoginIdAsLong();
             log.info("current user id:{}",id);
+            long compId = compUserMapper.getById(id).getCompId();
             log.info("Start updateTempTable3========");
-            stuMesMapper.updateTempTable3("tem",id);
+            stuMesMapper.updateTempTable3("tem",compId);
             log.info("Start updateTempTable2========");
             stuMesMapper.updateTempTable2("tem",stuMes.infoId,stuMes.infoType);
             log.info("Start updateTable========");

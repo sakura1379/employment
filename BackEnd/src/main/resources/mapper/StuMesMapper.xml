@@ -21,21 +21,21 @@
     <update id="dropTempTable">
         drop table if exists ${pvsTb}
     </update>
-    <!--更新临时表，获取全部mail与stu编号-->
+    <!--更新临时表，获取全部stu编号-->
     <update id="updateTempTable1">
-        insert into ${pvsTb} select distinct mailNum, stuNum from mail_info
+        insert into ${pvsTb}(stuNum) select stuNum from stu_info
     </update>
     <!--更新临时表，全局更新信息编号-->
     <update id="updateTempTable2">
         update ${pvsTb} set infoId=#{infoId}, infoType=#{infoType}
     </update>
-    <!--更新临时表，获取符合要求mail与stu编号-->
+    <!--更新临时表，获取stu编号-->
     <update id="updateTempTable3">
-        insert into ${pvsTb} select distinct mailNum, stuNum from mail_info where stuNum in (select stuNum from favor_info where compId=${compId})
+        insert into ${pvsTb}(stuNum) select stuNum from favor_info where compId=${compId}
     </update>
     <!--临时表与原表合并-->
     <update id="updateTable">
-        insert into mail_info select * from ${pvsTb}
+        insert into mail_info (infoId,infoType,stuNum) select infoId,infoType,stuNum from ${pvsTb}
     </update>
 
     <!-- 删 删除某一特定信箱的特定信息-->
