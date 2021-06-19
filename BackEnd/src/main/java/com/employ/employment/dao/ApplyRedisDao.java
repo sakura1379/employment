@@ -253,7 +253,8 @@ public class ApplyRedisDao {
         int line = 0;
         //删除学生-工作索引
         jedis.select(1);
-        line += jedis.del(stuNum, jobId);
+//        line += jedis.del(stuNum, jobId);
+        line += jedis.lrem(stuNum,0,jobId);
 
         //删除compId索引
         jedis.select(0);

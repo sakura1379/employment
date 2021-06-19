@@ -50,6 +50,14 @@
             "description": "Stu Controller"
         },
         {
+            "name": "stu-favor-controller",
+            "description": "Stu Favor Controller"
+        },
+        {
+            "name": "stu-mes-controller",
+            "description": "Stu Mes Controller"
+        },
+        {
             "name": "upload-controller",
             "description": "Upload Controller"
         },
@@ -372,12 +380,391 @@
                 "deprecated": false
             }
         },
+        "/admin/addAnnouncement": {
+            "post": {
+                "tags": [
+                    "admin-controller"
+                ],
+                "summary": "新增公告",
+                "operationId": "addAnnouncementUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "adminId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "adminId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "announceContent",
+                        "in": "query",
+                        "description": "公告内容",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "announceId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "announceId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "announceTitle",
+                        "in": "query",
+                        "description": "公告标题",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "announceType",
+                        "in": "query",
+                        "description": "公告类型 (1=系统公告, 2=经验分享)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/admin/getAllSeminar": {
+            "get": {
+                "tags": [
+                    "admin-controller"
+                ],
+                "summary": "管理员查看所有宣讲会信息",
+                "operationId": "getAllSeminarUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/admin/getAnnouncementById": {
+            "get": {
+                "tags": [
+                    "admin-controller"
+                ],
+                "summary": "根据id查询公告信息",
+                "operationId": "getAnnouncementByIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/admin/reviewJobInfo": {
+            "post": {
+                "tags": [
+                    "admin-controller"
+                ],
+                "summary": "管理员审核职位信息，1为未审核，2为通过，3为不通过",
+                "operationId": "reviewJobInfoUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "approveStatus",
+                        "in": "query",
+                        "description": "审核状态",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "2",
+                            "3"
+                        ]
+                    },
+                    {
+                        "name": "compId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "compId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "deliverNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "deliverNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "jobAddress",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jobAddress",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jobCon",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jobCon",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jobDeadline",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "jobDeadline",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "jobId",
+                        "in": "query",
+                        "description": "职位信息编号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jobKind",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "jobKind",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "jobName",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jobName",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jobType",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jobType",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "relDate",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "relDate",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "salary",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "salary",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
         "/admin/reviewSeminar": {
             "post": {
                 "tags": [
                     "admin-controller"
                 ],
-                "summary": "管理员审核宣讲会信息",
+                "summary": "管理员审核宣讲会信息，1为未审核，2为通过，3为不通过",
                 "operationId": "reviewSeminarUsingPOST",
                 "consumes": [
                     "application/json"
@@ -412,6 +799,32 @@
                         "format": "int64"
                     },
                     {
+                        "name": "releaseTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "releaseTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "seminarAddress",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "seminarAddress",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "seminarContent",
                         "in": "query",
                         "required": false,
@@ -434,20 +847,12 @@
                         "name": "seminarTime",
                         "in": "query",
                         "required": false,
-                        "type": "string",
-                        "format": "date-time"
+                        "type": "string"
                     },
                     {
                         "name": "seminarTime",
                         "in": "query",
                         "required": false,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    {
-                        "name": "seminarTitle",
-                        "in": "query",
-                        "required": false,
                         "type": "string"
                     },
                     {
@@ -455,6 +860,112 @@
                         "in": "query",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "seminarTitle",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/admin/updateAnnouncement": {
+            "post": {
+                "tags": [
+                    "admin-controller"
+                ],
+                "summary": "修改公告信息",
+                "operationId": "updateAnnouncementUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "adminId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "adminId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "announceContent",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "announceContent",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "announceId",
+                        "in": "query",
+                        "description": "公告编号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "announceTitle",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "announceTitle",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "announceType",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "announceType",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
                     }
                 ],
                 "responses": {
@@ -875,6 +1386,32 @@
                         "format": "int64"
                     },
                     {
+                        "name": "releaseTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "releaseTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "seminarAddress",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "seminarAddress",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "seminarContent",
                         "in": "query",
                         "description": "宣讲会内容",
@@ -899,15 +1436,13 @@
                         "name": "seminarTime",
                         "in": "query",
                         "required": false,
-                        "type": "string",
-                        "format": "date-time"
+                        "type": "string"
                     },
                     {
                         "name": "seminarTime",
                         "in": "query",
                         "required": false,
-                        "type": "string",
-                        "format": "date-time"
+                        "type": "string"
                     },
                     {
                         "name": "seminarTitle",
@@ -2026,6 +2561,32 @@
                         "format": "int64"
                     },
                     {
+                        "name": "releaseTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "releaseTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "seminarAddress",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "seminarAddress",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "seminarContent",
                         "in": "query",
                         "description": "宣讲会内容",
@@ -2043,15 +2604,13 @@
                         "name": "seminarTime",
                         "in": "query",
                         "required": false,
-                        "type": "string",
-                        "format": "date-time"
+                        "type": "string"
                     },
                     {
                         "name": "seminarTime",
                         "in": "query",
                         "required": false,
-                        "type": "string",
-                        "format": "date-time"
+                        "type": "string"
                     },
                     {
                         "name": "seminarTitle",
@@ -2059,6 +2618,297 @@
                         "description": "宣讲会标题",
                         "required": false,
                         "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/favor/add": {
+            "post": {
+                "tags": [
+                    "stu-favor-controller"
+                ],
+                "summary": "新建收藏项",
+                "operationId": "addUsingPOST_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "compId",
+                        "in": "query",
+                        "description": "企业编号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "favorNum",
+                        "in": "query",
+                        "description": "收藏编号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jobId",
+                        "in": "query",
+                        "description": "职位信息编号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "stuNum",
+                        "in": "query",
+                        "description": "学生编号",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/favor/delete": {
+            "post": {
+                "tags": [
+                    "stu-favor-controller"
+                ],
+                "summary": "根据收藏编号删除收藏项",
+                "operationId": "deleteUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "favorNum",
+                        "in": "query",
+                        "description": "favorNum",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/favor/getById": {
+            "get": {
+                "tags": [
+                    "stu-favor-controller"
+                ],
+                "summary": "根据收藏编号查看职位信息",
+                "operationId": "getCurrentUsingGET_2",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/favor/getList": {
+            "get": {
+                "tags": [
+                    "stu-favor-controller"
+                ],
+                "summary": "查当前学生用户所有收藏信息",
+                "operationId": "getListUsingGET_1",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/favor/update": {
+            "post": {
+                "tags": [
+                    "stu-favor-controller"
+                ],
+                "summary": "根据收藏编号修改收藏信息",
+                "operationId": "updateUsingPOST_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "compId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "compId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "favorNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "favorNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "jobId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "jobId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "stuNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "stuNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -2524,6 +3374,418 @@
                 "deprecated": false
             }
         },
+        "/mail/add": {
+            "post": {
+                "tags": [
+                    "stu-mes-controller"
+                ],
+                "summary": "新建信件",
+                "operationId": "addUsingPOST_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "infoId",
+                        "in": "query",
+                        "description": "信息编号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "infoType",
+                        "in": "query",
+                        "description": "信息类型（1=宣讲会信息，2=职位信息，3=公告信息）",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "1",
+                            "2",
+                            "3"
+                        ]
+                    },
+                    {
+                        "name": "mailNum",
+                        "in": "query",
+                        "description": "信箱编号",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "stuNum",
+                        "in": "query",
+                        "description": "学生编号",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/mail/deleteAll": {
+            "post": {
+                "tags": [
+                    "stu-mes-controller"
+                ],
+                "summary": "根据信息编号删除所有相关信件",
+                "operationId": "deleteUsingPOST_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "infoId",
+                        "in": "query",
+                        "description": "infoId",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/mail/deleteOne": {
+            "post": {
+                "tags": [
+                    "stu-mes-controller"
+                ],
+                "summary": "根据信箱、信件编号删除特定信件",
+                "operationId": "deleteUsingPOST_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "infoId",
+                        "in": "query",
+                        "description": "infoId",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "mailNum",
+                        "in": "query",
+                        "description": "mailNum",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/mail/getContent": {
+            "get": {
+                "tags": [
+                    "stu-mes-controller"
+                ],
+                "summary": "根据信件编号、类型查看信件内容",
+                "operationId": "getContentUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "infoId",
+                        "in": "query",
+                        "description": "infoId",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "infoType",
+                        "in": "query",
+                        "description": "infoType",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/mail/getList": {
+            "get": {
+                "tags": [
+                    "stu-mes-controller"
+                ],
+                "summary": "查当前学生用户所有信件",
+                "operationId": "getListUsingGET_2",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/mail/getTitle": {
+            "get": {
+                "tags": [
+                    "stu-mes-controller"
+                ],
+                "summary": "根据信件编号查看信件标题",
+                "operationId": "getTitleUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "infoId",
+                        "in": "query",
+                        "description": "infoId",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "infoType",
+                        "in": "query",
+                        "description": "infoType",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/mail/update": {
+            "post": {
+                "tags": [
+                    "stu-mes-controller"
+                ],
+                "summary": "修改信箱信息",
+                "operationId": "updateUsingPOST_4",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "infoId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "infoId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "infoType",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "infoType",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "mailNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "mailNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "stuNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "stuNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
         "/role/add": {
             "put": {
                 "tags": [
@@ -2823,6 +4085,153 @@
                 "deprecated": false
             }
         },
+        "/search/getAllAnnouncement": {
+            "get": {
+                "tags": [
+                    "search-controller"
+                ],
+                "summary": "分页查询所有公告",
+                "operationId": "getAllAnnouncementUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "页码",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/search/getAnnouncementByQuery": {
+            "get": {
+                "tags": [
+                    "search-controller"
+                ],
+                "summary": "根据检索词和公告类型分页查询所有公告",
+                "operationId": "getAnnouncementByQueryUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "announceType",
+                        "in": "query",
+                        "description": "公告类型 (1=系统公告, 2=经验分享)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "页码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "检索词",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/search/getAnnouncementList": {
+            "get": {
+                "tags": [
+                    "search-controller"
+                ],
+                "summary": "根据公告类型搜索所有公告信息",
+                "operationId": "getAnnouncementListUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "announceType",
+                        "in": "query",
+                        "description": "公告类型 (1=系统公告, 2=经验分享)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "页码",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
         "/search/getJobList": {
             "get": {
                 "tags": [
@@ -2908,6 +4317,48 @@
                         "name": "sortType",
                         "in": "query",
                         "description": "排序类型【1为按时间排，2为按匹配度排】",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/search/getTimeList": {
+            "get": {
+                "tags": [
+                    "search-controller"
+                ],
+                "summary": "根据公司名称搜索时间轴信息",
+                "operationId": "getTimeLineListUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "compName",
+                        "in": "query",
+                        "description": "公司名称",
                         "required": true,
                         "type": "string"
                     }
@@ -3939,7 +5390,7 @@
                 "tags": [
                     "user-info-controller"
                 ],
-                "summary": "增加用户信息",
+                "summary": "就业中心管理员注册",
                 "operationId": "addUsingPUT_1",
                 "consumes": [
                     "application/json"
@@ -4046,9 +5497,16 @@
                     {
                         "name": "roleId",
                         "in": "query",
-                        "description": "用户角色",
-                        "required": true,
-                        "type": "string"
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "roleId",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
                     },
                     {
                         "name": "roleName",
@@ -4288,7 +5746,7 @@
                     "user-info-controller"
                 ],
                 "summary": "查用户信息列表",
-                "operationId": "getListUsingGET_1",
+                "operationId": "getListUsingGET_3",
                 "produces": [
                     "*/*"
                 ],
@@ -4331,7 +5789,7 @@
                     "user-info-controller"
                 ],
                 "summary": "改用户名字",
-                "operationId": "updateUsingPOST_3",
+                "operationId": "updateUsingPOST_5",
                 "consumes": [
                     "application/json"
                 ],
