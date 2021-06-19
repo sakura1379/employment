@@ -18,13 +18,15 @@ import java.util.List;
 
 public interface StuFavorMapper {
 
-    /**
+      /**
      * 增
-     * @param s 实体对象
+     * @param jobId
+     * @param compId
+     * @param stuNum
      * @return 受影响行数
      */
-    int add(StuFavor s);
-
+    int add(@Param("jobId")long jobId,@Param("compId")long compId,@Param("stuNum")long stuNum);
+    
     /**
      * 删
      * @param favorNum 要删除的数据id
@@ -52,4 +54,11 @@ public interface StuFavorMapper {
      * @return 数据列表
      */
     List<StuFavor> getList(long stuNum);
+    
+     /**
+     * 查企业编号 -
+     * @param jobId 要查询的职位id
+     * @return 企业编号
+     */
+    long getCompId(@Param("jobId")long jobId);
 }
