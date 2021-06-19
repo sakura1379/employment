@@ -596,6 +596,18 @@
                         "format": "int64"
                     },
                     {
+                        "name": "compName",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "compName",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "deliverNum",
                         "in": "query",
                         "required": false,
@@ -1205,6 +1217,18 @@
                         "required": false,
                         "type": "integer",
                         "format": "int64"
+                    },
+                    {
+                        "name": "compName",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "compName",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
                     },
                     {
                         "name": "deliverNum",
@@ -2389,6 +2413,18 @@
                         "format": "int64"
                     },
                     {
+                        "name": "compName",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "compName",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "deliverNum",
                         "in": "query",
                         "required": false,
@@ -2480,16 +2516,13 @@
                     {
                         "name": "status",
                         "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "status",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
+                        "description": "招聘状态",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "1",
+                            "2"
+                        ]
                     }
                 ],
                 "responses": {
@@ -2980,6 +3013,18 @@
                         "format": "int64"
                     },
                     {
+                        "name": "compName",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "compName",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "deliverNum",
                         "in": "query",
                         "required": false,
@@ -3243,6 +3288,18 @@
                         "required": false,
                         "type": "integer",
                         "format": "int64"
+                    },
+                    {
+                        "name": "compName",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "compName",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
                     },
                     {
                         "name": "deliverNum",
@@ -4205,6 +4262,48 @@
                         "name": "page",
                         "in": "query",
                         "description": "页码",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/search/getJobInfobyJobId": {
+            "get": {
+                "tags": [
+                    "search-controller"
+                ],
+                "summary": "根据JobId查询对应的岗位详情",
+                "operationId": "getJobInfobyJobIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "jobId",
+                        "in": "query",
+                        "description": "职位编号",
                         "required": true,
                         "type": "string"
                     }
