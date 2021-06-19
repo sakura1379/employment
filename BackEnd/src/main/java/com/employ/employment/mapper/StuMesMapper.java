@@ -35,7 +35,7 @@ public interface StuMesMapper {
      * @param infoId 要删除,信息id
      * @return 受影响行数
      */
-    int deleteOne(@Param("mailNum") long mailNum, @Param("mailNum") long infoId);
+    int deleteOne(@Param("mailNum") long mailNum, @Param("infoId") long infoId);
 
     /**
      * 删所有信箱中特定信息
