@@ -31,7 +31,7 @@
     </update>
     <!--更新临时表，获取符合要求mail与stu编号-->
     <update id="updateTempTable3">
-        insert into ${pvsTb} select distinct mailNum, stuNum from mail_info where stuNum in (select stuNum from favor_info where compId=${compId})
+        insert into ${pvsTb}(mailNum, stuNum) select distinct mailNum, stuNum from mail_info where stuNum in (select stuNum from favor_info where compId=${compId})
     </update>
     <!--临时表与原表合并-->
     <update id="updateTable">
