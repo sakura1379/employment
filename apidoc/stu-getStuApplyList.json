@@ -1,0 +1,22 @@
+{
+  "code": 200,
+  "msg": "ok",
+  "data": [
+    {
+      "stuNum": 10002,
+      "stuName": null,
+      "jobName": "研发2",
+      "jobId": 26,
+      "internshipTime": 1,
+      "dutyTime": 1,
+      "ApplyStatus": 1,
+      "newApplyStatus": 1,
+      "applyStatus": 1
+    }
+  ],
+  "dataCount": 1,
+  "pageNo": 1,
+  "pageSize": 10,
+  "startIndex": 0,
+  "pageCount": 1
+}

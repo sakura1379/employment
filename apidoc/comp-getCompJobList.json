@@ -1,0 +1,26 @@
+{
+  "code": 200,
+  "msg": "ok",
+  "data": [
+    {
+      "jobId": 29,
+      "compId": 20003,
+      "jobName": "研发5",
+      "jobType": "1",
+      "jobKind": 1,
+      "status": 1,
+      "relDate": "2021-06-18T16:00:00.000+00:00",
+      "jobAddress": "中国",
+      "jobCon": "研发",
+      "jobDeadline": "2021-06-28T16:00:00.000+00:00",
+      "deliverNum": null,
+      "salary": "1000/天",
+      "approveStatus": 1
+    }
+  ],
+  "dataCount": 1,
+  "pageNo": 1,
+  "pageSize": 10,
+  "startIndex": 0,
+  "pageCount": 1
+}
