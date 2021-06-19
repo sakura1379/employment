@@ -36,6 +36,11 @@ public class JobInfo implements Serializable {
     public Long compId;
 
     /**
+     * 公司名称
+     */
+    public String compName;
+
+    /**
      * 职位名称
      */
     public String jobName;
