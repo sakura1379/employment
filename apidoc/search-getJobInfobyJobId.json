@@ -1,0 +1,23 @@
+{
+  "code": 200,
+  "msg": "ok",
+  "data": {
+    "jobId": 26,
+    "compName": "腾讯",
+    "compId": 20003,
+    "jobName": "研发2",
+    "jobType": "研发2",
+    "jobKind": 1,
+    "status": 1,
+    "relDate": "2021-06-15T16:00:00.000+00:00",
+    "jobAddress": "广州",
+    "jobCon": "研发2",
+    "jobDeadline": "2021-06-29T16:00:00.000+00:00",
+    "deliverNum": null,
+    "salary": "500/天",
+    "approveStatus": 1
+  },
+  "dataCount": -1,
+  "pageNo": -1,
+  "pageSize": -1
+}
