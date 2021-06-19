@@ -43,15 +43,14 @@ public class StuFavorController {
     @PostMapping("add")
     @ApiOperation("新建收藏项")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "favorNum", value = "收藏编号", required = true),
             @ApiImplicitParam(name = "stuNum", value = "学生编号", required = true),
-            @ApiImplicitParam(name = "compId", value = "企业编号", required = true),
             @ApiImplicitParam(name = "jobId", value = "职位信息编号", required = true),
     })
-    public AjaxJson add(StuFavor s){
+    public AjaxJson add(long stuNum, long jobId){
         log.info("Start addFavorInfo========");
-        stuFavorMapper.add(s);
-        return AjaxJson.getSuccessData(s);
+        long compId=stuFavorMapper.getCompId(jobId);
+        int line=stuFavorMapper.add(jobId,compId,stuNum);
+        return AjaxJson.getSuccessData(line);
     }
 
     /** 删 */
