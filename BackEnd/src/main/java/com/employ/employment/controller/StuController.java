@@ -9,6 +9,7 @@ import com.employ.employment.mapper.UserInfoMapper;
 import com.employ.employment.service.EpAdminPasswordService;
 import com.employ.employment.service.StuService;
 import com.employ.employment.service.UserInfoService;
+import com.employ.employment.util.PythonUtil;
 import com.employ.employment.util.UploadUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -42,15 +43,19 @@ public class StuController {
     private final JobInfoMapper jobInfoMapper;
 
     private final ApplyInfoMapper applyInfoMapper;
+
+    private final PythonUtil pythonUtil;
     //
 
     @Autowired
     public StuController(StuService stuService,StuInfoMapper stuInfoMapper,
-                             JobInfoMapper jobInfoMapper, ApplyInfoMapper applyInfoMapper) {
+                         JobInfoMapper jobInfoMapper, ApplyInfoMapper applyInfoMapper,
+                         PythonUtil pythonUtil) {
         this.stuService = stuService;
         this.stuInfoMapper = stuInfoMapper;
         this.jobInfoMapper = jobInfoMapper;
         this.applyInfoMapper = applyInfoMapper;
+        this.pythonUtil = pythonUtil;
     }
 
     /** 增 */
@@ -70,10 +75,18 @@ public class StuController {
             @ApiImplicitParam(name = "dreamAddress", value = "期望城市", required = true),
             @ApiImplicitParam(name = "dreamPosition", value = "期望职位类别", required = true)
     })
-    public AjaxJson add(StuInfo s, UserInfo u){
-        //TODO 验证学生邮箱
-        log.info("Start addStuInfo========");
-        stuService.add(s, u);
+    public AjaxJson add(StuInfo s, UserInfo u) throws Exception {
+        Integer type = 2;
+        String[] strings = new String[2];
+        strings[0] = u.getMail();
+        String status = pythonUtil.httpPost(type,strings);
+        log.info("status:{}",status);
+        if (status.equals("fail")){
+            return AjaxJson.getError("邮箱验证不通过");
+        }else {
+            log.info("Start addStuInfo========");
+            stuService.add(s, u);
+        }
         return AjaxJson.getSuccessData(s);
     }
 
