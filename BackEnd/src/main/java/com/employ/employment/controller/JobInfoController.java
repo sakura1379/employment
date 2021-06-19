@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/job/")
 @Api
 @Slf4j
+@CrossOrigin
 public class JobInfoController {
     private final CompService compService;
 
@@ -69,6 +70,7 @@ public class JobInfoController {
         long id = StpUtil.getLoginIdAsLong();
         log.info("Current user id:{}",id);
         j.setCompId(id);
+        j.setStatus(1);
         return compService.addJob(j);
     }
 

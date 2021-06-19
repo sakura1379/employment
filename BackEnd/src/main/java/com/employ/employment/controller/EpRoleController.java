@@ -25,6 +25,7 @@ import java.util.List;
 @RequestMapping("/role/")
 @Api
 @Slf4j
+@CrossOrigin
 public class EpRoleController {
 
 	private final EpRoleMapper epRoleMapper;

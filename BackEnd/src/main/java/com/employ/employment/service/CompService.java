@@ -259,6 +259,7 @@ public class CompService {
      */
     @Transactional(rollbackFor = Exception.class, propagation= Propagation.REQUIRED)
     public AjaxJson addJob(JobInfo j){
+
         //插入mysql
         int line = jobInfoMapper.add(j);
         //获得主键
