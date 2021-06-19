@@ -268,12 +268,13 @@ public class CompService {
 
         //获得compId
         long compId = j.getCompId();
-//        //插入标题索引到redis
-//        long redisLine1 = seminarRedisDao.insertIndex(s.seminarTitle, String.valueOf(seminarId));
+        //插入标题索引到redis
+        long redisLine2 = jobRedisDao.insertIndex(j.jobName, String.valueOf(jobId));
 
 //        //获得hrId对应的compId
-//        long compId = compUserMapper.getById(s.getHrId()).getCompId();
-//        log.info("compId:{}",compId);
+        log.info("compId:{}",compId);
+        //插入公司名称索引到redis
+        long redisLine3 = jobRedisDao.insertIndex(j.compName, String.valueOf(jobId));
 //
         //插入compId索引到redis
         int redisLine1 = jobRedisDao.insertCompIndex(String.valueOf(compId), String.valueOf(jobId));
@@ -302,8 +303,8 @@ public class CompService {
             return AjaxJson.getError("不是本公司职位信息，不能删除！！");
         }
 
-        //删除redis中索引
-        line += jobRedisDao.deleteIndex(String.valueOf(currentCompId), String.valueOf(jobId));
+        //删除redis中 公司名称—职位 职位名称—职位 公司id-职位索引
+        line += jobRedisDao.deleteIndex(String.valueOf(currentCompId), String.valueOf(jobId),String.valueOf(oldJob.jobName),String.valueOf(oldJob.compName));
 
         //删除mysql中数据
         line += jobInfoMapper.delete(jobId);
@@ -336,21 +337,21 @@ public class CompService {
             return AjaxJson.getError("==不是本公司职位信息，不能修改==");
         }
 
-//        //判断标题是否为空，如果不为空则要修改redis索引
-//        if(s.getSeminarTitle() != null){
-//            log.info("update title index in redis");
-//            //redis删除之前索引，插入新的索引
-//            line += seminarRedisDao.updateTitleIndex(oldSeminar.getSeminarTitle(),
-//                    s.getSeminarTitle(), String.valueOf(s.getSeminarId()));
-//            log.info("redis line:{}", line);
-//        }
+        //判断标题是否为空，如果不为空则要修改redis索引
+        if(j.getJobName()!= null){
+            log.info("update title index in redis");
+            //redis删除之前索引，插入新的索引
+            line += jobRedisDao.updateTitleIndex(oldJob.getJobName(),
+                    j.getJobName(), String.valueOf(j.getJobId()));
+            log.info("redis line:{}", line);
+        }
 
         //mysql中修改
         line += jobInfoMapper.update(j);
         if(j.status==2)
         {
             //删除redis中索引
-            line2 += jobRedisDao.deleteIndex(String.valueOf(currentCompId), String.valueOf(j.jobId));
+            line2 += jobRedisDao.deleteIndex(String.valueOf(currentCompId), String.valueOf(j.jobId),String.valueOf(j.jobName),String.valueOf(j.compName));
         }
         return AjaxJson.getByLine(line);
 

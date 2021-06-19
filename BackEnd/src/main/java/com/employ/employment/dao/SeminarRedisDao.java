@@ -143,6 +143,7 @@ public class SeminarRedisDao {
         return list;
     }
 
+
     /**
      * 插入标题索引
      * @param key
@@ -163,7 +164,6 @@ public class SeminarRedisDao {
 
         return line;
     }
-
     /**
      * 插入宣讲会信息compId索引
      * @param key

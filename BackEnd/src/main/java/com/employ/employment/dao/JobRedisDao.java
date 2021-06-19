@@ -162,12 +162,14 @@ public class JobRedisDao {
     }
 
     /**
-     * 删除宣讲会信息标题索引和compId索引
+     * 删除职位信息标题索引、公司名称索引和compId索引
      * @param compId
      * @param jobId
+     * @param jobName
+     * @param compName
      * @return
      */
-    public int deleteIndex(String compId,String jobId){
+    public int deleteIndex(String compId,String jobId, String jobName, String compName){
         log.info("start deleteTitleIndex========");
         log.info("receive oldKey:{}, oldValue:{}", compId, jobId);
         Jedis jedis = jedisUtil.getClient();
@@ -177,6 +179,58 @@ public class JobRedisDao {
         jedis.select(2);
         //jedis.del(compId,jobId);
         jedis.lrem(compId,0,jobId);
+
+        //删除职位名称索引
+        jedis.select(5);
+        jedis.lrem(jobName,0,jobId);
+
+        //删除公司名称索引
+        jedis.select(5);
+        jedis.lrem(compName,0,jobId);
+
+        jedis.close();
+        return line;
+    }
+
+    /**
+     * 插入标题索引
+     * @param key
+     * @param value
+     * @return
+     */
+
+    public Long insertIndex(String key, String value){
+        log.info("start insert Index into redis======");
+        log.info("receive key:{}, value:{}", key, value);
+        Jedis jedis = jedisUtil.getClient();
+        jedis.select(5);
+
+        long line = jedis.sadd(key, value);
+        log.info("line:{}",line);
+
+        jedis.close();
+
+        return line;
+    }
+
+    /**
+     * 更新职位信息标题的索引
+     * @param oldKey
+     * @param newKey
+     * @param value
+     * @return
+     */
+    public int updateTitleIndex(String oldKey, String newKey, String value){
+        log.info("start updateTitleIndex========");
+        log.info("receive oldKey:{}, newKey:{}, value:{}", oldKey, newKey, value);
+        Jedis jedis = jedisUtil.getClient();
+        jedis.select(5);
+        int line = 0;
+
+        //删除旧的
+        line += jedis.srem(oldKey, value);
+        //插入新的
+        line += jedis.sadd(newKey, value);
 
         jedis.close();
         return line;
