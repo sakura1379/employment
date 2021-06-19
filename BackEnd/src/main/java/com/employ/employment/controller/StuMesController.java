@@ -12,10 +12,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +20,7 @@ import java.util.List;
 @RequestMapping("/mail/")
 @Api
 @Slf4j
+@CrossOrigin
 public class StuMesController {
 
     private final StuMesService stuMesService;
@@ -157,7 +155,6 @@ public class StuMesController {
     AjaxJson getList(){
         log.info("Start getMailList========");
         long stuNum = StpUtil.getLoginIdAsLong();
-        StpUtil.checkPermission("mail_info");
         List<StuMes> list = stuMesMapper.getList(stuNum);
         return AjaxJson.getSuccessData(list);
     }
@@ -167,7 +164,6 @@ public class StuMesController {
     @ApiOperation("根据信件编号查看信件标题")
     public AjaxJson getTitle(long infoId,long infoType){
         log.info("Start getCurrentMailTitle========");
-        StpUtil.checkPermission("mail_info");
         if(infoType==1){
             if(seminarInfoMapper.getById(infoId)!=null){
                 SeminarInfo seminarInfo = seminarInfoMapper.getById(infoId);
@@ -197,7 +193,6 @@ public class StuMesController {
     @ApiOperation("根据信件编号、类型查看信件内容")
     public AjaxJson getContent(long infoId,long infoType){
         log.info("Start getCurrentMailContent========");
-        StpUtil.checkPermission("mail_info");
         if(infoType==1){
             if(seminarInfoMapper.getById(infoId)!=null){
                 SeminarInfo seminarInfo = seminarInfoMapper.getById(infoId);

@@ -31,6 +31,7 @@ import java.util.List;
 @RequestMapping("/comp/")
 @Api
 @Slf4j
+@CrossOrigin
 public class CompController {
 
     private final CompService compService;

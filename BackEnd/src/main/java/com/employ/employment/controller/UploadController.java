@@ -4,6 +4,7 @@ import com.employ.employment.entity.AjaxJson;
 import com.employ.employment.util.UploadUtil;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/upload/")
 @Api
 @Slf4j
+@CrossOrigin
 public class UploadController {
 
 	/** 上传图片 */

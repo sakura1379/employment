@@ -31,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/stu/")
 @Api
 @Slf4j
+@CrossOrigin
 public class StuController {
 
     private final StuService stuService;

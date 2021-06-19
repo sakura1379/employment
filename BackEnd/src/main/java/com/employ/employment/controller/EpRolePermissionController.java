@@ -22,6 +22,7 @@ import java.util.List;
 @RequestMapping("/EpRolePermission/")
 @Api
 @Slf4j
+@CrossOrigin
 public class EpRolePermissionController {
 
 	private final EpRolePermissionService epRolePermissionService;
