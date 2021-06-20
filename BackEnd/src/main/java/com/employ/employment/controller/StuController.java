@@ -88,8 +88,8 @@ public class StuController {
         }else {
             log.info("Start addStuInfo========");
             stuService.add(s, u);
+            return AjaxJson.getSuccessData(s);
         }
-        return AjaxJson.getSuccessData(s);
     }
 
 

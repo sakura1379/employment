@@ -83,11 +83,24 @@ public class CompController {
             @ApiImplicitParam(name = "compEsDate", value = "企业成立日期", required = true),
             @ApiImplicitParam(name = "compIntro", value = "企业介绍", required = true)
     })
-    public AjaxJson firstAdd(CompanyInfo c, UserInfo u){
-        log.info("Start addNewCompanyInfo========");
+    public AjaxJson firstAdd(CompanyInfo c, UserInfo u) throws Exception {
         log.info("Receive companyInfo:{}, userInfo:{}",c,u);
+//        Integer type = 1;
+//        String[] strings = new String[2];
+//        strings[0] = c.getCompName();
+//        strings[1] = c.getCreditcode();
+//        log.info(strings.toString());
+//        String status = pythonUtil.httpPost(type,strings);
+//        log.info("status:{}",status);
+//        if (status.equals("fail")){
+//            return AjaxJson.getError("邮箱验证不通过");
+//        }else {
+//
+//        }
+        log.info("Start addNewCompanyInfo========");
         compService.firstAdd(c,u);
         return AjaxJson.getSuccessData(c);
+
     }
 
     /** 增 */
