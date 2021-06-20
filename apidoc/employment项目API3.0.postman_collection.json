@@ -1,0 +1,6895 @@
+{
+	"info": {
+		"_postman_id": "d14b1bd5-8e9c-4587-93a6-6dfd4e84ea75",
+		"name": "employment项目API2.0",
+		"description": "API 描述\n\nContact Support:\n Name: Zenglr\n Email: 18023893551@163.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Acc Admin",
+			"item": [
+				{
+					"name": "退出登录",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/AccAdmin/doExit",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"AccAdmin",
+								"doExit"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/AccAdmin/doExit",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AccAdmin",
+										"doExit"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": null,\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "账号密码登录",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/AccAdmin/doLogin?key=10002&password=1234567",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"AccAdmin",
+								"doLogin"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "10002",
+									"description": "key（用户名和账号和邮箱都可以登录）"
+								},
+								{
+									"key": "password",
+									"value": "1234567",
+									"description": "password"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "学生用户",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/AccAdmin/doLogin?key=10002&password=1234567",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AccAdmin",
+										"doLogin"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "10002"
+										},
+										{
+											"key": "password",
+											"value": "1234567"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": {\n        \"user\": {\n            \"id\": 10002,\n            \"name\": \"clh\",\n            \"password\": \"********\",\n            \"mail\": \"992456536@qq.com\",\n            \"roleId\": 11,\n            \"status\": 1,\n            \"createTime\": \"2021-05-12T02:59:11.000+00:00\",\n            \"loginTime\": \"2021-06-10T11:20:10.053+00:00\",\n            \"loginIp\": \"127.0.0.1\",\n            \"loginCount\": 10,\n            \"roleName\": \"学生用户\"\n        },\n        \"per_list\": [\n            \"user_info\",\n            \"stu_info\",\n            \"favor_info\",\n            \"apply_info\"\n        ],\n        \"tokenInfo\": {\n            \"tokenName\": \"satoken\",\n            \"tokenValue\": \"c96e41e2-cd4c-456f-8394-a73fc9603297\",\n            \"isLogin\": true,\n            \"loginId\": \"10002\",\n            \"loginKey\": \"login\",\n            \"tokenTimeout\": 2592000,\n            \"sessionTimeout\": 2592000,\n            \"tokenSessionTimeout\": -2,\n            \"tokenActivityTimeout\": 1000,\n            \"loginDevice\": \"default-device\"\n        }\n    },\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						},
+						{
+							"name": "企业管理员",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/AccAdmin/doLogin?key=10003&password=1234567",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AccAdmin",
+										"doLogin"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "10003"
+										},
+										{
+											"key": "password",
+											"value": "1234567"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": {\n        \"user\": {\n            \"id\": 10003,\n            \"name\": \"cjy\",\n            \"password\": \"********\",\n            \"mail\": \"1234567@qq.com\",\n            \"roleId\": 121,\n            \"status\": 1,\n            \"createTime\": \"2021-05-12T03:01:07.000+00:00\",\n            \"loginTime\": \"2021-06-10T11:21:23.202+00:00\",\n            \"loginIp\": \"127.0.0.1\",\n            \"loginCount\": 6,\n            \"roleName\": \"公司普通管理员hr\"\n        },\n        \"per_list\": [\n            \"user_info\",\n            \"job_info\",\n            \"seminar_info\",\n            \"mail_info\",\n            \"favor_info\",\n            \"apply_info\",\n            \"company_info\"\n        ],\n        \"tokenInfo\": {\n            \"tokenName\": \"satoken\",\n            \"tokenValue\": \"b7812097-3e8a-4e9c-ab61-c263f51f0b0c\",\n            \"isLogin\": true,\n            \"loginId\": \"10003\",\n            \"loginKey\": \"login\",\n            \"tokenTimeout\": 2592000,\n            \"sessionTimeout\": 2592000,\n            \"tokenSessionTimeout\": -2,\n            \"tokenActivityTimeout\": 1000,\n            \"loginDevice\": \"default-device\"\n        }\n    },\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						},
+						{
+							"name": "企业超级管理员",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/AccAdmin/doLogin?key=10004&password=1234567",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AccAdmin",
+										"doLogin"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "10004"
+										},
+										{
+											"key": "password",
+											"value": "1234567"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": {\n        \"user\": {\n            \"id\": 10004,\n            \"name\": \"zy\",\n            \"password\": \"********\",\n            \"mail\": \"123456@qq.com\",\n            \"roleId\": 1212,\n            \"status\": 1,\n            \"createTime\": \"2021-05-12T04:14:16.000+00:00\",\n            \"loginTime\": \"2021-06-10T11:23:18.060+00:00\",\n            \"loginIp\": \"127.0.0.1\",\n            \"loginCount\": 1,\n            \"roleName\": \"公司超级管理员\"\n        },\n        \"per_list\": [\n            \"user_info\",\n            \"job_info\",\n            \"seminar_info\",\n            \"mail_info\",\n            \"company_info\",\n            \"comp_user\",\n            \"favor_info\",\n            \"apply_info\",\n            \"company_info_update\"\n        ],\n        \"tokenInfo\": {\n            \"tokenName\": \"satoken\",\n            \"tokenValue\": \"7d5c7697-23e6-413b-84b5-fec4b43c8411\",\n            \"isLogin\": true,\n            \"loginId\": \"10004\",\n            \"loginKey\": \"login\",\n            \"tokenTimeout\": 2592000,\n            \"sessionTimeout\": 2592000,\n            \"tokenSessionTimeout\": -2,\n            \"tokenActivityTimeout\": 1000,\n            \"loginDevice\": \"default-device\"\n        }\n    },\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						},
+						{
+							"name": "就业中心管理员",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/AccAdmin/doLogin?key=10004&password=1234567",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AccAdmin",
+										"doLogin"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "10004"
+										},
+										{
+											"key": "password",
+											"value": "1234567"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": "{\"code\":200,\"msg\":\"ok\",\"data\":{\"user\":{\"id\":10016,\"name\":\"就业管理员\",\"password\":\"********\",\"mail\":\"1236847193@123.com\",\"roleId\":1,\"status\":1,\"createTime\":\"2021-06-11T01:08:58.000+00:00\",\"loginTime\":\"2021-06-10T12:11:22.146+00:00\",\"loginIp\":\"127.0.0.1\",\"loginCount\":1,\"roleName\":\"超级管理员\"},\"per_list\":[\"bas\",\"1\",\"11\",\"99\",\"console\",\"sql-console\",\"redis-console\",\"apilog-list\",\"form-generator\",\"auth\",\"role-list\",\"menu-list\",\"admin-list\",\"admin-add\",\"sp-cfg\",\"sp-cfg-app\",\"sp-cfg-server\",\"user_info\",\"announcement\",\"review\"],\"tokenInfo\":{\"tokenName\":\"satoken\",\"tokenValue\":\"2e8cc19c-c45e-4ad4-8efb-c018fc5cf0d3\",\"isLogin\":true,\"loginId\":\"10016\",\"loginKey\":\"login\",\"tokenTimeout\":2592000,\"sessionTimeout\":2592000,\"tokenSessionTimeout\":-2,\"tokenActivityTimeout\":1000,\"loginDevice\":\"default-device\"}},\"dataCount\":-1,\"pageNo\":-1,\"pageSize\":-1}"
+						},
+						{
+							"name": "未提供参数",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/AccAdmin/doLogin?key=&password=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AccAdmin",
+										"doLogin"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": ""
+										},
+										{
+											"key": "password",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 500,\n    \"msg\": \"请提供key与password参数\",\n    \"data\": null,\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/AccAdmin/doLogin?key=xxxxx&password=xxxxx",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AccAdmin",
+										"doLogin"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "xxxxx"
+										},
+										{
+											"key": "password",
+											"value": "xxxxx"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 500,\n    \"msg\": \"无此账号\",\n    \"data\": null,\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						},
+						{
+							"name": "密码错误",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/AccAdmin/doLogin?key=10002&password=123456",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AccAdmin",
+										"doLogin"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "10002"
+										},
+										{
+											"key": "password",
+											"value": "123456"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 500,\n    \"msg\": \"密码错误\",\n    \"data\": null,\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "管理员登录后台时需要返回的信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/AccAdmin/firstOpenAdmin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"AccAdmin",
+								"firstOpenAdmin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/AccAdmin/firstOpenAdmin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AccAdmin",
+										"firstOpenAdmin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": {\n        \"user\": {\n            \"id\": 10003,\n            \"name\": \"cjy\",\n            \"password\": \"********\",\n            \"mail\": \"1234567@qq.com\",\n            \"roleId\": 121,\n            \"status\": 1,\n            \"createTime\": \"2021-05-12T03:01:07.000+00:00\",\n            \"loginTime\": \"2021-06-11T00:26:48.000+00:00\",\n            \"loginIp\": \"127.0.0.1\",\n            \"loginCount\": 8,\n            \"roleName\": \"公司普通管理员hr\"\n        },\n        \"per_list\": [\n            \"user_info\",\n            \"job_info\",\n            \"seminar_info\",\n            \"mail_info\",\n            \"favor_info\",\n            \"apply_info\",\n            \"company_info\"\n        ]\n    },\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/AccAdmin/firstOpenAdmin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AccAdmin",
+										"firstOpenAdmin"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/AccAdmin/firstOpenAdmin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AccAdmin",
+										"firstOpenAdmin"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/AccAdmin/firstOpenAdmin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AccAdmin",
+										"firstOpenAdmin"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Ep Role Permission",
+			"item": [
+				{
+					"name": "根据当前用户roleId获取权限列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/EpRolePermission/getPcodeByCurrRid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"EpRolePermission",
+								"getPcodeByCurrRid"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/getPcodeByCurrRid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"getPcodeByCurrRid"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": [\n        \"user_info\",\n        \"job_info\",\n        \"seminar_info\",\n        \"mail_info\",\n        \"favor_info\",\n        \"apply_info\",\n        \"company_info\"\n    ],\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/getPcodeByCurrRid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"getPcodeByCurrRid"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/getPcodeByCurrRid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"getPcodeByCurrRid"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/getPcodeByCurrRid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"getPcodeByCurrRid"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "【暂时没用】根据指定roleId,拉取权限id列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/EpRolePermission/getPcodeByRid?roleId=0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"EpRolePermission",
+								"getPcodeByRid"
+							],
+							"query": [
+								{
+									"key": "roleId",
+									"value": "0",
+									"description": "roleId"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/getPcodeByRid?roleId=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"getPcodeByRid"
+									],
+									"query": [
+										{
+											"key": "roleId",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/getPcodeByRid?roleId=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"getPcodeByRid"
+									],
+									"query": [
+										{
+											"key": "roleId",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/getPcodeByRid?roleId=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"getPcodeByRid"
+									],
+									"query": [
+										{
+											"key": "roleId",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/getPcodeByRid?roleId=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"getPcodeByRid"
+									],
+									"query": [
+										{
+											"key": "roleId",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "【也暂时没用】修改指定角色的拥有的权限",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/EpRolePermission/updatePcodeByRid?code=dolor reprehenderit aliquip occaecat&code=ut est aliqua ut dolor&roleId=-63159005",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"EpRolePermission",
+								"updatePcodeByRid"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "dolor reprehenderit aliquip occaecat",
+									"description": "code"
+								},
+								{
+									"key": "code",
+									"value": "ut est aliqua ut dolor",
+									"description": "code"
+								},
+								{
+									"key": "roleId",
+									"value": "-63159005",
+									"description": "roleId"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/updatePcodeByRid?code=sed aute laborum&code=fugiat esse ea magna&roleId=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"updatePcodeByRid"
+									],
+									"query": [
+										{
+											"key": "code",
+											"value": "sed aute laborum"
+										},
+										{
+											"key": "code",
+											"value": "fugiat esse ea magna"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/updatePcodeByRid?code=sed aute laborum&code=fugiat esse ea magna&roleId=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"updatePcodeByRid"
+									],
+									"query": [
+										{
+											"key": "code",
+											"value": "sed aute laborum"
+										},
+										{
+											"key": "code",
+											"value": "fugiat esse ea magna"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/updatePcodeByRid?code=sed aute laborum&code=fugiat esse ea magna&roleId=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"updatePcodeByRid"
+									],
+									"query": [
+										{
+											"key": "code",
+											"value": "sed aute laborum"
+										},
+										{
+											"key": "code",
+											"value": "fugiat esse ea magna"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/updatePcodeByRid?code=sed aute laborum&code=fugiat esse ea magna&roleId=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"updatePcodeByRid"
+									],
+									"query": [
+										{
+											"key": "code",
+											"value": "sed aute laborum"
+										},
+										{
+											"key": "code",
+											"value": "fugiat esse ea magna"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EpRolePermission/updatePcodeByRid?code=sed aute laborum&code=fugiat esse ea magna&roleId=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EpRolePermission",
+										"updatePcodeByRid"
+									],
+									"query": [
+										{
+											"key": "code",
+											"value": "sed aute laborum"
+										},
+										{
+											"key": "code",
+											"value": "fugiat esse ea magna"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "comp",
+			"item": [
+				{
+					"name": "企业hr注册，由企业超级管理员录入信息",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/comp/add?mail=43256532314@qq.com&name=企业管理员测试用户&password=1234567",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comp",
+								"add"
+							],
+							"query": [
+								{
+									"key": "mail",
+									"value": "43256532314@qq.com",
+									"description": "(Required) 邮箱"
+								},
+								{
+									"key": "name",
+									"value": "企业管理员测试用户",
+									"description": "(Required) 用户名"
+								},
+								{
+									"key": "password",
+									"value": "1234567",
+									"description": "(Required) 密码"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/add?mail=43256532314@qq.com&name=企业管理员测试用户&password=1234567",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"add"
+									],
+									"query": [
+										{
+											"key": "mail",
+											"value": "43256532314@qq.com"
+										},
+										{
+											"key": "name",
+											"value": "企业管理员测试用户"
+										},
+										{
+											"key": "password",
+											"value": "1234567"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": {\n        \"id\": null,\n        \"name\": \"企业管理员测试用户\",\n        \"password\": \"********\",\n        \"mail\": \"43256532314@qq.com\",\n        \"roleId\": 121,\n        \"status\": null,\n        \"createTime\": null,\n        \"loginTime\": null,\n        \"loginIp\": null,\n        \"loginCount\": null,\n        \"roleName\": null\n    },\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "添加宣讲会信息",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/comp/addSeminar?seminarContent=www.github.com&seminarTitle=曾琳荣最帅宣讲&seminarAddress=南校园礼堂&seminarTime=2021-07-01 19:00",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comp",
+								"addSeminar"
+							],
+							"query": [
+								{
+									"key": "seminarContent",
+									"value": "www.github.com",
+									"description": "(Required) 宣讲会内容链接"
+								},
+								{
+									"key": "seminarTitle",
+									"value": "曾琳荣最帅宣讲",
+									"description": "(Required) 宣讲会标题"
+								},
+								{
+									"key": "seminarAddress",
+									"value": "南校园礼堂",
+									"description": "(Required) 宣讲会地点"
+								},
+								{
+									"key": "seminarTime",
+									"value": "2021-07-01 19:00",
+									"description": "(Required) 宣讲会时间"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/addSeminar?seminarContent=www.github.com&seminarTitle=曾琳荣最帅宣讲&seminarAddress=南校园礼堂&seminarTime=2021-07-01",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"addSeminar"
+									],
+									"query": [
+										{
+											"key": "seminarContent",
+											"value": "www.github.com"
+										},
+										{
+											"key": "seminarTitle",
+											"value": "曾琳荣最帅宣讲"
+										},
+										{
+											"key": "seminarAddress",
+											"value": "南校园礼堂"
+										},
+										{
+											"key": "seminarTime",
+											"value": "2021-07-01"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"code\": 200,\n  \"msg\": \"ok\",\n  \"data\": {\n    \"seminarId\": 1208,\n    \"seminarTitle\": \"曾琳荣最帅宣讲\",\n    \"seminarContent\": \"www.github.com\",\n    \"seminarTime\": \"2021-07-01\",\n    \"seminarAddress\": \"南校园礼堂\",\n    \"hrId\": 10011,\n    \"approveStatus\": 1,\n    \"releaseTime\": \"2021-06-14T05:00:00.000+00:00\"\n  },\n  \"dataCount\": -1,\n  \"pageNo\": -1,\n  \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "删除宣讲会信息",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/comp/deleteSeminar?seminarId=1205",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comp",
+								"deleteSeminar"
+							],
+							"query": [
+								{
+									"key": "seminarId",
+									"value": "1205",
+									"description": "seminarId"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/deleteSeminar?seminarId=1205",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"deleteSeminar"
+									],
+									"query": [
+										{
+											"key": "seminarId",
+											"value": "1205"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": 2,\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						},
+						{
+							"name": "No Content",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/deleteSeminar?seminarId=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"deleteSeminar"
+									],
+									"query": [
+										{
+											"key": "seminarId",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/deleteSeminar?seminarId=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"deleteSeminar"
+									],
+									"query": [
+										{
+											"key": "seminarId",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/deleteSeminar?seminarId=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"deleteSeminar"
+									],
+									"query": [
+										{
+											"key": "seminarId",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "企业新用户注册，录入企业信息",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/comp/firstAdd?compAddress=地球&compEsDate=2000/1/15&compIndustry=房地产&compIntro=房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试&compName=房地产大佬企业&compSize=4&complink=www.baidu.com&creditcode=123447139471039&mail=12358129723@163.com&name=房地产企业超级管理员&password=1234567",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comp",
+								"firstAdd"
+							],
+							"query": [
+								{
+									"key": "compAddress",
+									"value": "地球",
+									"description": "(Required) 企业地址"
+								},
+								{
+									"key": "compEsDate",
+									"value": "2000/1/15",
+									"description": "(Required) 企业成立日期"
+								},
+								{
+									"key": "compIndustry",
+									"value": "房地产",
+									"description": "(Required) 企业所在行业"
+								},
+								{
+									"key": "compIntro",
+									"value": "房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试",
+									"description": "(Required) 企业介绍"
+								},
+								{
+									"key": "compName",
+									"value": "房地产大佬企业",
+									"description": "(Required) 企业名称"
+								},
+								{
+									"key": "compSize",
+									"value": "4",
+									"description": "(Required) 企业规模(1=100人以下, 2=999人以下, 3=9999人以下, 4=9999人以上)"
+								},
+								{
+									"key": "complink",
+									"value": "www.baidu.com",
+									"description": "企业官网链接"
+								},
+								{
+									"key": "creditcode",
+									"value": "123447139471039",
+									"description": "(Required) 统一社会信用代码"
+								},
+								{
+									"key": "mail",
+									"value": "12358129723@163.com",
+									"description": "(Required) 邮箱"
+								},
+								{
+									"key": "name",
+									"value": "房地产企业超级管理员",
+									"description": "用户名"
+								},
+								{
+									"key": "password",
+									"value": "1234567",
+									"description": "密码"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/firstAdd?compAddress=地球&compEsDate=2000/1/15&compIndustry=房地产&compIntro=房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试&compName=房地产大佬企业&compSize=4&complink=www.baidu.com&creditcode=123447139471039&mail=12358129723@163.com&name=房地产企业超级管理员&password=1234567",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"firstAdd"
+									],
+									"query": [
+										{
+											"key": "compAddress",
+											"value": "地球"
+										},
+										{
+											"key": "compEsDate",
+											"value": "2000/1/15"
+										},
+										{
+											"key": "compIndustry",
+											"value": "房地产"
+										},
+										{
+											"key": "compIntro",
+											"value": "房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试"
+										},
+										{
+											"key": "compName",
+											"value": "房地产大佬企业"
+										},
+										{
+											"key": "compSize",
+											"value": "4"
+										},
+										{
+											"key": "complink",
+											"value": "www.baidu.com"
+										},
+										{
+											"key": "creditcode",
+											"value": "123447139471039"
+										},
+										{
+											"key": "mail",
+											"value": "12358129723@163.com"
+										},
+										{
+											"key": "name",
+											"value": "房地产企业超级管理员"
+										},
+										{
+											"key": "password",
+											"value": "1234567"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": {\n        \"compId\": null,\n        \"compName\": \"房地产大佬企业\",\n        \"compIndustry\": \"房地产\",\n        \"compSize\": 4,\n        \"compAddress\": \"地球\",\n        \"complink\": \"www.baidu.com\",\n        \"creditcode\": \"123447139471039\",\n        \"compEsDate\": \"2000-01-14T16:00:00.000+00:00\",\n        \"compIntro\": \"房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试，房地产企业介绍测试\",\n        \"approveStatus\": null\n    },\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "企业用户查看当前企业信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/comp/getCurrent",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comp",
+								"getCurrent"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/getCurrent",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"getCurrent"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": {\n        \"compId\": 20004,\n        \"compName\": \"百度\",\n        \"compIndustry\": \"互联网\",\n        \"compSize\": 4,\n        \"compAddress\": \"哈哈哈哈哈哈哈哈哈曾琳荣好帅\",\n        \"complink\": \"www.baidu.com\",\n        \"creditcode\": \"2343267912\",\n        \"compEsDate\": \"2021-05-12T05:00:00.000+00:00\",\n        \"compIntro\": \"xxxxxxxxxxxxxcompIntro\",\n        \"approveStatus\": 2\n    },\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "查找该公司下所有的宣讲会信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/comp/getSeminarList?page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comp",
+								"getSeminarList"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "page"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/getSeminarList?page=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"getSeminarList"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"code\": 200,\n  \"msg\": \"ok\",\n  \"data\": [\n    {\n      \"seminarId\": 1204,\n      \"seminarTitle\": \"垃圾中山大学\",\n      \"seminarContent\": \"www.baidu.com\",\n      \"seminarTime\": \"2021-06-05 19:00(周四)\",\n      \"seminarAddress\": null,\n      \"hrId\": 10009,\n      \"approveStatus\": 1,\n      \"releaseTime\": null\n    },\n    {\n      \"seminarId\": 1203,\n      \"seminarTitle\": \"标题修改测试\",\n      \"seminarContent\": \"www.baidu.com\",\n      \"seminarTime\": \"2021-06-04 19:00(周四)\",\n      \"seminarAddress\": null,\n      \"hrId\": 10003,\n      \"approveStatus\": 2,\n      \"releaseTime\": null\n    },\n    {\n      \"seminarId\": 1202,\n      \"seminarTitle\": \"曾琳荣最帅标题\",\n      \"seminarContent\": \"www.baidu.com\",\n      \"seminarTime\": \"2021-06-03 19:00(周四)\",\n      \"seminarAddress\": null,\n      \"hrId\": 10003,\n      \"approveStatus\": 2,\n      \"releaseTime\": null\n    }\n  ],\n  \"dataCount\": 1,\n  \"pageNo\": 1,\n  \"pageSize\": 10,\n  \"startIndex\": 0,\n  \"pageCount\": 1\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/getSeminarList?page=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"getSeminarList"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 500,\n    \"msg\": \"未查询到，请检查公司id或页码\",\n    \"data\": null,\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "企业信息修改（修改以下字段中随意一个都可以），企业超级管理员权限",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/comp/update?compAddress=地球",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comp",
+								"update"
+							],
+							"query": [
+								{
+									"key": "compAddress",
+									"value": "地球"
+								},
+								{
+									"key": "compEsDate",
+									"value": "1952-05-18T11:37:51.881Z",
+									"disabled": true
+								},
+								{
+									"key": "compIndustry",
+									"value": "esse",
+									"disabled": true
+								},
+								{
+									"key": "compIntro",
+									"value": "esse",
+									"disabled": true
+								},
+								{
+									"key": "compName",
+									"value": "esse",
+									"disabled": true
+								},
+								{
+									"key": "compSize",
+									"value": "-63159005",
+									"disabled": true
+								},
+								{
+									"key": "complink",
+									"value": "esse",
+									"disabled": true
+								},
+								{
+									"key": "creditcode",
+									"value": "esse",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/update?compAddress=地球",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"update"
+									],
+									"query": [
+										{
+											"key": "compAddress",
+											"value": "地球"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": 1,\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "修改宣讲会信息,修改标题或内容",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/comp/updateSeminar?seminarContent=www.github.com&seminarId=1202&seminarTitle=宣讲会标题测试4&seminarTime=2021-05-05 18:00&seminarAddress=东校园人文社科楼",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comp",
+								"updateSeminar"
+							],
+							"query": [
+								{
+									"key": "seminarContent",
+									"value": "www.github.com",
+									"description": "宣讲会内容链接"
+								},
+								{
+									"key": "seminarId",
+									"value": "1202",
+									"description": "(Required) 宣讲会信息编号"
+								},
+								{
+									"key": "seminarTitle",
+									"value": "宣讲会标题测试4",
+									"description": "宣讲会标题"
+								},
+								{
+									"key": "seminarTime",
+									"value": "2021-05-05 18:00",
+									"description": "宣讲会时间"
+								},
+								{
+									"key": "seminarAddress",
+									"value": "东校园人文社科楼",
+									"description": "宣讲会地点"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/updateSeminar?seminarContent=宣讲会内容测试333333333333333333333333&seminarId=1207",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"updateSeminar"
+									],
+									"query": [
+										{
+											"key": "seminarContent",
+											"value": "宣讲会内容测试333333333333333333333333"
+										},
+										{
+											"key": "seminarId",
+											"value": "1207"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"code\": 200,\n  \"msg\": \"ok\",\n  \"data\": 3,\n  \"dataCount\": -1,\n  \"pageNo\": -1,\n  \"pageSize\": -1\n}"
+						},
+						{
+							"name": "不可修改别的公司的宣讲会信息",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/comp/updateSeminar?seminarContent=宣讲会内容测试333333333333333333333333&seminarId=1207",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comp",
+										"updateSeminar"
+									],
+									"query": [
+										{
+											"key": "seminarContent",
+											"value": "宣讲会内容测试333333333333333333333333"
+										},
+										{
+											"key": "seminarId",
+											"value": "1207"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"code\": 500,\n  \"msg\": \"不是本公司宣讲会信息，不能修改！！\",\n  \"data\": null,\n  \"dataCount\": -1,\n  \"pageNo\": -1,\n  \"pageSize\": -1\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "role（这部分你们应该没弄？）",
+			"item": [
+				{
+					"name": "增加角色",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/role/add?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&info=esse&isLock=-63159005&isLock=-63159005&name=esse",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"role",
+								"add"
+							],
+							"query": [
+								{
+									"key": "createTime",
+									"value": "1952-05-18T11:37:51.881Z"
+								},
+								{
+									"key": "createTime",
+									"value": "1952-05-18T11:37:51.881Z"
+								},
+								{
+									"key": "id",
+									"value": "esse",
+									"description": "(Required) roleId"
+								},
+								{
+									"key": "info",
+									"value": "esse",
+									"description": "(Required) 角色详细描述"
+								},
+								{
+									"key": "isLock",
+									"value": "-63159005"
+								},
+								{
+									"key": "isLock",
+									"value": "-63159005"
+								},
+								{
+									"key": "name",
+									"value": "esse",
+									"description": "(Required) 角色名称"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/add?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&info=esse&isLock=-63159005&isLock=-63159005&name=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"add"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "info",
+											"value": "esse"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/add?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&info=esse&isLock=-63159005&isLock=-63159005&name=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"add"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "info",
+											"value": "esse"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/add?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&info=esse&isLock=-63159005&isLock=-63159005&name=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"add"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "info",
+											"value": "esse"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/add?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&info=esse&isLock=-63159005&isLock=-63159005&name=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"add"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "info",
+											"value": "esse"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/add?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&info=esse&isLock=-63159005&isLock=-63159005&name=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"add"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "info",
+											"value": "esse"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "删除角色",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/role/delete?id=-63159005",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"role",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "-63159005",
+									"description": "id"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/delete?id=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "No Content",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/delete?id=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/delete?id=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/delete?id=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "根据id查角色",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/role/getById?id=-63159005",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"role",
+								"getById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "-63159005",
+									"description": "id"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/getById?id=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"getById"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/getById?id=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"getById"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/getById?id=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"getById"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/getById?id=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"getById"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "查所有的角色列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/role/getList",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"role",
+								"getList"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/getList",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"getList"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/getList",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"getList"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/getList",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"getList"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/getList",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"getList"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "修改角色",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/role/update?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&info=esse&isLock=-63159005&isLock=-63159005&name=esse",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"role",
+								"update"
+							],
+							"query": [
+								{
+									"key": "createTime",
+									"value": "1952-05-18T11:37:51.881Z"
+								},
+								{
+									"key": "createTime",
+									"value": "1952-05-18T11:37:51.881Z"
+								},
+								{
+									"key": "id",
+									"value": "esse",
+									"description": "(Required) roleId"
+								},
+								{
+									"key": "info",
+									"value": "esse",
+									"description": "(Required) 角色详细描述"
+								},
+								{
+									"key": "isLock",
+									"value": "-63159005"
+								},
+								{
+									"key": "isLock",
+									"value": "-63159005"
+								},
+								{
+									"key": "name",
+									"value": "esse",
+									"description": "(Required) 角色名称"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/update?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&info=esse&isLock=-63159005&isLock=-63159005&name=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"update"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "info",
+											"value": "esse"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/update?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&info=esse&isLock=-63159005&isLock=-63159005&name=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"update"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "info",
+											"value": "esse"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/update?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&info=esse&isLock=-63159005&isLock=-63159005&name=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"update"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "info",
+											"value": "esse"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/update?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&info=esse&isLock=-63159005&isLock=-63159005&name=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"update"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "info",
+											"value": "esse"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/role/update?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&info=esse&isLock=-63159005&isLock=-63159005&name=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role",
+										"update"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "info",
+											"value": "esse"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "isLock",
+											"value": "-63159005"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "stu",
+			"item": [
+				{
+					"name": "学生用户注册",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/stu/add?dreamAddress=广州&dreamPosition=后端&mail=135879641@163.com&name=zh&password=1234567&stJodKind=1&stuEducation=2&stuGraUniversity=sysu&stuGraduateTime=2022/6/30&stuMajor=管理&stuName=诸侯&stuTelephone=12345678911",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stu",
+								"add"
+							],
+							"query": [
+								{
+									"key": "dreamAddress",
+									"value": "广州",
+									"description": "(Required) 期望城市"
+								},
+								{
+									"key": "dreamPosition",
+									"value": "后端",
+									"description": "(Required) 期望职位类别"
+								},
+								{
+									"key": "mail",
+									"value": "135879641@163.com",
+									"description": "(Required) 邮箱"
+								},
+								{
+									"key": "name",
+									"value": "zh",
+									"description": "(Required) 用户名"
+								},
+								{
+									"key": "password",
+									"value": "1234567",
+									"description": "(Required) 密码"
+								},
+								{
+									"key": "stJodKind",
+									"value": "1",
+									"description": "(Required) 求职性质 (1=实习, 2=校招, 3=实习和校招)"
+								},
+								{
+									"key": "stuEducation",
+									"value": "2",
+									"description": "(Required) 学生学历（1=本科,2=硕士研究生"
+								},
+								{
+									"key": "stuGraUniversity",
+									"value": "sysu",
+									"description": "(Required) 学生学校"
+								},
+								{
+									"key": "stuGraduateTime",
+									"value": "2022/6/30",
+									"description": "(Required) 学生毕业年份 [date]"
+								},
+								{
+									"key": "stuMajor",
+									"value": "管理",
+									"description": "(Required) 学生专业"
+								},
+								{
+									"key": "stuName",
+									"value": "诸侯",
+									"description": "(Required) 学生姓名"
+								},
+								{
+									"key": "stuTelephone",
+									"value": "12345678911",
+									"description": "(Required) 学生电话号码"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/stu/add?dreamAddress=广州&dreamPosition=后端&mail=135879641@163.com&name=zh&password=1234567&stJodKind=1&stuEducation=2&stuGraUniversity=sysu&stuGraduateTime=2022/6/30&stuMajor=管理&stuName=诸侯&stuTelephone=12345678911",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"stu",
+										"add"
+									],
+									"query": [
+										{
+											"key": "dreamAddress",
+											"value": "广州"
+										},
+										{
+											"key": "dreamPosition",
+											"value": "后端"
+										},
+										{
+											"key": "mail",
+											"value": "135879641@163.com"
+										},
+										{
+											"key": "name",
+											"value": "zh"
+										},
+										{
+											"key": "password",
+											"value": "1234567"
+										},
+										{
+											"key": "stJodKind",
+											"value": "1"
+										},
+										{
+											"key": "stuEducation",
+											"value": "2"
+										},
+										{
+											"key": "stuGraUniversity",
+											"value": "sysu"
+										},
+										{
+											"key": "stuGraduateTime",
+											"value": "2022/6/30"
+										},
+										{
+											"key": "stuMajor",
+											"value": "管理"
+										},
+										{
+											"key": "stuName",
+											"value": "诸侯"
+										},
+										{
+											"key": "stuTelephone",
+											"value": "12345678911"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": {\n        \"stuNum\": 10015,\n        \"stuName\": \"诸侯\",\n        \"stuGraUniversity\": \"sysu\",\n        \"stuMajor\": \"管理\",\n        \"stuEducation\": 2,\n        \"stJodKind\": 1,\n        \"stuGraduateTime\": \"2022-06-29T16:00:00.000+00:00\",\n        \"stuTelephone\": \"12345678911\",\n        \"dreamAddress\": \"广州\",\n        \"dreamPosition\": \"后端\",\n        \"resume\": null\n    },\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "学生用户查看个人信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/stu/getCurrent",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stu",
+								"getCurrent"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/stu/getCurrent",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"stu",
+										"getCurrent"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\"code\":200,\"msg\":\"ok\",\"data\":{\"stuNum\":10002,\"stuName\":\"陈楽骅\",\"stuGraUniversity\":\"中山大学\",\"stuMajor\":\"信管\",\"stuEducation\":1,\"stJodKind\":1,\"stuGraduateTime\":\"2022-06-30T05:00:00.000+00:00\",\"stuTelephone\":\"18012357792\",\"dreamAddress\":\"土耳其\",\"dreamPosition\":\"产品\",\"resume\":\"http://127.0.0.1/upload/file/2021/06-01/1622542641671265872418.pdf\"},\"dataCount\":-1,\"pageNo\":-1,\"pageSize\":-1}"
+						}
+					]
+				},
+				{
+					"name": "学生用户修改个人基本信息",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/stu/update?dreamAddress=esse&dreamPosition=esse&stJodKind=-63159005&stuEducation=-63159005&stuGraUniversity=esse&stuGraduateTime=1952-05-18T11:37:51.881Z&stuMajor=esse&stuName=esse&stuTelephone=16293212345",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stu",
+								"update"
+							],
+							"query": [
+								{
+									"key": "dreamAddress",
+									"value": "esse"
+								},
+								{
+									"key": "dreamPosition",
+									"value": "esse"
+								},
+								{
+									"key": "stJodKind",
+									"value": "-63159005"
+								},
+								{
+									"key": "stuEducation",
+									"value": "-63159005"
+								},
+								{
+									"key": "stuGraUniversity",
+									"value": "esse"
+								},
+								{
+									"key": "stuGraduateTime",
+									"value": "1952-05-18T11:37:51.881Z"
+								},
+								{
+									"key": "stuMajor",
+									"value": "esse"
+								},
+								{
+									"key": "stuName",
+									"value": "esse"
+								},
+								{
+									"key": "stuTelephone",
+									"value": "16293212345"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/stu/update?stuTelephone=16293212345",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"stu",
+										"update"
+									],
+									"query": [
+										{
+											"key": "dreamAddress",
+											"value": "esse",
+											"disabled": true
+										},
+										{
+											"key": "dreamPosition",
+											"value": "esse",
+											"disabled": true
+										},
+										{
+											"key": "stJodKind",
+											"value": "-63159005",
+											"disabled": true
+										},
+										{
+											"key": "stuEducation",
+											"value": "-63159005",
+											"disabled": true
+										},
+										{
+											"key": "stuGraUniversity",
+											"value": "esse",
+											"disabled": true
+										},
+										{
+											"key": "stuGraduateTime",
+											"value": "1952-05-18T11:37:51.881Z",
+											"disabled": true
+										},
+										{
+											"key": "stuMajor",
+											"value": "esse",
+											"disabled": true
+										},
+										{
+											"key": "stuName",
+											"value": "esse",
+											"disabled": true
+										},
+										{
+											"key": "stuTelephone",
+											"value": "16293212345"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\"code\":200,\"msg\":\"ok\",\"data\":1,\"dataCount\":-1,\"pageNo\":-1,\"pageSize\":-1}"
+						}
+					]
+				},
+				{
+					"name": "上传简历",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"description": "file",
+									"type": "file",
+									"src": "Redis基础.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/stu/uploadResume",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stu",
+								"uploadResume"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/stu/uploadResume",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"stu",
+										"uploadResume"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\"code\":200,\"msg\":\"ok\",\"data\":\"http://127.0.0.1/upload/file/2021/06-10/1623328894536502015341.pdf\",\"dataCount\":-1,\"pageNo\":-1,\"pageSize\":-1}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "【应该也还没用？】upload",
+			"item": [
+				{
+					"name": "apk",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "exercitation amet irure reprehenderit sit",
+									"description": "file",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/upload/apk",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"upload",
+								"apk"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/apk",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"apk"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/apk",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"apk"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/apk",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"apk"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/apk",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"apk"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/apk",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"apk"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "audio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "exercitation amet irure reprehenderit sit",
+									"description": "file",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/upload/audio",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"upload",
+								"audio"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/audio",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"audio"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/audio",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"audio"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/audio",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"audio"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/audio",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"audio"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/audio",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"audio"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "file",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "exercitation amet irure reprehenderit sit",
+									"description": "file",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/upload/file",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"upload",
+								"file"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/file",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"file"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/file",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"file"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/file",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"file"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/file",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"file"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/file",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"file"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "exercitation amet irure reprehenderit sit",
+									"description": "file",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/upload/image",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"upload",
+								"image"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/image",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"image"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/image",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"image"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/image",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"image"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/image",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"image"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/image",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"image"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "video",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "exercitation amet irure reprehenderit sit",
+									"description": "file",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/upload/video",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"upload",
+								"video"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/video",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"video"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/video",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"video"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/video",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"video"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/video",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"video"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/upload/video",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"upload",
+										"video"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "就业中心管理员注册",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/add?mail=1343593@123.com&name=就业管理员3&password=1234567",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"add"
+							],
+							"query": [
+								{
+									"key": "mail",
+									"value": "1343593@123.com",
+									"description": "(Required) 邮箱"
+								},
+								{
+									"key": "name",
+									"value": "就业管理员3",
+									"description": "(Required) 用户名"
+								},
+								{
+									"key": "password",
+									"value": "1234567",
+									"description": "(Required) 密码"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/add?mail=1236847193@123.com&name=就业管理员&password=1234567",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"add"
+									],
+									"query": [
+										{
+											"key": "mail",
+											"value": "1236847193@123.com"
+										},
+										{
+											"key": "name",
+											"value": "就业管理员"
+										},
+										{
+											"key": "password",
+											"value": "1234567"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": 10016,\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "删除用户信息",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/delete?id=10017",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "10017",
+									"description": "id"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/delete?id=10017",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "10017"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\"code\":200,\"msg\":\"ok\",\"data\":1,\"dataCount\":-1,\"pageNo\":-1,\"pageSize\":-1}"
+						}
+					]
+				},
+				{
+					"name": "（没用）根据id列表删除用户信息",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/deleteByIds",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"deleteByIds"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/deleteByIds",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"deleteByIds"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "No Content",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/deleteByIds",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"deleteByIds"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/deleteByIds",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"deleteByIds"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/deleteByIds",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"deleteByIds"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "当前用户注销",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/deleteCurrent",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"deleteCurrent"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/deleteCurrent",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"deleteCurrent"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\"code\":200,\"msg\":\"ok\",\"data\":1,\"dataCount\":-1,\"pageNo\":-1,\"pageSize\":-1}"
+						}
+					]
+				},
+				{
+					"name": "返回当前用户信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getByCurr",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getByCurr"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/getByCurr",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"getByCurr"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\"code\":200,\"msg\":\"ok\",\"data\":{\"id\":10016,\"name\":\"就业管理员\",\"password\":\"********\",\"mail\":\"1236847193@123.com\",\"roleId\":1,\"status\":1,\"createTime\":\"2021-06-11T01:08:58.000+00:00\",\"loginTime\":\"2021-06-11T01:16:12.000+00:00\",\"loginIp\":\"127.0.0.1\",\"loginCount\":2,\"roleName\":\"超级管理员\"},\"dataCount\":-1,\"pageNo\":-1,\"pageSize\":-1}"
+						}
+					]
+				},
+				{
+					"name": "根据id查一个用户信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getById?id=10002",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "10002",
+									"description": "id"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/getById?id=10002",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"getById"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "10002"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\"code\":200,\"msg\":\"ok\",\"data\":{\"id\":10002,\"name\":\"clh\",\"password\":\"********\",\"mail\":\"992456536@qq.com\",\"roleId\":11,\"status\":1,\"createTime\":\"2021-05-12T02:59:11.000+00:00\",\"loginTime\":\"2021-06-11T00:20:10.000+00:00\",\"loginIp\":\"127.0.0.1\",\"loginCount\":10,\"roleName\":\"学生用户\"},\"dataCount\":-1,\"pageNo\":-1,\"pageSize\":-1}"
+						}
+					]
+				},
+				{
+					"name": "查用户信息列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getList?page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getList"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "page"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/getList?page=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"getList"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\"code\":200,\"msg\":\"ok\",\"data\":[{\"id\":10016,\"name\":\"就业管理员\",\"password\":\"********\",\"mail\":\"1236847193@123.com\",\"roleId\":1,\"status\":1,\"createTime\":\"2021-06-11T01:08:58.000+00:00\",\"loginTime\":\"2021-06-11T01:16:12.000+00:00\",\"loginIp\":\"127.0.0.1\",\"loginCount\":2,\"roleName\":\"超级管理员\"},{\"id\":10015,\"name\":\"zh\",\"password\":\"********\",\"mail\":\"135879641@163.com\",\"roleId\":11,\"status\":1,\"createTime\":\"2021-06-11T00:57:23.000+00:00\",\"loginTime\":null,\"loginIp\":null,\"loginCount\":0,\"roleName\":\"学生用户\"},{\"id\":10014,\"name\":\"房地产企业超级管理员\",\"password\":\"********\",\"mail\":\"12358129723@163.com\",\"roleId\":1212,\"status\":1,\"createTime\":\"2021-06-11T00:43:58.000+00:00\",\"loginTime\":null,\"loginIp\":null,\"loginCount\":0,\"roleName\":\"公司超级管理员\"},{\"id\":10013,\"name\":\"企业管理员测试用户\",\"password\":\"********\",\"mail\":\"43256532314@qq.com\",\"roleId\":121,\"status\":1,\"createTime\":\"2021-06-11T00:32:05.000+00:00\",\"loginTime\":null,\"loginIp\":null,\"loginCount\":0,\"roleName\":\"公司普通管理员hr\"},{\"id\":10011,\"name\":\"曾麟榮\",\"password\":\"********\",\"mail\":\"zenglr8@mail2.sysu.edu.com\",\"roleId\":121,\"status\":1,\"createTime\":\"2021-05-15T04:28:37.000+00:00\",\"loginTime\":null,\"loginIp\":null,\"loginCount\":0,\"roleName\":\"公司普通管理员hr\"},{\"id\":10009,\"name\":\"曾琳荣公司\",\"password\":\"********\",\"mail\":\"zenglr9@mail2.sysu.edu.cn\",\"roleId\":1212,\"status\":1,\"createTime\":\"2021-05-15T02:48:42.000+00:00\",\"loginTime\":\"2021-05-18T01:17:31.000+00:00\",\"loginIp\":\"127.0.0.1\",\"loginCount\":21,\"roleName\":\"公司超级管理员\"},{\"id\":10007,\"name\":\"曾琳荣最帅3\",\"password\":\"********\",\"mail\":\"992456@qq.com\",\"roleId\":111,\"status\":1,\"createTime\":\"2021-05-12T23:16:15.000+00:00\",\"loginTime\":\"2021-05-15T04:42:53.000+00:00\",\"loginIp\":\"127.0.0.1\",\"loginCount\":1,\"roleName\":\"测试角色\"},{\"id\":10005,\"name\":\"曾琳荣帅\",\"password\":\"********\",\"mail\":\"992456@qq.com\",\"roleId\":111,\"status\":1,\"createTime\":\"2021-05-12T20:33:49.000+00:00\",\"loginTime\":\"2021-05-13T15:27:48.000+00:00\",\"loginIp\":\"127.0.0.1\",\"loginCount\":1,\"roleName\":\"测试角色\"},{\"id\":10004,\"name\":\"zy\",\"password\":\"********\",\"mail\":\"123456@qq.com\",\"roleId\":1212,\"status\":1,\"createTime\":\"2021-05-12T04:14:16.000+00:00\",\"loginTime\":\"2021-06-11T00:30:39.000+00:00\",\"loginIp\":\"127.0.0.1\",\"loginCount\":2,\"roleName\":\"公司超级管理员\"},{\"id\":10003,\"name\":\"cjy\",\"password\":\"********\",\"mail\":\"1234567@qq.com\",\"roleId\":121,\"status\":1,\"createTime\":\"2021-05-12T03:01:07.000+00:00\",\"loginTime\":\"2021-06-11T00:26:48.000+00:00\",\"loginIp\":\"127.0.0.1\",\"loginCount\":8,\"roleName\":\"公司普通管理员hr\"}],\"dataCount\":12,\"pageNo\":1,\"pageSize\":10,\"startIndex\":0,\"pageCount\":2}"
+						}
+					]
+				},
+				{
+					"name": "（没用）管理员改别的用户名字",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/update?id&name",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"update"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null
+								},
+								{
+									"key": "name",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/update?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&loginCount=-63159005&loginCount=-63159005&loginIp=esse&loginIp=esse&loginTime=1952-05-18T11:37:51.881Z&loginTime=1952-05-18T11:37:51.881Z&mail=esse&mail=esse&name=esse&password=esse&password=esse&password2=esse&roleId=-63159005&roleId=-63159005&roleName=esse&status=-63159005&status=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"update"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "loginCount",
+											"value": "-63159005"
+										},
+										{
+											"key": "loginCount",
+											"value": "-63159005"
+										},
+										{
+											"key": "loginIp",
+											"value": "esse"
+										},
+										{
+											"key": "loginIp",
+											"value": "esse"
+										},
+										{
+											"key": "loginTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "loginTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "mail",
+											"value": "esse"
+										},
+										{
+											"key": "mail",
+											"value": "esse"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										},
+										{
+											"key": "password2",
+											"value": "esse"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleName",
+											"value": "esse"
+										},
+										{
+											"key": "status",
+											"value": "-63159005"
+										},
+										{
+											"key": "status",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/update?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&loginCount=-63159005&loginCount=-63159005&loginIp=esse&loginIp=esse&loginTime=1952-05-18T11:37:51.881Z&loginTime=1952-05-18T11:37:51.881Z&mail=esse&mail=esse&name=esse&password=esse&password=esse&password2=esse&roleId=-63159005&roleId=-63159005&roleName=esse&status=-63159005&status=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"update"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "loginCount",
+											"value": "-63159005"
+										},
+										{
+											"key": "loginCount",
+											"value": "-63159005"
+										},
+										{
+											"key": "loginIp",
+											"value": "esse"
+										},
+										{
+											"key": "loginIp",
+											"value": "esse"
+										},
+										{
+											"key": "loginTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "loginTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "mail",
+											"value": "esse"
+										},
+										{
+											"key": "mail",
+											"value": "esse"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										},
+										{
+											"key": "password2",
+											"value": "esse"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleName",
+											"value": "esse"
+										},
+										{
+											"key": "status",
+											"value": "-63159005"
+										},
+										{
+											"key": "status",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/update?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&loginCount=-63159005&loginCount=-63159005&loginIp=esse&loginIp=esse&loginTime=1952-05-18T11:37:51.881Z&loginTime=1952-05-18T11:37:51.881Z&mail=esse&mail=esse&name=esse&password=esse&password=esse&password2=esse&roleId=-63159005&roleId=-63159005&roleName=esse&status=-63159005&status=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"update"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "loginCount",
+											"value": "-63159005"
+										},
+										{
+											"key": "loginCount",
+											"value": "-63159005"
+										},
+										{
+											"key": "loginIp",
+											"value": "esse"
+										},
+										{
+											"key": "loginIp",
+											"value": "esse"
+										},
+										{
+											"key": "loginTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "loginTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "mail",
+											"value": "esse"
+										},
+										{
+											"key": "mail",
+											"value": "esse"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										},
+										{
+											"key": "password2",
+											"value": "esse"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleName",
+											"value": "esse"
+										},
+										{
+											"key": "status",
+											"value": "-63159005"
+										},
+										{
+											"key": "status",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/update?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&loginCount=-63159005&loginCount=-63159005&loginIp=esse&loginIp=esse&loginTime=1952-05-18T11:37:51.881Z&loginTime=1952-05-18T11:37:51.881Z&mail=esse&mail=esse&name=esse&password=esse&password=esse&password2=esse&roleId=-63159005&roleId=-63159005&roleName=esse&status=-63159005&status=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"update"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "loginCount",
+											"value": "-63159005"
+										},
+										{
+											"key": "loginCount",
+											"value": "-63159005"
+										},
+										{
+											"key": "loginIp",
+											"value": "esse"
+										},
+										{
+											"key": "loginIp",
+											"value": "esse"
+										},
+										{
+											"key": "loginTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "loginTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "mail",
+											"value": "esse"
+										},
+										{
+											"key": "mail",
+											"value": "esse"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										},
+										{
+											"key": "password2",
+											"value": "esse"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleName",
+											"value": "esse"
+										},
+										{
+											"key": "status",
+											"value": "-63159005"
+										},
+										{
+											"key": "status",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/update?createTime=1952-05-18T11:37:51.881Z&createTime=1952-05-18T11:37:51.881Z&id=esse&loginCount=-63159005&loginCount=-63159005&loginIp=esse&loginIp=esse&loginTime=1952-05-18T11:37:51.881Z&loginTime=1952-05-18T11:37:51.881Z&mail=esse&mail=esse&name=esse&password=esse&password=esse&password2=esse&roleId=-63159005&roleId=-63159005&roleName=esse&status=-63159005&status=-63159005",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"update"
+									],
+									"query": [
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "createTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "id",
+											"value": "esse"
+										},
+										{
+											"key": "loginCount",
+											"value": "-63159005"
+										},
+										{
+											"key": "loginCount",
+											"value": "-63159005"
+										},
+										{
+											"key": "loginIp",
+											"value": "esse"
+										},
+										{
+											"key": "loginIp",
+											"value": "esse"
+										},
+										{
+											"key": "loginTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "loginTime",
+											"value": "1952-05-18T11:37:51.881Z"
+										},
+										{
+											"key": "mail",
+											"value": "esse"
+										},
+										{
+											"key": "mail",
+											"value": "esse"
+										},
+										{
+											"key": "name",
+											"value": "esse"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										},
+										{
+											"key": "password2",
+											"value": "esse"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleId",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleName",
+											"value": "esse"
+										},
+										{
+											"key": "status",
+											"value": "-63159005"
+										},
+										{
+											"key": "status",
+											"value": "-63159005"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "当前用户修改名字",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/updateInfo?name=就业管理员1111",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"updateInfo"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "就业管理员1111",
+									"description": "(Required) 新用户名"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/updateInfo?name=就业管理员1111",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"updateInfo"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "就业管理员1111"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\"code\":200,\"msg\":\"ok\",\"data\":1,\"dataCount\":-1,\"pageNo\":-1,\"pageSize\":-1}"
+						}
+					]
+				},
+				{
+					"name": "（没用）管理员改别人密码",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/updatePassword?id=-63159005&password=esse",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"updatePassword"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "-63159005",
+									"description": "id"
+								},
+								{
+									"key": "password",
+									"value": "esse",
+									"description": "password"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/updatePassword?id=-63159005&password=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"updatePassword"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/updatePassword?id=-63159005&password=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"updatePassword"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/updatePassword?id=-63159005&password=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"updatePassword"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/updatePassword?id=-63159005&password=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"updatePassword"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/updatePassword?id=-63159005&password=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"updatePassword"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										},
+										{
+											"key": "password",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "（没用）管理员根据id改角色",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/updateRole?id=-63159005&roleId=esse",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"updateRole"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "-63159005",
+									"description": "id"
+								},
+								{
+									"key": "roleId",
+									"value": "esse",
+									"description": "roleId"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/updateRole?id=-63159005&roleId=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"updateRole"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleId",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/updateRole?id=-63159005&roleId=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"updateRole"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleId",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/updateRole?id=-63159005&roleId=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"updateRole"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleId",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/updateRole?id=-63159005&roleId=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"updateRole"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleId",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/updateRole?id=-63159005&roleId=esse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"updateRole"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "-63159005"
+										},
+										{
+											"key": "roleId",
+											"value": "esse"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "管理员改别的用户状态（禁用）",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/updateStatus?id=10003&status=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"updateStatus"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "10003",
+									"description": "id"
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"description": "status"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/updateStatus?id=10003&status=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"updateStatus"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "10003"
+										},
+										{
+											"key": "status",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\"code\":200,\"msg\":\"ok\",\"data\":null,\"dataCount\":-1,\"pageNo\":-1,\"pageSize\":-1}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "管理员审核宣讲会信息",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/admin/reviewSeminar?approveStatus=2&seminarId=1202",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"reviewSeminar"
+							],
+							"query": [
+								{
+									"key": "approveStatus",
+									"value": "2",
+									"description": "(Required) 审核状态(1=未审核, 2=审核通过, 3=审核不通过)"
+								},
+								{
+									"key": "seminarId",
+									"value": "1202",
+									"description": "(Required) 宣讲会信息编号"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/admin/reviewSeminar?approveStatus=2&seminarId=1202",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"reviewSeminar"
+									],
+									"query": [
+										{
+											"key": "approveStatus",
+											"value": "2"
+										},
+										{
+											"key": "seminarId",
+											"value": "1202"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"code\": 200,\n  \"msg\": \"ok\",\n  \"data\": 1,\n  \"dataCount\": -1,\n  \"pageNo\": -1,\n  \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "管理员查看所有宣讲会信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/admin/getAllSeminar?page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"getAllSeminar"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/admin/getAllSeminar?page=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"getAllSeminar"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"code\": 200,\n  \"msg\": \"ok\",\n  \"data\": [\n    {\n      \"seminarId\": 1207,\n      \"seminarTitle\": \"宣讲会标题测试3\",\n      \"seminarContent\": \"www.baidu.com\",\n      \"seminarTime\": \"2021-06-07 19:00(周四)\",\n      \"seminarAddress\": \"东校园行政楼B109\",\n      \"hrId\": 10004,\n      \"approveStatus\": 2,\n      \"releaseTime\": \"2021-06-10T05:00:00.000+00:00\"\n    },\n    {\n      \"seminarId\": 1206,\n      \"seminarTitle\": \"宣讲会标题添加测试\",\n      \"seminarContent\": \"www.baidu.com\",\n      \"seminarTime\": \"2021-06-06 19:00(周四)\",\n      \"seminarAddress\": \"东校园行政楼B108\",\n      \"hrId\": 10004,\n      \"approveStatus\": 2,\n      \"releaseTime\": \"2021-06-10T05:00:00.000+00:00\"\n    },\n    {\n      \"seminarId\": 1204,\n      \"seminarTitle\": \"垃圾中山大学\",\n      \"seminarContent\": \"www.baidu.com\",\n      \"seminarTime\": \"2021-06-05 19:00(周四)\",\n      \"seminarAddress\": \"东校园行政楼A109\",\n      \"hrId\": 10009,\n      \"approveStatus\": 1,\n      \"releaseTime\": \"2021-05-17T05:00:00.000+00:00\"\n    },\n    {\n      \"seminarId\": 1203,\n      \"seminarTitle\": \"标题修改测试\",\n      \"seminarContent\": \"www.baidu.com\",\n      \"seminarTime\": \"2021-06-04 19:00(周四)\",\n      \"seminarAddress\": \"东校园行政楼A100\",\n      \"hrId\": 10003,\n      \"approveStatus\": 2,\n      \"releaseTime\": \"2021-05-16T05:00:00.000+00:00\"\n    },\n    {\n      \"seminarId\": 1202,\n      \"seminarTitle\": \"宣讲会标题测试4\",\n      \"seminarContent\": \"www.github.com\",\n      \"seminarTime\": \"2021-05-05 18:00\",\n      \"seminarAddress\": \"东校园人文社科楼\",\n      \"hrId\": 10011,\n      \"approveStatus\": 1,\n      \"releaseTime\": \"2021-05-15T05:00:00.000+00:00\"\n    }\n  ],\n  \"dataCount\": 5,\n  \"pageNo\": 1,\n  \"pageSize\": 10,\n  \"startIndex\": 0,\n  \"pageCount\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "管理员审核职位信息，1为未审核，2为通过，3为不通过",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/admin/reviewJobInfo?jobId&approveStatus",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"reviewJobInfo"
+							],
+							"query": [
+								{
+									"key": "jobId",
+									"value": null
+								},
+								{
+									"key": "approveStatus",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/admin/reviewJobInfo?jobId&approveStatus",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"reviewJobInfo"
+									],
+									"query": [
+										{
+											"key": "jobId",
+											"value": null
+										},
+										{
+											"key": "approveStatus",
+											"value": null
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n  \"code\": 200,\n  \"msg\": \"ok\",\n  \"data\": 1,\n  \"dataCount\": -1,\n  \"pageNo\": -1,\n  \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "管理员新增公告",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/admin/addAnnouncement?announceTitle=公告标题测试啦啦啦啦2&announceContent=公告内容1235678199&announceType=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"addAnnouncement"
+							],
+							"query": [
+								{
+									"key": "announceTitle",
+									"value": "公告标题测试啦啦啦啦2",
+									"description": "公告标题"
+								},
+								{
+									"key": "announceContent",
+									"value": "公告内容1235678199",
+									"description": "公告内容"
+								},
+								{
+									"key": "announceType",
+									"value": "1",
+									"description": "公告类型 (1=系统公告, 2=经验分享)"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/admin/addAnnouncement?announceTitle=公告标题测试啦啦啦啦2&announceContent=公告内容1235678199&announceType=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"addAnnouncement"
+									],
+									"query": [
+										{
+											"key": "announceTitle",
+											"value": "公告标题测试啦啦啦啦2",
+											"description": "公告标题"
+										},
+										{
+											"key": "announceContent",
+											"value": "公告内容1235678199",
+											"description": "公告内容"
+										},
+										{
+											"key": "announceType",
+											"value": "1",
+											"description": "公告类型 (1=系统公告, 2=经验分享)"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": {\n        \"announceId\": 1006,\n        \"announceTitle\": \"公告标题测试啦啦啦啦2\",\n        \"announceContent\": \"公告内容1235678199\",\n        \"announceType\": 1,\n        \"announceTime\": \"2021-06-16T05:00:00.000+00:00\",\n        \"adminId\": 10001\n    },\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "根据id查询公告信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": [
+						{
+							"name": "ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/admin/getAnnouncementById?id=1006",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"getAnnouncementById"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1006"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": {\n        \"announceId\": 1006,\n        \"announceTitle\": \"公告标题测试啦啦啦啦2\",\n        \"announceContent\": \"公告内容1235678199\",\n        \"announceType\": 1,\n        \"announceTime\": \"2021-06-16T05:00:00.000+00:00\",\n        \"adminId\": 10001\n    },\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				},
+				{
+					"name": "修改公告信息",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/admin/updateAnnouncement?announceId=1006&announceContent=修改公告内容&announceTitle=修改公告标题&announceType=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"updateAnnouncement"
+							],
+							"query": [
+								{
+									"key": "announceId",
+									"value": "1006"
+								},
+								{
+									"key": "announceContent",
+									"value": "修改公告内容"
+								},
+								{
+									"key": "announceTitle",
+									"value": "修改公告标题"
+								},
+								{
+									"key": "announceType",
+									"value": "2",
+									"description": "(1=系统公告, 2=经验分享)"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ok",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/admin/updateAnnouncement?announceId=1006&announceContent=修改公告内容&announceTitle=修改公告标题&announceType=2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"updateAnnouncement"
+									],
+									"query": [
+										{
+											"key": "announceId",
+											"value": "1006"
+										},
+										{
+											"key": "announceContent",
+											"value": "修改公告内容"
+										},
+										{
+											"key": "announceTitle",
+											"value": "修改公告标题"
+										},
+										{
+											"key": "announceType",
+											"value": "2",
+											"description": "(1=系统公告, 2=经验分享)"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": {\n        \"announceId\": 1006,\n        \"announceTitle\": \"修改公告标题\",\n        \"announceContent\": \"修改公告内容\",\n        \"announceType\": 2,\n        \"announceTime\": \"2021-06-16T05:00:00.000+00:00\",\n        \"adminId\": 10001\n    },\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "search",
+			"item": [
+				{
+					"name": "根据检索词查找所有的审核通过的宣讲会信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/search/getSeminarList?page=1&query=宣讲&sortType=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"search",
+								"getSeminarList"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "(Required) 页码"
+								},
+								{
+									"key": "query",
+									"value": "宣讲",
+									"description": "(Required) 检索词 可加空格"
+								},
+								{
+									"key": "sortType",
+									"value": "1",
+									"description": "(Required) 排序类型【1为按时间排，2为按匹配度排】"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search/getSeminarList?page=1&query=标题&sortType=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search",
+										"getSeminarList"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "query",
+											"value": "标题"
+										},
+										{
+											"key": "sortType",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"code\": 200,\n  \"msg\": \"ok\",\n  \"data\": [\n    {\n      \"seminarId\": 1207,\n      \"seminarTitle\": \"宣讲会标题测试3\",\n      \"seminarContent\": \"www.baidu.com\",\n      \"seminarTime\": \"2021-06-07 19:00(周四)\",\n      \"seminarAddress\": null,\n      \"hrId\": 10004,\n      \"approveStatus\": 2,\n      \"releaseTime\": null\n    },\n    {\n      \"seminarId\": 1206,\n      \"seminarTitle\": \"宣讲会标题添加测试\",\n      \"seminarContent\": \"www.baidu.com\",\n      \"seminarTime\": \"2021-06-06 19:00(周四)\",\n      \"seminarAddress\": null,\n      \"hrId\": 10004,\n      \"approveStatus\": 2,\n      \"releaseTime\": null\n    }\n  ],\n  \"dataCount\": 1,\n  \"pageNo\": 1,\n  \"pageSize\": 10,\n  \"startIndex\": 0,\n  \"pageCount\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "根据检索词查找所有的审核通过的职位信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/search/getJobList?page=1&query=&sortType=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"search",
+								"getJobList"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "query",
+									"value": ""
+								},
+								{
+									"key": "sortType",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search/getJobList?page=1&query=&sortType=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search",
+										"getJobList"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "query",
+											"value": ""
+										},
+										{
+											"key": "sortType",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": [\n        {\n            \"jobId\": 21,\n            \"compId\": 10003,\n            \"jobName\": \"职位名称\",\n            \"jobType\": \"岗位类别\",\n            \"jobKind\": 1,\n            \"status\": null,\n            \"relDate\": \"2021-06-16T05:00:00.000+00:00\",\n            \"jobAddress\": \"中大\",\n            \"jobCon\": \"职位描述\",\n            \"jobDeadline\": \"2021-09-29T05:00:00.000+00:00\",\n            \"deliverNum\": null,\n            \"salary\": \"薪资\",\n            \"approveStatus\": 1\n        },\n        {\n            \"jobId\": 20,\n            \"compId\": 20005,\n            \"jobName\": \"职位名称\",\n            \"jobType\": \"职位类型\",\n            \"jobKind\": 1,\n            \"status\": 1,\n            \"relDate\": \"2021-06-16T05:00:00.000+00:00\",\n            \"jobAddress\": \"地球\",\n            \"jobCon\": \"乱填的内容\",\n            \"jobDeadline\": \"2021-06-16T05:00:00.000+00:00\",\n            \"deliverNum\": 0,\n            \"salary\": \"没钱\",\n            \"approveStatus\": 1\n        },\n        {\n            \"jobId\": 19,\n            \"compId\": 20005,\n            \"jobName\": \"研发\",\n            \"jobType\": \"研发\",\n            \"jobKind\": 1,\n            \"status\": 1,\n            \"relDate\": \"2021-06-16T05:00:00.000+00:00\",\n            \"jobAddress\": \"宇宙\",\n            \"jobCon\": \"乱填的\",\n            \"jobDeadline\": \"2021-06-30T05:00:00.000+00:00\",\n            \"deliverNum\": 0,\n            \"salary\": \"没钱\",\n            \"approveStatus\": 2\n        },\n        {\n            \"jobId\": 18,\n            \"compId\": 20004,\n            \"jobName\": \"产品运营\",\n            \"jobType\": \"运营\",\n            \"jobKind\": 1,\n            \"status\": 1,\n            \"relDate\": \"2021-05-11T05:00:00.000+00:00\",\n            \"jobAddress\": \"深圳\",\n            \"jobCon\": \"乱填的\",\n            \"jobDeadline\": \"2021-05-30T05:00:00.000+00:00\",\n            \"deliverNum\": 0,\n            \"salary\": \"50/天\",\n            \"approveStatus\": 2\n        },\n        {\n            \"jobId\": 17,\n            \"compId\": 20005,\n            \"jobName\": \"产品经理\",\n            \"jobType\": \"产品\",\n            \"jobKind\": 1,\n            \"status\": 1,\n            \"relDate\": \"2021-05-11T05:00:00.000+00:00\",\n            \"jobAddress\": \"广州\",\n            \"jobCon\": \"是由中山大学信息管理学院2018级MIS第六组成员自创\",\n            \"jobDeadline\": \"2021-05-29T05:00:00.000+00:00\",\n            \"deliverNum\": 0,\n            \"salary\": \"100/天\",\n            \"approveStatus\": 2\n        }\n    ],\n    \"dataCount\": 5,\n    \"pageNo\": 1,\n    \"pageSize\": 10,\n    \"startIndex\": 0,\n    \"pageCount\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "分页查询所有公告",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/search/getAllAnnouncement?page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"search",
+								"getAllAnnouncement"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search/getAllAnnouncement?page=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search",
+										"getAllAnnouncement"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": [\n        {\n            \"announceId\": 1002,\n            \"announceTitle\": \"公告标题1\",\n            \"announceContent\": \"公告内容1\",\n            \"announceType\": 1,\n            \"announceTime\": \"2021-06-16T05:00:00.000+00:00\",\n            \"adminId\": 10001\n        },\n        {\n            \"announceId\": 1005,\n            \"announceTitle\": \"公告标题测试啦啦啦啦1\",\n            \"announceContent\": \"公告内容123567819\",\n            \"announceType\": 1,\n            \"announceTime\": \"2021-06-16T05:00:00.000+00:00\",\n            \"adminId\": 10001\n        },\n        {\n            \"announceId\": 1006,\n            \"announceTitle\": \"修改公告标题\",\n            \"announceContent\": \"修改公告内容\",\n            \"announceType\": 2,\n            \"announceTime\": \"2021-06-16T05:00:00.000+00:00\",\n            \"adminId\": 10001\n        },\n        {\n            \"announceId\": 1003,\n            \"announceTitle\": \"经验分享标题1\",\n            \"announceContent\": \"经验分享内容1\",\n            \"announceType\": 2,\n            \"announceTime\": \"2021-06-14T05:00:00.000+00:00\",\n            \"adminId\": 10001\n        },\n        {\n            \"announceId\": 1004,\n            \"announceTitle\": \"经验分享啦啦啦啦标题2\",\n            \"announceContent\": \"经验分享啦啦啦内容2\",\n            \"announceType\": 2,\n            \"announceTime\": \"2021-06-01T05:00:00.000+00:00\",\n            \"adminId\": 10001\n        },\n        {\n            \"announceId\": 1001,\n            \"announceTitle\": \"系统公告\",\n            \"announceContent\": \"第一条测试公告，你好，我是帅哥。\",\n            \"announceType\": 1,\n            \"announceTime\": \"2021-05-11T05:00:00.000+00:00\",\n            \"adminId\": 10001\n        }\n    ],\n    \"dataCount\": 6,\n    \"pageNo\": 1,\n    \"pageSize\": 10,\n    \"startIndex\": 0,\n    \"pageCount\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "根据检索词和公告类型分页查询所有公告",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/search/getAnnouncementByQuery?page=1&query=&announceType=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"search",
+								"getAnnouncementByQuery"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "query",
+									"value": "",
+									"description": "检索词"
+								},
+								{
+									"key": "announceType",
+									"value": "2",
+									"description": "公告类型 (1=系统公告, 2=经验分享)"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search/getAnnouncementByQuery?page=1&query=&announceType=2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search",
+										"getAnnouncementByQuery"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "query",
+											"value": "",
+											"description": "检索词"
+										},
+										{
+											"key": "announceType",
+											"value": "2",
+											"description": "公告类型 (1=系统公告, 2=经验分享)"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": [\n        {\n            \"announceId\": 1006,\n            \"announceTitle\": \"修改公告标题\",\n            \"announceContent\": \"修改公告内容\",\n            \"announceType\": 2,\n            \"announceTime\": \"2021-06-16T05:00:00.000+00:00\",\n            \"adminId\": 10001\n        },\n        {\n            \"announceId\": 1003,\n            \"announceTitle\": \"经验分享标题1\",\n            \"announceContent\": \"经验分享内容1\",\n            \"announceType\": 2,\n            \"announceTime\": \"2021-06-14T05:00:00.000+00:00\",\n            \"adminId\": 10001\n        },\n        {\n            \"announceId\": 1004,\n            \"announceTitle\": \"经验分享啦啦啦啦标题2\",\n            \"announceContent\": \"经验分享啦啦啦内容2\",\n            \"announceType\": 2,\n            \"announceTime\": \"2021-06-01T05:00:00.000+00:00\",\n            \"adminId\": 10001\n        }\n    ],\n    \"dataCount\": 3,\n    \"pageNo\": 1,\n    \"pageSize\": 10,\n    \"startIndex\": 0,\n    \"pageCount\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "根据公告类型搜索所有公告信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/search/getAnnouncementList?announceType=1&page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"search",
+								"getAnnouncementList"
+							],
+							"query": [
+								{
+									"key": "announceType",
+									"value": "1",
+									"description": "公告类型 (1=系统公告, 2=经验分享)"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search/getAnnouncementList?announceType=1&page=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search",
+										"getAnnouncementList"
+									],
+									"query": [
+										{
+											"key": "announceType",
+											"value": "1",
+											"description": "公告类型 (1=系统公告, 2=经验分享)"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": [\n        {\n            \"announceId\": 1002,\n            \"announceTitle\": \"公告标题1\",\n            \"announceContent\": \"公告内容1\",\n            \"announceType\": 1,\n            \"announceTime\": \"2021-06-16T05:00:00.000+00:00\",\n            \"adminId\": 10001\n        },\n        {\n            \"announceId\": 1005,\n            \"announceTitle\": \"公告标题测试啦啦啦啦1\",\n            \"announceContent\": \"公告内容123567819\",\n            \"announceType\": 1,\n            \"announceTime\": \"2021-06-16T05:00:00.000+00:00\",\n            \"adminId\": 10001\n        },\n        {\n            \"announceId\": 1001,\n            \"announceTitle\": \"系统公告\",\n            \"announceContent\": \"第一条测试公告，你好，我是帅哥。\",\n            \"announceType\": 1,\n            \"announceTime\": \"2021-05-11T05:00:00.000+00:00\",\n            \"adminId\": 10001\n        }\n    ],\n    \"dataCount\": 3,\n    \"pageNo\": 1,\n    \"pageSize\": 10,\n    \"startIndex\": 0,\n    \"pageCount\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "根据公司名称搜索时间轴信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/search/getTimeList?compName=字节跳动",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"search",
+								"getTimeList"
+							],
+							"query": [
+								{
+									"key": "compName",
+									"value": "字节跳动"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search/getTimeList?compName=字节跳动",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search",
+										"getTimeList"
+									],
+									"query": [
+										{
+											"key": "compName",
+											"value": "字节跳动"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"code\":200,\n    \"msg\":\"ok\",\n    \"data\":{\n        \"_id\":{\n            \"$oid\":\"60c9e908c3a0d5978afd41d5\"\n        },\n        \"compName\":\"字节跳动\",\n        \"referral\":\"2月24日-4月30日16:00\",\n        \"resume\":\"2月24日-4月30日16:00\",\n        \"written\":\"2月下旬开始\",\n        \"audition\":\"2月24日开始\",\n        \"offer\":\"3月上旬开始\"\n    },\n    \"dataCount\":-1,\n    \"pageNo\":-1,\n    \"pageSize\":-1\n}"
+						},
+						{
+							"name": "无结果",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/search/getTimeList?compName=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"search",
+										"getTimeList"
+									],
+									"query": [
+										{
+											"key": "compName",
+											"value": ""
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"ok\",\n    \"data\": \"{}\",\n    \"dataCount\": -1,\n    \"pageNo\": -1,\n    \"pageSize\": -1\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "指定用户修改自己密码",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/UserPassword/update?newPwd=1234567&oldPwd=12345678",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"UserPassword",
+						"update"
+					],
+					"query": [
+						{
+							"key": "newPwd",
+							"value": "1234567",
+							"description": "newPwd"
+						},
+						{
+							"key": "oldPwd",
+							"value": "12345678",
+							"description": "oldPwd"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/UserPassword/update?newPwd=1234567&oldPwd=12345678",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"UserPassword",
+								"update"
+							],
+							"query": [
+								{
+									"key": "newPwd",
+									"value": "1234567"
+								},
+								{
+									"key": "oldPwd",
+									"value": "12345678"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": "{\"code\":200,\"msg\":\"ok\",\"data\":1,\"dataCount\":-1,\"pageNo\":-1,\"pageSize\":-1}"
+				},
+				{
+					"name": "旧密码输入错误",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/UserPassword/update?newPwd=esse&oldPwd=esse",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"UserPassword",
+								"update"
+							],
+							"query": [
+								{
+									"key": "newPwd",
+									"value": "esse"
+								},
+								{
+									"key": "oldPwd",
+									"value": "esse"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": "{\"code\":500,\"msg\":\"旧密码输入错误\",\"data\":null,\"dataCount\":-1,\"pageNo\":-1,\"pageSize\":-1}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:8299/"
+		}
+	]
+}
