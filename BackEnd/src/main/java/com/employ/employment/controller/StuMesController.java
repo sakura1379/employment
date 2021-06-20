@@ -165,8 +165,39 @@ public class StuMesController {
     AjaxJson getList(){
         log.info("Start getMailList========");
         long stuNum = StpUtil.getLoginIdAsLong();
-        List<StuMes> list = stuMesMapper.getList(stuNum);
+//        StpUtil.checkPermission("mail_info");
+        List<StuMes> stuMess = stuMesMapper.getList(stuNum);
+        List<StuMesForReturn> list = new ArrayList<StuMesForReturn>();
+        for (StuMes s: stuMess){
+            String title = ""+getTitle1(s.infoId,s.infoType);
+            StuMesForReturn SMFR=new StuMesForReturn(title,s.infoId,s.infoType);
+            list.add(SMFR);
+        }
         return AjaxJson.getSuccessData(list);
+    }
+    
+    public String getTitle1(long infoId,long infoType){
+        log.info("Start getCurrentMailTitle========");
+        if(infoType==1){
+            if(seminarInfoMapper.getById(infoId)!=null){
+                SeminarInfo seminarInfo = seminarInfoMapper.getById(infoId);
+                return (seminarInfo.seminarTitle);
+            }
+        }
+        if(infoType==2){
+            if(jobInfoMapper.getById(infoId)!=null){
+                JobInfo jobInfo = jobInfoMapper.getById(infoId);
+                return (jobInfo.jobName);
+            }
+        }
+        if(infoType==3){
+            if (announcementMapper.getById((int) infoId)!=null){
+                Announcement announcement = announcementMapper.getById((int) infoId);
+                return (announcement.announceTitle);
+            }
+        }
+        String s=""+"查询出现错误";
+        return s;
     }
 
     /** 查 - 根据信件id查标题 */
