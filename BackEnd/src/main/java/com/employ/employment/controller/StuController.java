@@ -76,9 +76,11 @@ public class StuController {
             @ApiImplicitParam(name = "dreamPosition", value = "期望职位类别", required = true)
     })
     public AjaxJson add(StuInfo s, UserInfo u) throws Exception {
+        log.info("stuInfo:{},userInfo:{}",s.toString(),u.toString());
         Integer type = 2;
         String[] strings = new String[2];
         strings[0] = u.getMail();
+        log.info(strings.toString());
         String status = pythonUtil.httpPost(type,strings);
         log.info("status:{}",status);
         if (status.equals("fail")){

@@ -99,8 +99,8 @@ public class PythonUtil {
         }
         return result;
     }
-//
-//    public static void main(String[] args) throws Exception {
+
+//    public void main(String[] args) throws Exception {
 //        String[] strings = new String[2];
 //        strings[0] = "18023893551@123.com";
 //        System.out.println(httpPost(2,strings));
