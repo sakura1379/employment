@@ -116,4 +116,11 @@ public interface StuMesMapper {
      * @return
      */
     List<StuMesForReturn> getStuList(long stuNum);
+    
+        /**
+     * 查信息编号 -
+     * @param mailNum 要查询的信箱id
+     * @return infoId
+     */
+    long getInfoId(@Param("mailNum")long mailNum);
 }
