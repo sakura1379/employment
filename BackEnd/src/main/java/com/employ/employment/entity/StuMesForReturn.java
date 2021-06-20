@@ -16,18 +16,18 @@ public class StuMesForReturn {
     public String title;
 
     /**
-     * 信件id
+     * 信箱id
      */
-    public long infoId;
+    public long mailNum;
 
     /**
      * 信件类型
      */
     public long infoType;
 
-    public StuMesForReturn(String title,long infoId,long infoType){
+    public StuMesForReturn(String title,long mailNum,long infoType){
         this.title=title;
-        this.infoId=infoId;
+        this.mailNum=mailNum;
         this.infoType=infoType;
     }
 }
