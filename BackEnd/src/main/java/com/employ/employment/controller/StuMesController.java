@@ -198,29 +198,29 @@ public class StuMesController {
         return AjaxJson.getError("查询出现错误");
     }
 
-    /** 查 - 根据信件id查内容 */
-    @GetMapping("getContent")
+    /** 查 - 根据信件id查询信件细节 */
+    @GetMapping("getDetail")
     @ApiOperation("根据信件编号、类型查看信件内容")
-    public AjaxJson getContent(long infoId,long infoType){
+    public AjaxJson getDetail(long infoId,long infoType){
         log.info("Start getCurrentMailContent========");
         if(infoType==1){
             if(seminarInfoMapper.getById(infoId)!=null){
                 SeminarInfo seminarInfo = seminarInfoMapper.getById(infoId);
-                return AjaxJson.getSuccessData(seminarInfo.seminarContent);
+                return AjaxJson.getSuccessData(seminarInfo);
             }
             else return AjaxJson.getError("该信息已被删除或已失效");
         }
         if(infoType==2){
             if(jobInfoMapper.getById(infoId)!=null){
                 JobInfo jobInfo = jobInfoMapper.getById(infoId);
-                return AjaxJson.getSuccessData(jobInfo.jobCon);
+                return AjaxJson.getSuccessData(jobInfo);
             }
             else return AjaxJson.getError("该信息已被删除或已失效");
         }
         if(infoType==3){
             if (announcementMapper.getById((int) infoId)!=null){
                 Announcement announcement = announcementMapper.getById((int) infoId);
-                return AjaxJson.getSuccessData(announcement.announceContent);
+                return AjaxJson.getSuccessData(announcement);
             }
             else return AjaxJson.getError("该信息已被删除或已失效");
         }
