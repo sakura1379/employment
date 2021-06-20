@@ -81,7 +81,7 @@ public class SearchController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "compName", value = "公司名称", required = true)
     })
-    public AjaxJson getTimeLineList(String compName) {
+    public String getTimeLineList(String compName) {
         log.info("start getTimeLineList======");
         log.info("receive compName:{}", compName);
         return timeListMongoDao.getTimeList(compName);
@@ -131,6 +131,7 @@ public class SearchController {
         log.info("start getJobInfobyJobId=======");
         log.info("receive jobId:{}", jobId);
         JobInfo j = jobInfoMapper.getById(jobId);
+        log.info(AjaxJson.getSuccessData(j).toString());
         return AjaxJson.getSuccessData(j);
     }
 }

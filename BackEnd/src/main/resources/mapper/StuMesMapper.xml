@@ -41,7 +41,7 @@
     <!-- 删 删除某一特定信箱的特定信息-->
     <delete id="deleteOne">
         delete from mail_info
-        where mailNum = #{mailNum} and infoId = #{infoId}
+        where mailNum = #{mailNum}
     </delete>
 
     <!-- 删 删除所有信箱的特定信息-->
@@ -58,7 +58,7 @@
             <if test="infoId != null">infoId = #{infoId},</if>
             <if test="infoType != null">infoType = #{infoType},</if>
         </trim>
-        where mailNum = #{mailNum} and infoId = #{infoId}
+        where mailNum = #{mailNum}
     </update>
 
 
@@ -82,7 +82,7 @@
     <!-- 查 - 根据信件id -->
     <select id="getById" resultMap="model">
         <include refid="select_sql"></include>
-        where infoId = #{infoId}
+        where mailNum = #{mailNum}
     </select>
 
     <!-- 查集合 - 根据学生id查该学生所有信件 [G] -->
@@ -109,12 +109,6 @@
 -->
         where stuNum = #{stuNum}
     </select>
-
-
-
-
-
-
 
 
 

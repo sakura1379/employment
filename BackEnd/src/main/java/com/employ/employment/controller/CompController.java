@@ -8,6 +8,7 @@ import com.employ.employment.entity.*;
 import com.employ.employment.mapper.*;
 import com.employ.employment.service.CompService;
 import com.employ.employment.service.StuService;
+import com.employ.employment.util.PythonUtil;
 import com.sun.xml.internal.bind.v2.TODO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -47,13 +48,15 @@ public class CompController {
     private final ApplyInfoMapper applyInfoMapper;
 
     private final StuInfoMapper stuInfoMapper;
+
+    private final PythonUtil pythonUtil;
     //
 
     @Autowired
     public CompController(CompService compService, CompUserMapper compUserMapper,
                           CompanyInfoMapper companyInfoMapper, SeminarInfoMapper seminarInfoMapper,
                           JobInfoMapper jobInfoMapper, ApplyInfoMapper applyInfoMapper,
-                          StuInfoMapper stuInfoMapper) {
+                          StuInfoMapper stuInfoMapper, PythonUtil pythonUtil) {
         this.compService = compService;
         this.compUserMapper = compUserMapper;
         this.companyInfoMapper = companyInfoMapper;
@@ -61,6 +64,7 @@ public class CompController {
         this.jobInfoMapper = jobInfoMapper;
         this.applyInfoMapper = applyInfoMapper;
         this.stuInfoMapper = stuInfoMapper;
+        this.pythonUtil = pythonUtil;
     }
 
     /** 增 */
@@ -94,12 +98,22 @@ public class CompController {
             @ApiImplicitParam(name = "password", value = "密码", required = true),
             @ApiImplicitParam(name = "mail", value = "邮箱", required = true)
                 })
-    public AjaxJson add(UserInfo u){
-        log.info("Start addNewCompanyHRInfo========");
-        log.info("Receive userInfo:{}",u);
-        StpUtil.checkPermission("comp_user");
-        compService.add(u);
-        return AjaxJson.getSuccessData(u);
+    public AjaxJson add(UserInfo u) throws Exception {
+        Integer type = 2;
+        String[] strings = new String[2];
+        strings[0] = u.getMail();
+        log.info(strings.toString());
+        String status = pythonUtil.httpPost(type,strings);
+        log.info("status:{}",status);
+        if (status.equals("fail")){
+            return AjaxJson.getError("邮箱验证不通过");
+        }else {
+            log.info("Start addNewCompanyHRInfo========");
+            log.info("Receive userInfo:{}",u);
+            StpUtil.checkPermission("comp_user");
+            compService.add(u);
+            return AjaxJson.getSuccessData(u);
+        }
     }
 
 

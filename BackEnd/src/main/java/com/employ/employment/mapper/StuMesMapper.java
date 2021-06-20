@@ -2,6 +2,7 @@ package com.employ.employment.mapper;
 
 import com.employ.employment.entity.SoMap;
 import com.employ.employment.entity.StuMes;
+import com.employ.employment.entity.StuMesForReturn;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -32,10 +33,9 @@ public interface StuMesMapper {
     /**
      * 删特定信箱中特定信息
      * @param mailNum 要删除的信箱id
-     * @param infoId 要删除,信息id
      * @return 受影响行数
      */
-    int deleteOne(@Param("mailNum") long mailNum, @Param("infoId") long infoId);
+    int deleteOne(long mailNum);
 
     /**
      * 删所有信箱中特定信息
@@ -110,4 +110,10 @@ public interface StuMesMapper {
      */
     List<StuMes> getList(long stuNum);
 
+    /**
+     * 查集合
+     * @param stuNum
+     * @return
+     */
+    List<StuMesForReturn> getStuList(long stuNum);
 }

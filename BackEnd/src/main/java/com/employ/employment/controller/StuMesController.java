@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -119,16 +120,16 @@ public class StuMesController {
     /** 删 - 删除某一特定邮箱中的特定信息 */
     @PostMapping("deleteOne")
     @ApiOperation("根据信箱、信件编号删除特定信件")
-    public AjaxJson delete(long mailNum,long infoId){
-        log.info("Start deleteMailInfo========"+mailNum+","+infoId);
-        int line=stuMesMapper.deleteOne(mailNum, infoId);
+    public AjaxJson deleteOne(long mailNum){
+        log.info("Start deleteMailInfo========"+mailNum);
+        int line=stuMesMapper.deleteOne(mailNum);
         return AjaxJson.getByLine(line);
     }
 
     /** 删 - 删除所有邮箱中的相关信息 */
     @PostMapping("deleteAll")
     @ApiOperation("根据信息编号删除所有相关信件")
-    public AjaxJson delete(long infoId){
+    public AjaxJson deleteAll(long infoId){
         log.info("Start deleteMailInfo========"+infoId);
         int line=stuMesMapper.deleteAll(infoId);
         return AjaxJson.getByLine(line);
@@ -175,7 +176,7 @@ public class StuMesController {
         }
         return AjaxJson.getSuccessData(list);
     }
-    
+
     public String getTitle1(long infoId,long infoType){
         log.info("Start getCurrentMailTitle========");
         if(infoType==1){

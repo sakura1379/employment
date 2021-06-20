@@ -24,12 +24,13 @@ public class TimeListMongoDao {
     private static MongoCollection<Document> collection;
     private static StringBuilder sb;
 
-    public AjaxJson getTimeList(String compName){
+    public String getTimeList(String compName){
         MongoClient mongoClient=null;
         try{
             mongoClient = MongoDBUtil.getConn();
             collection = mongoClient.getDatabase("employment").getCollection("timeList");
             sb= new StringBuilder();
+//            sb.append("[");
             Pattern pattern = Pattern.compile("^.*" +compName+ ".*$", Pattern.CASE_INSENSITIVE);
             BasicDBObject compName1 = new BasicDBObject("compName",pattern);
             Document originDoc = collection.find(compName1).first();
@@ -44,12 +45,14 @@ public class TimeListMongoDao {
                 log.info("not found");
             }
 //            sb.deleteCharAt(0);
+//            sb.append("]");
             log.info("has already timeList from MongoDB");
             log.info(sb.toString());
         }finally {
             assert mongoClient != null;
             mongoClient.close();
         }
-        return AjaxJson.getSuccessData(sb.toString());
+        log.info(AjaxJson.getSuccessData(sb.toString()).toString());
+        return sb.toString();
     }
 }
