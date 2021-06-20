@@ -54,6 +54,16 @@
     <select id="getCompId" resultType="long">
         select compId from job_info where jobId=${jobId}
     </select>
+    
+    <!-- 根据公司id查名字  -->
+    <select id="getCompName" resultType="String">
+        select compName from company_info where compId=${compId}
+    </select>
+
+    <!-- 根据id查收藏id  -->
+    <select id="getFavorId" resultType="long">
+        select favorNum from favor_info where stuNum=${stuNum} and compId=${compId} and jobId=${jobId}
+    </select>
 
     <!-- 查集合 - 根据学生id查该学生收藏的所有收藏信息 [G] -->
     <select id="getJobList" resultType="long">
