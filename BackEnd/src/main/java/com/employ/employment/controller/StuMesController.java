@@ -230,11 +230,12 @@ public class StuMesController {
         return AjaxJson.getError("查询出现错误");
     }
 
-/** 查 - 根据信件id查询信件细节 */
+    /** 查 - 根据信件id查询信件细节 */
     @GetMapping("getDetail")
     @ApiOperation("根据信件编号、类型查看信件内容")
-    public AjaxJson getDetail(long mailNum,long infoType){
+    public AjaxJson getDetail(long mailNum){
         long infoId=stuMesMapper.getInfoId(mailNum);
+        int infoType=stuMesMapper.getInfoType(mailNum);
         log.info("Start getCurrentMailContent========");
         if(infoType==1){
             if(seminarInfoMapper.getById(infoId)!=null){
