@@ -1,6 +1,7 @@
 package com.employ.employment.service;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.employ.employment.controller.CompController;
 import com.employ.employment.dao.ApplyRedisDao;
 import com.employ.employment.entity.*;
 import com.employ.employment.mapper.*;
@@ -94,6 +95,14 @@ public class StuService {
 
         //获取对应公司compId
         long compId = jobInfoMapper.getById(jobId).compId;
+
+        //每加一个申请的，deliverNum=1
+        JobInfo j = jobInfoMapper.getById(jobId);
+        int delNum = j.getDeliverNum() - 1;
+        j.setDeliverNum(delNum);
+        int line2 = jobInfoMapper.update(j);
+        log.info("jobId:{},deliverNum:{}",compId,delNum);
+
         //删除redis中索引
         line += applyRedisDao.deleteIndex(String.valueOf(compId), String.valueOf(stuNum), String.valueOf(jobId));
 
@@ -152,7 +161,14 @@ public class StuService {
         //获得jobId对应的compId
         long compId = jobInfoMapper.getById(a.jobId).getCompId();
         log.info("compId:{}",compId);
-//
+
+        //每加一个申请的，deliverNum=1
+        JobInfo j = jobInfoMapper.getById(a.jobId);
+        int delNum = j.getDeliverNum() + 1;
+        j.setDeliverNum(delNum);
+        int line2 = jobInfoMapper.update(j);
+        log.info("jobId:{},deliverNum:{}",compId,delNum);
+
         //插入compId索引到redis
         int redisLine2 = applyRedisDao.insertCompIndex(String.valueOf(compId), String.valueOf(a.jobId));
 

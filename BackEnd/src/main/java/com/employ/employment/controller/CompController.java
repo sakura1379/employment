@@ -215,6 +215,8 @@ public class CompController {
         j.setCompId(comp_id);
         j.setStatus(1);
         j.setApproveStatus(1);
+        j.setCompName(companyInfoMapper.getById(comp_id).getCompName());
+        j.setDeliverNum(0);
         return compService.addJob(j);
     }
 

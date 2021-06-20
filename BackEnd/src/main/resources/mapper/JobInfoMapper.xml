@@ -6,8 +6,8 @@
 <!--  jobId, status, deliverNum, approveStatus-->
     <insert id="add">
         insert into
-        job_info (compId, jobName, jobType, jobKind, status, relDate, jobAddress, jobCon,jobDeadline,salary)
-        values (#{compId}, #{jobName}, #{jobType}, #{jobKind}, #{status}, now(), #{jobAddress}, #{jobCon}, #{jobDeadline}, #{salary})
+        job_info (compId, jobName, jobType, jobKind, status, relDate, jobAddress, jobCon,jobDeadline,deliverNum,salary)
+        values (#{compId}, #{jobName}, #{jobType}, #{jobKind}, #{status}, now(), #{jobAddress}, #{jobCon}, #{jobDeadline}, #{deliverNum}, #{salary})
     </insert>
 
     <!-- 删 -->
@@ -29,7 +29,7 @@
             <if test="jobAddress != null">jobAddress = #{jobAddress},</if>
             <if test="jobCon != null">jobCon = #{jobCon},</if>
             <if test="jobDeadline != null">jobDeadline = #{jobDeadline}, </if>
-<!--            <if test="deliverNum != null">deliverNum = #{deliverNum}, </if>-->
+            <if test="deliverNum != null">deliverNum = #{deliverNum}, </if>
             <if test="salary != null">salary = #{salary}, </if>
             <if test="approveStatus != null">approveStatus = #{approveStatus},</if>
         </trim>
