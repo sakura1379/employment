@@ -143,4 +143,19 @@ public class AdminController {
         return AjaxJson.getSuccessData(a);
     }
 
+    /**
+     * 删除公告信息
+     * @param announceId
+     * @return
+     */
+    @DeleteMapping("deleteAnnouncement")
+    @ApiOperation("删除公告信息")
+    public AjaxJson deleteSeminar(long announceId){
+        log.info("Start deleteAnnouncement========");
+        log.info("Receive announceId:{}",announceId);
+        StpUtil.checkPermission("announcement");
+        int line = announcementMapper.delete(announceId);
+        return AjaxJson.getByLine(line);
+    }
+
 }

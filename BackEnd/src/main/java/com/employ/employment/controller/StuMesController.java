@@ -61,6 +61,7 @@ public class StuMesController {
     @Transactional(rollbackFor = Exception.class, propagation= Propagation.REQUIRED)
     public AjaxJson add(StuMes stuMes){
         log.info(stuMes.toString());
+        StpUtil.checkPermission("mail_info");
         if(stuMes.infoType==3){
             log.info("Start dropTempTable========");
             stuMesMapper.dropTempTable("tem");
@@ -138,7 +139,6 @@ public class StuMesController {
     @ApiOperation("修改信箱信息")
     public AjaxJson update(StuMes s){
         log.info("Start updateMailInfo========");
-        StpUtil.checkPermission("mail_info");
         long id = StpUtil.getLoginIdAsLong();
         log.info("current user id:{}",id);
         s.setStuNum(id);

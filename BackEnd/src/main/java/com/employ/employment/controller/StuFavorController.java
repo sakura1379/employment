@@ -3,13 +3,10 @@ package com.employ.employment.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.employ.employment.entity.AjaxJson;
 import com.employ.employment.entity.JobInfo;
-import com.employ.employment.entity.SoMap;
 import com.employ.employment.entity.StuFavor;
 import com.employ.employment.mapper.JobInfoMapper;
 import com.employ.employment.mapper.StuFavorMapper;
-import com.employ.employment.mapper.StuMesMapper;
 import com.employ.employment.service.StuFavorService;
-import com.employ.employment.service.StuMesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -18,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -104,6 +102,7 @@ public class StuFavorController {
             jobIds1.add(temp);
         }
         List<JobInfo> list = jobInfoMapper.selectAllJobByJobIds(jobIds1);
+        log.info(list.toString());
         return AjaxJson.getSuccessData(list);
     }
 }
