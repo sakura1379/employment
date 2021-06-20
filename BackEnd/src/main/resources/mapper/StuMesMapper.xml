@@ -84,6 +84,11 @@
         <include refid="select_sql"></include>
         where mailNum = #{mailNum}
     </select>
+    
+        <!-- 根据信箱id查信件type  -->
+    <select id="getInfoType" resultType="int">
+        select infoType from mail_info where mailNum=${mailNum}
+    </select>
 
     <!-- 查集合 - 根据学生id查该学生所有信件 [G] -->
     <select id="getList" resultMap="model">
