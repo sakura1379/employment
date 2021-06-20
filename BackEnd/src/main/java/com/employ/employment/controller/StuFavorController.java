@@ -97,7 +97,13 @@ public class StuFavorController {
         StpUtil.checkPermission("favor_info");
         long id = StpUtil.getLoginIdAsLong();
         log.info("Current user id:{}",id);
-        List<StuFavor> list = stuFavorMapper.getList(id);
+        List<Long> jobIds = stuFavorMapper.getJobList(id);
+        List<String> jobIds1 = new ArrayList<String>();
+        for(Long x: jobIds){
+            String temp = ""+x;
+            jobIds1.add(temp);
+        }
+        List<JobInfo> list = jobInfoMapper.selectAllJobByJobIds(jobIds1);
         return AjaxJson.getSuccessData(list);
     }
 }
