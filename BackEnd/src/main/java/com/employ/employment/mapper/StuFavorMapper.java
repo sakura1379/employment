@@ -62,4 +62,20 @@ public interface StuFavorMapper {
      * @return 企业编号
      */
     long getCompId(@Param("jobId")long jobId);
+      
+     /**
+     * 查企业名字 -
+     * @param compId 要查询的企业id
+     * @return 企业名字
+     */
+    String getCompName(@Param("compId")long compId);
+
+    /**
+     * 查收藏编号 -
+     * @param stuNum 要查询的学生id
+     * @param compId 要查询的企业id
+     * @param jobId 要查询的职位id
+     * @return 收藏编号
+     */
+    long getFavorId(@Param("stuNum")long stuNum ,@Param("compId")long compId,@Param("jobId")long jobId);
 }
