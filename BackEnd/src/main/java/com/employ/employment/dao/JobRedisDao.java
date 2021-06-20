@@ -52,7 +52,7 @@ public class JobRedisDao {
         }
         //去重（顺序不变）
         List<String> result = new ArrayList<>(new LinkedHashSet<>(res));
-        log.debug("redis fuzzy search:" + query.toString() + ",return" + result.toString());
+        log.debug("redis fuzzy search:" + query + ",return" + result.toString());
         log.info("redis fuzzy search:{},return {} lines", query, result.size());
         return result;
     }

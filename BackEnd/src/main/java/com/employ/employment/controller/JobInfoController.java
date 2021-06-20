@@ -68,9 +68,11 @@ public class JobInfoController {
         log.info("Receive jobInfo:{}",j);
         StpUtil.checkPermission("job_info");
         long id = StpUtil.getLoginIdAsLong();
+        long compId = compUserMapper.getById(id).getCompId();
         log.info("Current user id:{}",id);
-        j.setCompId(id);
+        j.setCompId(compId);
         j.setStatus(1);
+        j.setDeliverNum(0);
         return compService.addJob(j);
     }
 

@@ -269,7 +269,7 @@ public class CompService {
         //获得compId
         long compId = j.getCompId();
         //插入标题索引到redis
-        long redisLine2 = jobRedisDao.insertIndex(j.jobName, String.valueOf(jobId));
+        long redisLine2 = jobRedisDao.insertIndex(j.getJobName(), String.valueOf(jobId));
 
 //        //获得hrId对应的compId
         log.info("compId:{}",compId);

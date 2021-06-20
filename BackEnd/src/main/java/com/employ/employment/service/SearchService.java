@@ -84,6 +84,7 @@ public class SearchService {
         }else {
             SoMap so = SoMap.getSoMap();
             List<SeminarInfo> seminarInfos = seminarInfoMapper.getList(so.startPage());
+            log.info(seminarInfos.toString());
             return AjaxJson.getPageData(so.getDataCount(), seminarInfos, page, seminarPageRecord);
         }
 
@@ -114,6 +115,7 @@ public class SearchService {
             if(!res.isEmpty()){
                 //根据jobIdList到mysql中查询到【已通过审核】的职位信息
                 List<JobInfo> jobInfos = jobInfoMapper.selectJobByJobIds(res, sortType);
+                log.info(jobInfos.toString());
                 return AjaxJson.getPageData(pageCount, jobInfos, page, jobPageRecord);
             }else {
                 return AjaxJson.getError("未查询到对应的职位信息，请检查检索词或页码");
@@ -121,6 +123,7 @@ public class SearchService {
         }else {
             SoMap so = SoMap.getSoMap();
             List<JobInfo> jobInfos = jobInfoMapper.getList(so.startPage());
+            log.info(jobInfos.toString());
             return AjaxJson.getPageData(so.getDataCount(), jobInfos, page, jobPageRecord);
         }
 
@@ -139,6 +142,7 @@ public class SearchService {
         so.set("announceType", announceType);
         so.set("pageNo",page);
         List<Announcement> announcementList = announcementMapper.getList(so.startPage());
+        log.info(announcementList.toString());
         return AjaxJson.getPageData(so.getDataCount(), announcementList, page, seminarPageRecord);
     }
 
@@ -151,6 +155,7 @@ public class SearchService {
         SoMap so=new SoMap();
         so.set("pageNo",page);
         List<Announcement> announcementList = announcementMapper.getList(so.startPage());
+        log.info(announcementList.toString());
         return AjaxJson.getPageData(so.getDataCount(), announcementList, page, 10);
     }
 
@@ -167,6 +172,7 @@ public class SearchService {
         so.set("announceType", announceType);
         so.set("announceTitle", query);
         List<Announcement> announcementList = announcementMapper.getList(so.startPage());
+        log.info(announcementList.toString());
         return AjaxJson.getPageData(so.getDataCount(), announcementList, page, 10);
     }
 

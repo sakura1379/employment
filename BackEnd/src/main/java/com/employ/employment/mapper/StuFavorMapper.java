@@ -5,6 +5,7 @@ import com.employ.employment.entity.SoMap;
 import com.employ.employment.entity.StuFavor;
 import com.employ.employment.entity.StuMes;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public interface StuFavorMapper {
      * @param stuNum
      * @return 受影响行数
      */
-    int add(@Param("jobId")long jobId,@Param("compId")long compId,@Param("stuNum")long stuNum);
+    int add(@Param("jobId")long jobId, @Param("compId")long compId, @Param("stuNum")long stuNum);
     
     /**
      * 删

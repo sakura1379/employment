@@ -43,13 +43,14 @@ public class StuFavorController {
     @PostMapping("add")
     @ApiOperation("新建收藏项")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "stuNum", value = "学生编号", required = true),
-            @ApiImplicitParam(name = "jobId", value = "职位信息编号", required = true),
+            @ApiImplicitParam(name = "jobId", value = "职位信息编号", required = true)
     })
-    public AjaxJson add(long stuNum, long jobId){
+    public AjaxJson add(long jobId){
         log.info("Start addFavorInfo========");
+        StpUtil.checkPermission("favor_info");
+        long id = StpUtil.getLoginIdAsLong();
         long compId=stuFavorMapper.getCompId(jobId);
-        int line=stuFavorMapper.add(jobId,compId,stuNum);
+        int line=stuFavorMapper.add(jobId,compId,id);
         return AjaxJson.getSuccessData(line);
     }
 
@@ -64,10 +65,10 @@ public class StuFavorController {
 
     /** 改 */
     @PostMapping("update")
-    @ApiOperation("根据收藏编号修改收藏信息")
+    @ApiOperation("根据收藏编号修改收藏信息[不需要]")
     public AjaxJson update(StuFavor s){
         log.info("Start updateFavorInfo========");
-        StpUtil.checkPermission("favor_info");
+//        StpUtil.checkPermission("favor_info");
         long id = StpUtil.getLoginIdAsLong();
         log.info("current user id:{}",id);
         s.setStuNum(id);
