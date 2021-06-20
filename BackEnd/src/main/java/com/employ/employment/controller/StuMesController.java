@@ -171,7 +171,7 @@ public class StuMesController {
         List<StuMesForReturn> list = new ArrayList<StuMesForReturn>();
         for (StuMes s: stuMess){
             String title = ""+getTitle1(s.infoId,s.infoType);
-            StuMesForReturn SMFR=new StuMesForReturn(title,s.infoId,s.infoType);
+            StuMesForReturn SMFR=new StuMesForReturn(title,s.mailNum,s.infoType);
             list.add(SMFR);
         }
         return AjaxJson.getSuccessData(list);
