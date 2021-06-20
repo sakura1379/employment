@@ -49,12 +49,12 @@ public interface StuFavorMapper {
      */
     StuFavor getById(Long favorNum);
 
-    /**
+/**
      * 查集合 - 根据条件（参数为空时代表忽略指定条件）
      * @param stuNum 要查询的学生id
      * @return 数据列表
      */
-    List<StuFavor> getList(long stuNum);
+    List<Long> getJobList(long stuNum);
     
      /**
      * 查企业编号 -
