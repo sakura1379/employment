@@ -101,8 +101,15 @@ public class StuFavorController {
             String temp = ""+x;
             jobIds1.add(temp);
         }
-        List<JobInfo> list = jobInfoMapper.selectAllJobByJobIds(jobIds1);
-        log.info(list.toString());
+        List<JobInfo> jobInfos = jobInfoMapper.selectAllJobByJobIds(jobIds1);
+        List<StuFavorForReturn> list = new ArrayList<>();
+
+        for(JobInfo j:jobInfos){
+            long favorNum=stuFavorMapper.getFavorId(id,j.compId,j.jobId);
+            String compName=stuFavorMapper.getCompName(j.compId);
+            StuFavorForReturn s=new StuFavorForReturn(j,compName,favorNum);
+            list.add(s);
+        }
         return AjaxJson.getSuccessData(list);
     }
 }
