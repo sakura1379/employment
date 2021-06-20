@@ -123,4 +123,11 @@ public interface StuMesMapper {
      * @return infoId
      */
     long getInfoId(@Param("mailNum")long mailNum);
+    
+        /**
+     * 查信息编号 -
+     * @param mailNum 要查询的信箱id
+     * @return infoType
+     */
+    int getInfoType(@Param("mailNum")long mailNum);
 }
