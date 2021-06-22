@@ -60,4 +60,14 @@ public class ApplyInfo implements Serializable {
      * (1=简历待筛选 2=未通过 3=一面 4=二面 5=HR面 6=录用评估中 7=录用意向 8=已录用)
      */
     public Integer newApplyStatus;
+
+    /**
+     * 简历
+     */
+    public String resume;
+
+    /**
+     * 公司名称
+     */
+    public String compName;
 }

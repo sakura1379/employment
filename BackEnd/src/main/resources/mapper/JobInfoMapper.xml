@@ -80,7 +80,8 @@
     <!--    没有发布时间relDate-->
 <!--    jobId, compId, jobName, jobType, jobKind, status, relDate, jobAddress, jobCon,jobDeadline,deliverNum, salary, approveStatus-->
     <select id="getList" resultMap="model">
-        <include refid="select_sql"></include>
+        select jobId,`job_info`.compId,compName,jobName,jobType,jobKind,status,relDate,jobAddress,jobCon,jobDeadline,deliverNum,salary,`job_info`.approveStatus
+        from `job_info`, `company_info`
         <where>
             <if test=' this.has("jobId") '> and jobId = #{jobId} </if>
             <if test=' this.has("compId") '> and compId = #{compId} </if>
@@ -94,6 +95,7 @@
             <if test=' this.has("deliverNum") '> and deliverNum = #{deliverNum} </if>
             <if test=' this.has("salary") '> and salary = #{salary} </if>
             <if test=' this.has("approveStatus") '> and approveStatus = #{approveStatus} </if>
+            and status=1 and `job_info`.compId = `company_info`.compId
         </where>
         order by
         <choose>
@@ -151,5 +153,12 @@
                 )
             </otherwise>
         </choose>
+    </select>
+
+    <select id="selectReviewJobs" parameterType="java.util.List" resultType="JobInfo">
+        select jobId,`job_info`.compId,compName, jobName,jobType,jobKind,status,relDate,jobAddress,jobCon,jobDeadline,deliverNum,salary,`job_info`.approveStatus
+        from `job_info`, `company_info`
+        where `job_info`.approveStatus = 1 and status =1 and `company_info`.compId = `job_info`.compId
+        order by relDate desc
     </select>
 </mapper>

@@ -94,7 +94,7 @@ public class JobRedisDao {
     }
 
     /**
-     * 返回要显示的页码总数
+     * 返回要显示的总数
      *
      * @param compId
      * @return
@@ -113,7 +113,7 @@ public class JobRedisDao {
         }
         long page = num / pageRecord + 1;
         log.info("pageCount: " + page);
-        return page;
+        return num;
     }
 
     /**

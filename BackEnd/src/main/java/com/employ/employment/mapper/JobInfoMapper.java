@@ -67,4 +67,10 @@ public interface JobInfoMapper {
      * @return 数据列表
      */
     List<JobInfo> selectJobByJobIds(@Param("jobIds") List<String> jobIds, @Param("sortType") int sortType);
+
+    /**
+     * 获取所有未审核的职位信息
+     * @return
+     */
+    List<JobInfo> selectReviewJobs(SoMap job);
 }

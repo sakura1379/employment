@@ -85,21 +85,20 @@ public class CompController {
     })
     public AjaxJson firstAdd(CompanyInfo c, UserInfo u) throws Exception {
         log.info("Receive companyInfo:{}, userInfo:{}",c,u);
-//        Integer type = 1;
-//        String[] strings = new String[2];
-//        strings[0] = c.getCompName();
-//        strings[1] = c.getCreditcode();
-//        log.info(strings.toString());
-//        String status = pythonUtil.httpPost(type,strings);
-//        log.info("status:{}",status);
-//        if (status.equals("fail")){
-//            return AjaxJson.getError("邮箱验证不通过");
-//        }else {
-//
-//        }
-        log.info("Start addNewCompanyInfo========");
-        compService.firstAdd(c,u);
-        return AjaxJson.getSuccessData(c);
+        Integer type = 1;
+        String[] strings = new String[2];
+        strings[0] = c.getCompName();
+        strings[1] = c.getCreditcode();
+        log.info(strings.toString());
+        String status = pythonUtil.httpPost(type,strings);
+        log.info("status:{}",status);
+        if (status.equals("fail")){
+            return AjaxJson.getError("邮箱验证不通过");
+        }else {
+            log.info("Start addNewCompanyInfo========");
+            compService.firstAdd(c,u);
+            return AjaxJson.getSuccessData(c);
+        }
 
     }
 
@@ -157,6 +156,7 @@ public class CompController {
         long comp_id = compUserMapper.getById(id).getCompId();
         log.info("Current comp_id:{}",comp_id);
         CompanyInfo c = companyInfoMapper.getById(comp_id);
+        log.info(AjaxJson.getSuccessData(c).toString());
         return AjaxJson.getSuccessData(c);
     }
 
@@ -178,7 +178,7 @@ public class CompController {
     }
 
     /** 改 */
-    @PostMapping("updateSeminar")
+    @RequestMapping("updateSeminar")
     @ApiOperation("修改宣讲会信息,修改标题或内容")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "seminarId", value = "宣讲会信息编号", required = true),
@@ -196,7 +196,7 @@ public class CompController {
         return compService.updateSeminarInfo(s);
     }
 
-    @DeleteMapping("deleteSeminar")
+    @RequestMapping("deleteSeminar")
     @ApiOperation("删除宣讲会信息")
     public AjaxJson deleteSeminar(long seminarId){
         log.info("Start deleteSeminarInfo========");
@@ -279,7 +279,7 @@ public class CompController {
      * 删除职位信息
      * 其实没有删除 只是把status 改成2
      * */
-    @DeleteMapping("deleteJobInfo")
+    @RequestMapping("deleteJobInfo")
     @ApiOperation("删除职位信息")
     public AjaxJson deleteJobInfo(long jobId){
         log.info("Start deleteJobInfo========");
@@ -326,7 +326,6 @@ public class CompController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "stuNum", value = "学生编号", required = true),
             @ApiImplicitParam(name = "jobId", value = "职位信息编号", required = true),
-            @ApiImplicitParam(name = "ApplyStatus", value = "历史申请状态", required = true, allowableValues = "1,2,3,4,5,6,7,8"),
             @ApiImplicitParam(name = "newApplyStatus", value = "最近申请状态", required = true, allowableValues = "1,2,3,4,5,6,7,8")
     })
     public AjaxJson updateApplyInfo(ApplyInfo a){

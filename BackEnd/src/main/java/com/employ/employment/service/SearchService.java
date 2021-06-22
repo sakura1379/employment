@@ -123,6 +123,10 @@ public class SearchService {
         }else {
             SoMap so = SoMap.getSoMap();
             List<JobInfo> jobInfos = jobInfoMapper.getList(so.startPage());
+//            for(JobInfo jobInfo:jobInfos){
+//                String compName = jobInfoMapper.getById(jobInfo.getJobId()).getCompName();
+//                jobInfo.setCompName(compName);
+//            }
             log.info(jobInfos.toString());
             return AjaxJson.getPageData(so.getDataCount(), jobInfos, page, jobPageRecord);
         }

@@ -97,8 +97,9 @@ public class JobInfoController {
         StpUtil.checkPermission("job_info");
         long id = StpUtil.getLoginIdAsLong();
         log.info("Current user id:{}",id);
+        long compId = compUserMapper.getById(id).getCompId();
         //每次修改都要将发布人更改为现在用户
-        j.setCompId(id);
+        j.setCompId(compId);
         return compService.updateJobInfo(j);
     }
 

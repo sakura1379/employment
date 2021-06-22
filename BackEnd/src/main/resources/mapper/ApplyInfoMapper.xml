@@ -100,7 +100,7 @@
 <!--    left join `stu_info`.stuNum = `apply_info`.stuNum and `jobId` in-->
 <!--    <select id="selectAllApplyByJobIds" parameterType="java.util.List" resultType="ApplyInfo">-->
     <select id="selectAllApplyByJobIds" parameterType="java.util.List" resultType="ApplyInfo">
-        select `apply_info`.stuNum,`stu_info`.stuName,`apply_info`.jobId,`job_info`.jobName,`apply_info`.internshipTime,`apply_info`.dutyTime,`apply_info`.ApplyStatus,`apply_info`.newApplyStatus
+        select `apply_info`.stuNum,`stu_info`.stuName,`stu_info`.resume,`apply_info`.jobId,`job_info`.jobName,`apply_info`.internshipTime,`apply_info`.dutyTime,`apply_info`.ApplyStatus,`apply_info`.newApplyStatus
         from `apply_info`, `job_info`, `stu_info`
         where `stu_info`.stuNum = `apply_info`.stuNum and `apply_info`.jobId = `job_info`.jobId
         and `apply_info`.jobId in

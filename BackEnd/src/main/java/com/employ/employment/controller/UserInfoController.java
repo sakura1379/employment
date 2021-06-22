@@ -150,7 +150,7 @@ public class UserInfoController {
 //	}
 
 	/** 改状态  */
-	@PostMapping("updateStatus")
+	@RequestMapping("updateStatus")
 	@ApiOperation("改状态")
 	public AjaxJson updateStatus(long id, int status) {
 		log.info("Start updateUserStatus========");

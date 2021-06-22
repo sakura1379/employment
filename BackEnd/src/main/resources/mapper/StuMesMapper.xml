@@ -31,7 +31,7 @@
     </update>
     <!--更新临时表，获取stu编号-->
     <update id="updateTempTable3">
-        insert into ${pvsTb}(stuNum) select stuNum from favor_info where compId=${compId}
+        insert into ${pvsTb}(stuNum) select distinct stuNum from favor_info where compId=${compId}
     </update>
     <!--临时表与原表合并-->
     <update id="updateTable">
@@ -113,6 +113,7 @@
         </choose>
 -->
         where stuNum = #{stuNum}
+        order by mailNum desc
     </select>
 
 

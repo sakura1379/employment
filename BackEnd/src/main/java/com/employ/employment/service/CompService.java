@@ -210,14 +210,16 @@ public class CompService {
 
         //根据页码获得当前公司下的所有SeminarId以及总共页码
         List<String> seminarIdList = seminarRedisDao.getSeminarByCompId(comp_id,page);
-        long pageCount = seminarRedisDao.getPageNumberByCompId(comp_id);
+        long dataCount = seminarRedisDao.getPageNumberByCompId(comp_id);
 
         //到mysql中查询
         if (!seminarIdList.isEmpty()){
             log.info("select seminarInfos from mysql");
             List<SeminarInfo> seminarInfos = seminarInfoMapper.selectAllSeminarBySeminarIds(seminarIdList);
-            return AjaxJson.getPageData(pageCount, seminarInfos, page, seminarPageRecord);
+            log.info(AjaxJson.getPageData(dataCount, seminarInfos, page, seminarPageRecord).toString());
+            return AjaxJson.getPageData(dataCount, seminarInfos, page, seminarPageRecord);
         } else {
+            log.info("未查询到，请检查公司id或页码");
             return AjaxJson.getError("未查询到，请检查公司id或页码");
         }
 
@@ -247,7 +249,7 @@ public class CompService {
         int redisLine2 = seminarRedisDao.insertCompIndex(String.valueOf(compId), String.valueOf(seminarId));
 
         SeminarInfo seminarInfo = seminarInfoMapper.getById(seminarId);
-
+        log.info(AjaxJson.getSuccessData(seminarInfo).toString());
         return AjaxJson.getSuccessData(seminarInfo);
     }
 
@@ -273,8 +275,10 @@ public class CompService {
 
 //        //获得hrId对应的compId
         log.info("compId:{}",compId);
+        String compName = companyInfoMapper.getById(compId).getCompName();
+        j.setCompName(compName);
         //插入公司名称索引到redis
-        long redisLine3 = jobRedisDao.insertIndex(j.compName, String.valueOf(jobId));
+        long redisLine3 = jobRedisDao.insertIndex(j.getCompName(), String.valueOf(jobId));
 //
         //插入compId索引到redis
         int redisLine1 = jobRedisDao.insertCompIndex(String.valueOf(compId), String.valueOf(jobId));
@@ -292,7 +296,7 @@ public class CompService {
     @Transactional(rollbackFor = Exception.class, propagation= Propagation.REQUIRED)
     public AjaxJson deleteJobInfo(long id, long jobId){
         log.info("start delete JobInfo======");
-        log.info("receive company id:{}, jobId:{}", id, jobId);
+        log.info("receive hr id:{}, jobId:{}", id, jobId);
         int line = 0;
 
         //判断是否为该公司的职位信息，否则不能修改
@@ -369,15 +373,17 @@ public class CompService {
         log.info("Current comp_id:{}",comp_id);
 
         //根据页码获得当前公司下的所有jobId以及总共页码
-        List<String> jobIdList = jobRedisDao.getJobByCompId(comp_id,page);
-        long pageCount = jobRedisDao.getJobPageNumberByCompId(comp_id);
+        List<String> jobIdList= jobRedisDao.getJobByCompId(comp_id,page);
+        long dataCount = jobRedisDao.getJobPageNumberByCompId(comp_id);
 
         //到mysql中查询
         if (!jobIdList.isEmpty()){
             log.info("select jobInfos from mysql");
             List<JobInfo> jobInfos = jobInfoMapper.selectAllJobByJobIds(jobIdList);
-            return AjaxJson.getPageData(pageCount, jobInfos, page, jobPageRecord);
+            log.info(AjaxJson.getPageData(dataCount, jobInfos, page, jobPageRecord).toString());
+            return AjaxJson.getPageData(dataCount, jobInfos, page, jobPageRecord);
         } else {
+            log.info("未查询到，请检查公司id或页码");
             return AjaxJson.getError("未查询到，请检查公司id或页码");
         }
 
@@ -395,14 +401,16 @@ public class CompService {
 
         //根据页码获得当前公司下的所有申请jobId,stuNum以及总共页码
         List<String> appIdList = applyRedisDao.getApplyByCompId(comp_id,page);
-        long pageCount = applyRedisDao.getApplyPageNumberByCompId(comp_id);
+        long dataCount = applyRedisDao.getApplyPageNumberByCompId(comp_id);
 
         //到mysql中查询
         if (!appIdList.isEmpty()){
             log.info("select applyInfos from mysql");
             List<ApplyInfo> applyInfos = applyInfoMapper.selectAllApplyByJobIds(appIdList);
-            return AjaxJson.getPageData(pageCount, applyInfos, page, applyPageRecord);
+            log.info(AjaxJson.getPageData(dataCount, applyInfos, page, applyPageRecord).toString());
+            return AjaxJson.getPageData(dataCount, applyInfos, page, applyPageRecord);
         } else {
+            log.info("未查询到，请检查公司id或页码");
             return AjaxJson.getError("未查询到，请检查公司id或页码");
         }
 
@@ -441,6 +449,9 @@ public class CompService {
 //                    s.getSeminarTitle(), String.valueOf(s.getSeminarId()));
 //            log.info("redis line:{}", line);
 //        }
+
+        //获取到原来的最新状态，将原来的最新状态改成现在的历史状态
+        a.setApplyStatus(applyInfoMapper.getByAppId(a.getStuNum(),a.getJobId()).getNewApplyStatus());
 
         //mysql中修改
         line += applyInfoMapper.update(a);

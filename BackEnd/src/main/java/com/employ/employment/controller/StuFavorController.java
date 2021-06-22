@@ -4,6 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.employ.employment.entity.AjaxJson;
 import com.employ.employment.entity.JobInfo;
 import com.employ.employment.entity.StuFavor;
+import com.employ.employment.entity.StuFavorForReturn;
 import com.employ.employment.mapper.JobInfoMapper;
 import com.employ.employment.mapper.StuFavorMapper;
 import com.employ.employment.service.StuFavorService;
@@ -53,7 +54,7 @@ public class StuFavorController {
     }
 
     /** 删 */
-    @PostMapping("delete")
+    @RequestMapping("delete")
     @ApiOperation("根据收藏编号删除收藏项")
     public AjaxJson delete(long favorNum){
         log.info("Start deleteFavorInfo========"+favorNum);
@@ -84,6 +85,7 @@ public class StuFavorController {
         log.info("Current favor id:{}",id);
         StuFavor s = stuFavorMapper.getById(id);
         JobInfo jobInfo = jobInfoMapper.getById(s.jobId);
+        log.info(AjaxJson.getSuccessData(jobInfo).toString());
         return AjaxJson.getSuccessData(jobInfo);
     }
 
@@ -110,6 +112,7 @@ public class StuFavorController {
             StuFavorForReturn s=new StuFavorForReturn(j,compName,favorNum);
             list.add(s);
         }
+        log.info(AjaxJson.getSuccessData(list).toString());
         return AjaxJson.getSuccessData(list);
     }
 }

@@ -16,6 +16,16 @@ public class StuMesForReturn {
     public String title;
 
     /**
+     * 信件内容
+     */
+    public String content;
+
+    /**
+     * 信件ID
+     */
+    public long infoId;
+
+    /**
      * 信箱id
      */
     public long mailNum;
@@ -25,8 +35,10 @@ public class StuMesForReturn {
      */
     public long infoType;
 
-    public StuMesForReturn(String title,long mailNum,long infoType){
+    public StuMesForReturn(String content,String title,long infoId, long mailNum,long infoType){
+        this.content=content;
         this.title=title;
+        this.infoId=infoId;
         this.mailNum=mailNum;
         this.infoType=infoType;
     }

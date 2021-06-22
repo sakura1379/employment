@@ -51,7 +51,7 @@ public class StuMesController {
     }
 
     /** 增 */
-    @PostMapping("add")
+    @RequestMapping("add")
     @ApiOperation("新建信件")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "mailNum", value = "信箱编号", required = false),
@@ -61,6 +61,7 @@ public class StuMesController {
     })
     @Transactional(rollbackFor = Exception.class, propagation= Propagation.REQUIRED)
     public AjaxJson add(StuMes stuMes){
+        log.info("Start addMail=============");
         log.info(stuMes.toString());
         StpUtil.checkPermission("mail_info");
         if(stuMes.infoType==3){
@@ -118,7 +119,7 @@ public class StuMesController {
 //    }
 
     /** 删 - 删除某一特定邮箱中的特定信息 */
-    @PostMapping("deleteOne")
+    @RequestMapping("deleteOne")
     @ApiOperation("根据信箱、信件编号删除特定信件")
     public AjaxJson deleteOne(long mailNum){
         log.info("Start deleteMailInfo========"+mailNum);
@@ -166,14 +167,26 @@ public class StuMesController {
     AjaxJson getList(){
         log.info("Start getMailList========");
         long stuNum = StpUtil.getLoginIdAsLong();
+        String content = null;
 //        StpUtil.checkPermission("mail_info");
         List<StuMes> stuMess = stuMesMapper.getList(stuNum);
         List<StuMesForReturn> list = new ArrayList<StuMesForReturn>();
         for (StuMes s: stuMess){
+            log.info(s.toString());
             String title = ""+getTitle1(s.infoId,s.infoType);
-            StuMesForReturn SMFR=new StuMesForReturn(title,s.mailNum,s.infoType);
+            if(s.getInfoType()==1){
+                content = seminarInfoMapper.getById(s.getInfoId()).getSeminarContent();
+            }
+            if(s.getInfoType()==2){
+                content = jobInfoMapper.getById(s.getInfoId()).getCompName();
+            }
+            if(s.getInfoType()==3){
+                content = announcementMapper.getById(s.getInfoId()).getAnnounceContent();
+            }
+            StuMesForReturn SMFR=new StuMesForReturn(content,title,s.infoId,s.mailNum,s.infoType);
             list.add(SMFR);
         }
+        log.info(AjaxJson.getSuccessData(list).toString());
         return AjaxJson.getSuccessData(list);
     }
 
@@ -252,8 +265,8 @@ public class StuMesController {
             else return AjaxJson.getError("该信息已被删除或已失效");
         }
         if(infoType==3){
-            if (announcementMapper.getById((int) infoId)!=null){
-                Announcement announcement = announcementMapper.getById((int) infoId);
+            if (announcementMapper.getById(infoId)!=null){
+                Announcement announcement = announcementMapper.getById(infoId);
                 return AjaxJson.getSuccessData(announcement);
             }
             else return AjaxJson.getError("该信息已被删除或已失效");

@@ -47,7 +47,7 @@ public class AdminController {
     }
 
 
-    @PostMapping("reviewSeminar")
+    @RequestMapping("reviewSeminar")
     @ApiOperation("管理员审核宣讲会信息，1为未审核，2为通过，3为不通过")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "seminarId", value = "宣讲会信息编号", required = true),
@@ -64,18 +64,20 @@ public class AdminController {
     }
 
     @GetMapping("getAllSeminar")
-    @ApiOperation("管理员查看所有宣讲会信息")
+    @ApiOperation("管理员查看所有未审核的宣讲会信息")
     public AjaxJson getAllSeminar(int page){
         log.info("Start getAllSeminarInfo========");
         StpUtil.checkPermission("review");
         long id = StpUtil.getLoginIdAsLong();
         log.info("Current user id:{}",id);
         SoMap so = SoMap.getRequestSoMap();
+        so.set("approveStatus","1");
         List<SeminarInfo> seminarInfos = seminarInfoMapper.getList(so.startPage());
+        log.info(AjaxJson.getPageData(so.getDataCount(), seminarInfos, page, 10).toString());
         return AjaxJson.getPageData(so.getDataCount(), seminarInfos, page, 10);
     }
 
-    @PostMapping("reviewJobInfo")
+    @RequestMapping("reviewJobInfo")
     @ApiOperation("管理员审核职位信息，1为未审核，2为通过，3为不通过")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "jobId", value = "职位信息编号", required = true),
@@ -91,11 +93,24 @@ public class AdminController {
         return AjaxJson.getByLine(line);
     }
 
+    @GetMapping("getAllJobList")
+    @ApiOperation("管理员查看所有未审核的职位信息")
+    public AjaxJson getAllJobList(int page){
+        log.info("Start getAllJobList========");
+        StpUtil.checkPermission("review");
+        long id = StpUtil.getLoginIdAsLong();
+        log.info("Current user id:{}",id);
+        SoMap so = SoMap.getRequestSoMap();
+        List<JobInfo> jobInfos = jobInfoMapper.selectReviewJobs(so.startPage());
+        log.info(AjaxJson.getPageData(so.getDataCount(), jobInfos, page, 10).toString());
+        return AjaxJson.getPageData(so.getDataCount(), jobInfos, page, 10);
+    }
+
 
     /**
      * 增
      */
-    @PostMapping("addAnnouncement")
+    @RequestMapping("addAnnouncement")
     @ApiOperation("新增公告")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "announceTitle", value = "公告标题", required = true),
@@ -148,13 +163,14 @@ public class AdminController {
      * @param announceId
      * @return
      */
-    @DeleteMapping("deleteAnnouncement")
+    @RequestMapping("deleteAnnouncement")
     @ApiOperation("删除公告信息")
     public AjaxJson deleteSeminar(long announceId){
         log.info("Start deleteAnnouncement========");
         log.info("Receive announceId:{}",announceId);
         StpUtil.checkPermission("announcement");
         int line = announcementMapper.delete(announceId);
+        log.info(AjaxJson.getByLine(line).toString());
         return AjaxJson.getByLine(line);
     }
 

@@ -130,6 +130,11 @@ public class StuService {
         if (!appIdList.isEmpty()){
             log.info("select applyInfos from mysql");
             List<ApplyInfo> applyInfos = applyInfoMapper.selectAllApplyByAppIds(appIdList, stuNum);
+            for(ApplyInfo applyInfo : applyInfos){
+                String compName = jobInfoMapper.getById(applyInfo.getJobId()).getCompName();
+                applyInfo.setCompName(compName);
+            }
+            log.info(AjaxJson.getPageData(pageCount, applyInfos, page, applyPageRecord).toString());
             return AjaxJson.getPageData(pageCount, applyInfos, page, applyPageRecord);
         } else {
             return AjaxJson.getError("未查询到，请检查公司id或页码");
@@ -175,7 +180,8 @@ public class StuService {
         //插入mysql
         int line = applyInfoMapper.add(a);
         ApplyInfo applyInfo = applyInfoMapper.getByAppId(a.getStuNum(),a.getJobId());
-
+        String compName = jobInfoMapper.getById(a.getJobId()).getCompName();
+        applyInfo.setCompName(compName);
         return AjaxJson.getSuccessData(applyInfo);
     }
 }

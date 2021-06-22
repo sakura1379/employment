@@ -120,14 +120,14 @@ public class StuController {
 
     @PostMapping("uploadResume")
     @ApiOperation("上传简历")
-    public AjaxJson uploadResume(MultipartFile file){
+    public AjaxJson uploadResume(MultipartFile file,long id){
         log.info("Start uploadResume========");
-        log.info("Receive file:{}", file.toString());
+//        log.info("Receive file:{}", file.toString());
         // 验证文件大小 -> 验证后缀 -> 保存到硬盘 -> 地址返回给前端
         UploadUtil.checkFileSize(file);
         UploadUtil.checkSubffix(file.getOriginalFilename(), UploadUtil.uploadConfig.fileSuffix);
         String httpUrl = UploadUtil.saveFile(file, UploadUtil.uploadConfig.fileFolder);
-        long id = StpUtil.getLoginIdAsLong();
+//        long id = StpUtil.getLoginIdAsLong();
         log.info("Current user id:{}",id);
         log.info("resume address:{}", httpUrl);
         StuInfo s = new StuInfo();
@@ -143,17 +143,17 @@ public class StuController {
     @PostMapping("addApplyInfo")
     @ApiOperation("增加职位申请信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "stuNum", value = "学生编号", required = true),
             @ApiImplicitParam(name = "jobId", value = "职位信息编号", required = true),
             @ApiImplicitParam(name = "internshipTime", value = "一周可实习时间", required = true, allowableValues = "1,2,3,4,5,6"),
             @ApiImplicitParam(name = "dutyTime", value = "最快到岗时间", required = true, allowableValues = "1,2,3,4")
     })
     public AjaxJson addApplyInfo(ApplyInfo a){
         log.info("Start addApplyInfo========");
-        log.info("Receive stuNum:{}",a.getStuNum());
-        log.info("Receive JobId:{}",a.getJobId());
+        long id = StpUtil.getLoginIdAsLong();
+        log.info("Receive JobId:{}，internshipTime:{}, dutyTime:{}",a.getJobId(),a.getInternshipTime(),a.getDutyTime());
+        log.info("current userId:{}", id);
         StpUtil.checkPermission("apply_info");
-//        long id = StpUtil.getLoginIdAsLong();
+        a.setStuNum(id);
         return stuService.addApplyInfo(a);
     }
     /**
