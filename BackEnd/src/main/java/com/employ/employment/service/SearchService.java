@@ -77,7 +77,8 @@ public class SearchService {
             if(!res.isEmpty()){
                 //根据SeminarIdList到mysql中查询到【已通过审核】的宣讲会信息
                 List<SeminarInfo> seminarInfos = seminarInfoMapper.selectSeminarBySeminarIds(res, sortType);
-                return AjaxJson.getPageData((long)seminarInfos.size(), seminarInfos, page, seminarPageRecord);
+                List<SeminarInfo> allSeminarInfos = seminarInfoMapper.selectSeminarBySeminarIds(seminarIdList, sortType);
+                return AjaxJson.getPageData((long)allSeminarInfos.size(), seminarInfos, page, seminarPageRecord);
             }else {
                 return AjaxJson.getError("未查询到对应的宣讲会信息，请检查检索词或页码");
             }
@@ -115,8 +116,9 @@ public class SearchService {
             if(!res.isEmpty()){
                 //根据jobIdList到mysql中查询到【已通过审核】的职位信息
                 List<JobInfo> jobInfos = jobInfoMapper.selectJobByJobIds(res, sortType);
+                List<JobInfo> allJobInfos = jobInfoMapper.selectJobByJobIds(jobIdList, sortType);
                 log.info(jobInfos.toString());
-                return AjaxJson.getPageData((long)jobInfos.size(), jobInfos, page, jobPageRecord);
+                return AjaxJson.getPageData((long)allJobInfos.size(), jobInfos, page, jobPageRecord);
             }else {
                 return AjaxJson.getError("未查询到对应的职位信息，请检查检索词或页码");
             }

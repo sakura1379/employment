@@ -352,11 +352,11 @@ public class CompService {
 
         //mysql中修改
         line += jobInfoMapper.update(j);
-        if(j.status==2)
-        {
-            //删除redis中索引
-            line2 += jobRedisDao.deleteIndex(String.valueOf(currentCompId), String.valueOf(j.jobId),String.valueOf(j.jobName),String.valueOf(j.compName));
-        }
+//        if(j.status==2)
+//        {
+//            //删除redis中索引
+//            line2 += jobRedisDao.deleteIndex(String.valueOf(currentCompId), String.valueOf(j.jobId),String.valueOf(j.jobName),String.valueOf(j.compName));
+//        }
         return AjaxJson.getByLine(line);
 
     }
@@ -434,7 +434,7 @@ public class CompService {
         //要改成的job的公司id
         long currentCompId = jobInfoMapper.getById(a.getJobId()).getCompId();
         //原来的job
-        ApplyInfo oldApply = applyInfoMapper.getByJobId(a.getJobId());
+        ApplyInfo oldApply = applyInfoMapper.getByAppId(a.getStuNum(),a.getJobId());
         //原来的job的公司id
         long jobCompId = jobInfoMapper.getById(oldApply.getJobId()).getCompId();
         if (currentCompId != jobCompId){

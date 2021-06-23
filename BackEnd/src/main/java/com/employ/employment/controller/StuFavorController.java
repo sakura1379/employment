@@ -39,7 +39,7 @@ public class StuFavorController {
     }
 
     /** 增 */
-    @PostMapping("add")
+    @RequestMapping("add")
     @ApiOperation("新建收藏项")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "jobId", value = "职位信息编号", required = true)

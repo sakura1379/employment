@@ -123,7 +123,7 @@
                  open="(" close=")" separator=",">
             #{jobId}
         </foreach>
-        and status=1 and `job_info`.compId = `company_info`.compId
+        and `job_info`.compId = `company_info`.compId
         order by field(
         `jobId`,
         <foreach collection="jobIds" separator="," item="jobId">
